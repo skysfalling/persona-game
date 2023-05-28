@@ -3,76 +3,75 @@ class Play extends Phaser.Scene {
         super("tiledSimpleScene");
     }
 
+    
     preload() {
         // load assets
         this.load.path = "./assets/";
         this.load.image("1bit_tiles", "tilemap/monochrome_packed.png");    // tile sheet
         this.load.tilemapTiledJSON("map", "tilemap/map1.json");    // Tiled JSON file
+
+        this.load.atlas('characters', '/characters/character-sheet.png', '/characters/character-sheet.json');
+
+        this.physics.add.existing(this);
     }
 
     create() {
         // add a tile map
-        // https://photonstorm.github.io/phaser3-docs/Phaser.GameObjects.GameObjectFactory.html#tilemap__anchor
-        const map = this.add.tilemap("map");    // this is referencing the key to our Tiled JSON file
-        // add a tile set to the map
-        // first parameter: the name we gave the tileset when we added it to Tiled
-        // second parameter: the key for the tile sheet we loaded above, in preload
-        // https://photonstorm.github.io/phaser3-docs/Phaser.Tilemaps.Tilemap.html#addTilesetImage__anchor
-        const tileset = map.addTilesetImage("monochrome_packed", "1bit_tiles");
-        // create a new tilemap layer
-        // https://newdocs.phaser.io/docs/3.54.0/Phaser.Tilemaps.Tilemap#createLayer
-        const backgroundLayer = map.createLayer("background", tileset, 0, 0);
-        const collisionLayer = map.createLayer("collision", tileset, 0, 0);
+        this.map = this.add.tilemap("map"); 
+        const tileset = this.map.addTilesetImage("monochrome_packed", "1bit_tiles");
+
+        // setup tilemap layers
+        const backgroundLayer = this.map.createLayer("background", tileset, 0, 0);
+        const collisionLayer = this.map.createLayer("collision", tileset, 0, 0);
+        collisionLayer.setCollisionByProperty({ collides: true });
+
+        // get inputs
+        this.cursors = this.input.keyboard.createCursorKeys();
+
+        // create player
+        const p1Spawn = this.map.findObject("player_spawn", obj => obj.name === "p1spawn");
+        this.p1 = new Player(this, p1Spawn.x, p1Spawn.y);
+        const p2Spawn = this.map.findObject("player_spawn", obj => obj.name === "p2spawn");
+        this.p2 = new Player(this, p2Spawn.x, p2Spawn.y, 10);
+
+        collisionLayer.setCollisionBetween(52, 54);
+        this.physics.add.collider(this.p1, collisionLayer);
+        this.physics.add.collider(this.p2, collisionLayer);
+
+        const sprite = this.add.sprite(100, 100, 'characters', 5);
+        sprite.play("horz-walk");
+        
+        this.playerGroup = this.add.group({
+        });
+        this.playerGroup.add(this.p1);
+        this.playerGroup.add(this.p2);
+        this.playerGroup.add(sprite);
+        this.physics.add.collider(this.playerGroup, this.playerGroup, (obj) => {
+            console.log("player collision")
+        });
 
 
-        // define keyboard cursor input
-        cursors = this.input.keyboard.createCursorKeys();
+        //#region << CAMERA SETUP >>
+        this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+        this.cameras.main.startFollow(this.p1);
+        //this.cameras.main.setZoom(2);
+        //#endregion
+        
+        this.debugGraphics = this.add.graphics();
 
-        // create camera control configuration object to pass to Camera Controller (see below)
-        // https://photonstorm.github.io/phaser3-docs/Phaser.Types.Cameras.Controls.html#.SmoothedKeyControlConfig__anchor
-        let controlConfig = {
-            camera: this.cameras.main,      // which camera?
-            left: cursors.left,             // define keys...
-            right: cursors.right,
-            up: cursors.up,
-            down: cursors.down,
-            zoomIn: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q),
-            zoomOut: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E),
-            zoomSpeed: 0.02,
-            acceleration: 0.06,             // physics values (keep these low)
-            drag: 0.0005,
-            maxSpeed: 0.5
-        }
-        // create smoothed key camera control
-        // i.e., we control the cam w/ the defined keys w/ physics controls
-        // note: you *must* call the update method of this controller each frame (see below)
-        // https://photonstorm.github.io/phaser3-docs/Phaser.Cameras.Controls.SmoothedKeyControl.html
-        this.camControl = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
+        this.input.keyboard.on('keydown-C', event =>
+        {
+            this.showDebug = !this.showDebug;
+            this.drawDebug();
+        });
 
-        // set camera bounds
-        this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+        this.cursors = this.input.keyboard.createCursorKeys();
 
-        // enable scene switcher / reload keys
-        this.swap = this.input.keyboard.addKey('S');
-        this.reload = this.input.keyboard.addKey('R');
-
-        // update instruction text
-        document.getElementById('description').innerHTML = '<h2>TiledSimple.js</h2><br>Arrow keys: Move Camera<br>Q/E: Zoom out/in<br>S: Next Scene<br>R: Restart Scene';
-
-        // debug
-        //this.scene.start("tiledPlatformScene");
     }
 
-    update(time, delta) {
-        // update our camera controller (delta: Δ time in ms since last frame)
-        this.camControl.update(delta);
-
-        // scene switching / restart
-        if(Phaser.Input.Keyboard.JustDown(this.reload)) {
-            this.scene.restart();
-        }
-        if(Phaser.Input.Keyboard.JustDown(this.swap)) {
-            this.scene.start("tiledPlatformScene");
-        }
+    update (time, delta)
+    {
+        this.p1.update();
+        this.p2.update();
     }
 }
