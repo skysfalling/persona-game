@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../Mappy"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "persona-game"
+	}
+}
