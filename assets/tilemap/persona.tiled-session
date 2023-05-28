@@ -11,18 +11,18 @@
             "scaleInDock": 1
         },
         "map1.json": {
-            "scale": 1,
+            "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 42,
-                "y": 7
+                "x": 171.25,
+                "y": 169.75
             }
         },
         "map1.json#character-sheet": {
             "scaleInDock": 4
         },
         "map1.json#monochrome_packed": {
-            "scaleInDock": 1
+            "scaleInDock": 2
         },
         "map1.tmx": {
             "expandedObjectLayers": [

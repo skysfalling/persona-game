@@ -2,21 +2,21 @@ class Gizmos {
     constructor(scene) {
         this.scene = scene;
         this.graphics = scene.add.graphics();
-        this.graphics.setDepth(depthLayers.gizmos);
+        //this.graphics.setDepth(depthLayers.gizmos);
         this.visible = true;
 
         this.scene.events.on('update', this.update, this);
     }
 
     update(){
-        if (gizmosActive)
+        /* if (gizmosActive)
         {
             this.visible = true;
         }
         else if (!gizmosActive){
             this.visible = false;
             this.clear();
-        }
+        } */
     }
   
     clear(){
@@ -174,7 +174,7 @@ class Gizmos {
         var textObject = this.scene.add.text(x, y, text);
         textObject.setOrigin(0.5, 0.5);
         textObject.setColor(color);
-        textObject.setFont(fontSize);
+        textObject.setFontSize(fontSize);
         textObject.setAngle(angle);
         textObject.setVisible(this.visible);
         this.scene.add.existing(textObject);
@@ -191,7 +191,7 @@ class Gizmos {
         textObject.text = text;
         textObject.setColor(color);
         textObject.setAngle(angle);
-        textObject.setFont(fontSize);
+        textObject.setFontSize(fontSize);
         textObject.setVisible(this.visible);
 
     }

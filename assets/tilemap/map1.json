@@ -25,6 +25,7 @@
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
          "height":20,
          "id":2,
+         "locked":true,
          "name":"background",
          "opacity":1,
          "type":"tilelayer",
@@ -36,6 +37,7 @@
         {
          "draworder":"topdown",
          "id":3,
+         "locked":true,
          "name":"player_spawn",
          "objects":[
                 {
@@ -67,6 +69,28 @@
          "y":0
         }, 
         {
+         "draworder":"topdown",
+         "id":4,
+         "name":"interaction",
+         "objects":[
+                {
+                 "height":16,
+                 "id":4,
+                 "name":"moveable_obj",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":96,
+                 "y":176
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
          "data":[53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53,
             53, 53, 0, 53, 53, 53, 53, 53, 53, 53, 0, 0, 0, 0, 53, 53, 53, 53, 53, 53,
             53, 53, 0, 53, 53, 53, 53, 53, 53, 53, 0, 53, 0, 0, 0, 0, 53, 53, 53, 53,
@@ -89,6 +113,7 @@
             53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53],
          "height":20,
          "id":1,
+         "locked":true,
          "name":"collision",
          "opacity":1,
          "type":"tilelayer",
@@ -97,8 +122,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":4,
- "nextobjectid":4,
+ "nextlayerid":5,
+ "nextobjectid":10,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",
