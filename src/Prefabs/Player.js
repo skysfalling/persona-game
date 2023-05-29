@@ -11,6 +11,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.x = x;
         this.y = y;
+        this.setOrigin(0.5, 0.5);
         
         this.gizmos = new Gizmos(scene);
         this.gizmos.visible = false;
@@ -25,7 +26,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.characterSprite = characterSprite
         this.inverted = invertedMove;
 
-        this.disableUntilIdle = false;
+        this.disable = false;
 
         this.cursors = scene.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.UP,
@@ -147,9 +148,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     }
 
                     if (this.currentState == this.state.IDLE) {return;}
-                    this.disableUntilIdle = false;
-
-
                     this.currentState = this.state.IDLE;
                 }
             },
@@ -367,7 +365,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         // disable movement until idle again
-        if (this.disableUntilIdle)
+        if (this.disable)
         {
             this.currMoveSpeed = 0;
         }

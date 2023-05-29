@@ -85,8 +85,10 @@ a
         this.graphics.lineStyle(lineWidth, color, opacity);
         this.graphics.setAlpha(opacity);
         
-        rect.setPosition(x - (rect.width * origin.x), y - (rect.height * origin.y));
+        //rect.setPosition(x - (rect.width * origin.x), y - (rect.height * origin.y));
+        rect.setPosition(x, y);
 
+        //rect.setPosition(x - (rect.width * origin.x), y - (rect.height * origin.y));
         this.graphics.strokeRectShape(rect);
         return rect;
     }

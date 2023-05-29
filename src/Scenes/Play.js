@@ -90,7 +90,18 @@ class Play extends Phaser.Scene {
 
         // >>  MAIN OBJECT COLLISION
         this.physics.add.collider(this.playerObjs, this.interactObjects, (player, obj) =>{
-            player.disableUntilIdle = true;
+
+            if (player.disable) {return;}
+
+            // Turn on the player.disable property
+            player.disable = true;
+
+            // Delay timer to set the player.disableUntilIdle property to false after a certain delay
+            this.time.delayedCall(200, () => {
+                // This callback function will be executed after the delay
+                // Set the player.disableUntilIdle property to false
+                player.disable = false;
+            }, [], this);
 
             const interaction_direction = player.getDirectionOfObj(obj);
             console.log(player.name + " " + interaction_direction);
@@ -198,7 +209,7 @@ class Play extends Phaser.Scene {
         this.gizmos.clear();
         this.gizmos.drawLine({x: this.p1.x, y: this.p1.y}, {x: this.p2.x, y: this.p2.y}, 0xff00ff, 1);
 
-        this.gizmos.drawExistingRect(this.overlapTrigger, this.p1.x, this.p1.y, 0xff00ff, 1);
+        this.gizmos.drawExistingRect(this.overlapTrigger, this.p1.x, this.p1.y, 0xff00ff, 1, 1);
 
 
         if (Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z))) {
@@ -210,7 +221,7 @@ class Play extends Phaser.Scene {
         }
 
         //#region << UPDATE CAMERA >>
-        const distance = Phaser.Math.Distance.Between(this.p1.x, this.p1.y, this.p2.x, this.p2.y);
+        const distance = Phaser.Math.Distance.Between(this.p1.x, this.p1.y, this.p2.x, this.p2.y, {x: 0, y: 0});
         const thresholdDistance = 300;
 
         // ( SPLIT SCREEN TRANSITION ) 
