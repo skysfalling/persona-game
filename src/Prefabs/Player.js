@@ -3,25 +3,38 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, characterSprite, invertedMove);
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.body.setSize(this.width / 2, this.height/2);
         this.body.setCollideWorldBounds(true);
+        this.body.setSize(this.width/2, this.height/2);
+        this.setDepth(2);
 
-        this.gizmos = new Gizmos(this.scene);
+        this.name = characterSprite;
+
+        this.x = x;
+        this.y = y;
+        
+        this.gizmos = new Gizmos(scene);
+        this.gizmos.visible = false;
+
+        this.overrideGizmos = new Gizmos(scene);
+        this.overrideGizmos.visible = true;
+        this.overrideGizmos.graphics.setDepth(3);
 
         this.moveSpeed = 100;
+        this.currMoveSpeed = this.moveSpeed;
+        
         this.characterSprite = characterSprite
         this.inverted = invertedMove;
 
-        this.disableMovement = false;
+        this.disableUntilIdle = false;
 
-        this.cursors = scene.input.keyboard.createCursorKeys();
-
-
-
-        this.create();
-    }
-
-    create(){
+        this.cursors = scene.input.keyboard.addKeys({
+            up: Phaser.Input.Keyboard.KeyCodes.UP,
+            down: Phaser.Input.Keyboard.KeyCodes.DOWN,
+            left: Phaser.Input.Keyboard.KeyCodes.LEFT,
+            right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
+            z: Phaser.Input.Keyboard.KeyCodes.Z,
+            x: Phaser.Input.Keyboard.KeyCodes.X
+        });
 
         //#region DOWN ANIMATIONS
         this.scene.anims.create({
@@ -50,7 +63,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         });
         //#endregion
 
-
         //#region HORZ ANIMATIONS
         this.scene.anims.create({
             key: 'horz-idle1',
@@ -78,7 +90,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         });
         //#endregion
         
-
         //#region UP ANIMATIONS
         this.scene.anims.create({
             key: 'up-idle1',
@@ -106,43 +117,27 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         });
         //#endregion
         
-
         // Define the movement states
         this.state = {
             IDLE: {
                 name: "idle",
                 enter: () => {
-                    this.body.setVelocityX(0);
+                    this.body.setVelocity(0);
 
-                    if (this.currentState == this.state.IDLE) {return;}
-
-                    // set idle animation
-                    if (this.currentState == this.state.DOWN)
+                    // set move animation
+                    if (this.currentFacing == "up" || this.currentFacing == "down")
                     {
-                        // set move animation
-                        if (this.characterSprite == 'character1')
+                        if (!this.inverted)
                         {
-                            this.anims.play('down-idle1');
+                            this.anims.play(this.currentFacing + '-idle1');
                         }
                         else{
-                            this.anims.play('down-idle2');
+                            this.anims.play(this.currentFacing + '-idle2');
                         }
                     }
-                    if (this.currentState == this.state.UP)
-                    {
+                    else {
                         // set move animation
-                        if (this.characterSprite == 'character1')
-                        {
-                            this.anims.play('up-idle1');
-                        }
-                        else{
-                            this.anims.play('up-idle2');
-                        }
-                    }
-                    if (this.currentState == this.state.LEFT || this.currentState == this.state.RIGHT)
-                    {
-                        // set move animation
-                        if (this.characterSprite == 'character1')
+                        if (!this.inverted)
                         {
                             this.anims.play('horz-idle1');
                         }
@@ -150,6 +145,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                             this.anims.play('horz-idle2');
                         }
                     }
+
+                    if (this.currentState == this.state.IDLE) {return;}
+                    this.disableUntilIdle = false;
+
+
                     this.currentState = this.state.IDLE;
                 }
             },
@@ -157,7 +157,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 name: "left",
                 enter: () => {
 
-                    this.body.setVelocityX(-this.moveSpeed);
+                    this.body.setVelocityX(-this.currMoveSpeed);
+                    this.body.setVelocityY(0);
+                    this.currentFacing = "left";
 
                     // dont reset animations if in same state
                     if (this.currentState == this.state.LEFT) {return;} 
@@ -167,7 +169,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.setFlipX(false);
 
                     // set move animation
-                    if (this.characterSprite == 'character1')
+                    if (!this.inverted)
                     {
                         this.anims.play('horz-move1');
                     }
@@ -180,7 +182,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 name: "right",
                 enter: () => {
 
-                    this.body.setVelocityX(this.moveSpeed); // update velocity
+                    this.body.setVelocityX(this.currMoveSpeed); // update velocity
+                    this.body.setVelocityY(0);
+                    this.currentFacing = "right";
 
                     // dont reset animations if in same state
                     if (this.currentState == this.state.RIGHT) {return;} 
@@ -190,7 +194,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.setFlipX(true);
 
                     // set move animation
-                    if (this.characterSprite == 'character1')
+                    if (!this.inverted)
                     {
                         this.anims.play('horz-move1');
                     }
@@ -202,7 +206,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             UP: {
                 name: "up",
                 enter: () => {
-                    this.body.setVelocityY(-this.moveSpeed);
+                    this.body.setVelocityX(0);
+                    this.body.setVelocityY(-this.currMoveSpeed);
+                    this.currentFacing = "up";
 
                     // dont reset animations if in same state
                     if (this.currentState == this.state.UP) {return;} 
@@ -212,7 +218,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.setFlipX(false);
 
                     // set move animation
-                    if (this.characterSprite == 'character1')
+                    if (!this.inverted)
                     {
                         this.anims.play('up-move1');
                     }
@@ -224,7 +230,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             DOWN: {
                 name: "down",
                 enter: () => {
-                    this.body.setVelocityY(this.moveSpeed);
+                    this.body.setVelocityX(0);
+                    this.body.setVelocityY(this.currMoveSpeed);
+                    this.currentFacing = "down";
 
                     // dont reset animations if in same state
                     if (this.currentState == this.state.DOWN) {return;} 
@@ -234,7 +242,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.setFlipX(false);
 
                     // set move animation
-                    if (this.characterSprite == 'character1')
+                    if (!this.inverted)
                     {
                         this.anims.play('down-move1');
                     }
@@ -244,22 +252,82 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 },
             },
         };
-
         // Set the initial state
         this.currentState = this.state.DOWN;
-        
+        this.currentFacing = "down";
+
+        this.overlapTrigger = this.scene.add.sprite(this.x, this.y, null);
+        this.scene.physics.add.existing(this.overlapTrigger);
+        this.overlapTrigger.setVisible(false);
+        this.overlapTrigger.setOrigin(0.5)
+        this.overlapTrigger.setSize(this.width*2, this.height*2);
+
+        this.currOverlapObject;
+        this.currGrabbedObject;
+
         this.stateText = this.gizmos.createText(this.x, this.y, this.currentState.name, '#ffffff', 5);
+        this.colliderGizmo = this.gizmos.createRect(this.x, this.y, this.body.width, this.body.height);
+
+        // Create a point light
+        this.light = this.scene.lights.addLight(this.x, this.y, 50, 0x555555).setIntensity(1);
     }
 
     update() {
         this.handleMovement();
 
-        this.gizmos.updateText(this.stateText, this.x, this.y + this.height, this.currentState.name, '#ffffff', 10);
+        // ============================================// >> *
+        this.light.setPosition(this.x, this.y);
 
+        this.gizmos.clear();
+        this.overrideGizmos.clear();
+
+        this.gizmos.updateText(this.stateText, this.x, this.y + this.height, this.currentState.name, '#ffffff', 7);
+
+        this.gizmos.drawExistingRect(this.colliderGizmo, this.x, this.y, 0xffffff, 1, 0.5);
+
+
+        // ============================================// >> *
+
+        if (this.currOverlapObject)
+        {
+            if (this.grabbedObject == null) {
+                this.grabbedObject = this.currOverlapObject;
+            }
+            else if (this.grabbedObject.name != this.currOverlapObject.name)
+            {
+                // ( GIZMOS )
+                this.gizmos.drawExistingRect(this.overlapTrigger, this.x, this.y, 0xff00ff, 1, 1);
+
+                let playerPos = {x: this.x, y: this.y};
+                let overlapObjPos = {x: this.currOverlapObject.x, y: this.currOverlapObject.y};
+                this.overrideGizmos.drawLine(playerPos, overlapObjPos, 0xff00ff, 1, 1);
+
+                console.log("overlap" + this.currOverlapObject.name);
+
+            }
+
+            this.currOverlapObject = null;
+        }
+        else {
+            this.gizmos.drawExistingRect(this.overlapTrigger, this.x, this.y, 0xff00ff, 1, 0.3);
+        }
+
+        
+        // Update the position of the grabbed object relative to the player
+        if (this.grabbedObject)
+        {
+            this.grabbedObject.connectPlayer(this);
+
+            this.gizmos.drawCircle(this.grabbedObject.x, this.grabbedObject.y, 10, 0xffffff, 0, 1);
+            let playerPos = {x: this.x, y: this.y};
+            let grabbedObjPos = {x: this.grabbedObject.x, y: this.grabbedObject.y};
+            this.overrideGizmos.drawLine(playerPos, grabbedObjPos, 0xffffff, 1, 1);
+        }
     }
 
     handleMovement() {
-        this.body.setVelocity(0); // stops movement if no input
+
+        this.overlapTrigger.setPosition(this.x, this.y);
 
         if (this.cursors.left.isDown) {
 
@@ -297,5 +365,61 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         else{
             this.state.IDLE.enter();
         }
+
+        // disable movement until idle again
+        if (this.disableUntilIdle)
+        {
+            this.currMoveSpeed = 0;
+        }
+        else {
+            this.currMoveSpeed = this.moveSpeed;
+        }
+
     }
+
+    getDirectionOfObj(object) {
+        const dx = object.x - this.x;
+        const dy = object.y - this.y;
+      
+        if (Math.abs(dx) > Math.abs(dy)) {
+            if (dx < 0) {
+                return "left";
+            } else {
+                return "right";
+            }
+        } else {
+            if (dy < 0) {
+                return "up";
+            } else {
+                return "down";
+            }
+        }
+    }
+
+    getFacingDirection() {
+        const direction = new Phaser.Math.Vector2();
+      
+        if (this.currentState == this.state.LEFT) 
+        {
+          direction.x = -1;
+        } 
+        else if (this.currentState == this.state.RIGHT)
+        {
+          direction.x = 1;
+        }
+        else if (this.currentState == this.state.DOWN) 
+        {
+            direction.y = -1;
+        } 
+        else if (this.currentState == this.state.UP)
+        {
+            direction.y = 1;
+        }
+
+      
+        direction.normalize();
+      
+        return direction;
+    }
+
 }

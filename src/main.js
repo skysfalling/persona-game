@@ -11,18 +11,18 @@
 // game config
 let config = {
     parent: 'phaser-game',
-    type: Phaser.CANVAS,
+    type: Phaser.WEBGL,
     render: {
         pixelArt: true
     },
-    //pixelArt: true,
+    backgroundColor: '#000000',
     width: 320,
     height: 320,
     zoom: 2,
     physics: {
         default: "arcade",
         arcade: {
-            //debug: true,
+            debug: true,
             gravity: { y: 0 }
         }
     },

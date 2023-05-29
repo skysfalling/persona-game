@@ -22,7 +22,7 @@ class Gizmos {
     clear(){
         this.graphics.clear();
     }
-
+    
     // [[ LINE ]]
     drawLine (startpoint, endpoint, color = 0xffffff, lineWidth = 2, opacity = 1) {
         if (!this.visible) {return;}
@@ -34,7 +34,7 @@ class Gizmos {
         this.graphics.strokePath();
         this.graphics.setAlpha(opacity);
     }
-
+a
     //#region  [[ CIRCLE ]]
     drawCircle(x, y, radius, color = 0xffffff, rotation = 0, lineWidth = 2) {
         if (!this.visible) {return;}
@@ -80,10 +80,12 @@ class Gizmos {
         return rect;
     }
 
-    drawExistingRect(rect, color = 0xffffff, lineWidth = 5, opacity = 1, origin = {x: 0.5, y: 0.5}) {
+    drawExistingRect(rect, x , y, color = 0xffffff, lineWidth = 5, opacity = 1, origin = {x: 0.5, y: 0.5}) {
         if (!this.visible) {return;}
         this.graphics.lineStyle(lineWidth, color, opacity);
         this.graphics.setAlpha(opacity);
+        
+        rect.setPosition(x - (rect.width * origin.x), y - (rect.height * origin.y));
 
         this.graphics.strokeRectShape(rect);
         return rect;
@@ -184,7 +186,10 @@ class Gizmos {
     // create or update a text object
     updateText(textObject, x, y, text = "gizmos", color = "#ffffff", fontSize = 20, angle = 0) 
     {            
-        if (!textObject) {console.error("No text object"); return;}
+        if (!textObject) {
+            //console.error("No text object"); 
+            return;
+        }
         
         textObject.x = x;
         textObject.y = y;
@@ -206,6 +211,13 @@ class Gizmos {
         const nx = (cos * (x - cx)) + (sin * (y - cy)) + cx;
         const ny = (cos * (y - cy)) - (sin * (x - cx)) + cy;
         return { x: nx, y: ny };
+    }
+
+    // get midpoint between two points
+    calculateMidpoint(startpoint, endpoint) {
+        const midpointX = (startpoint.x + endpoint.x) / 2;
+        const midpointY = (startpoint.y + endpoint.y) / 2;
+        return { x: midpointX, y: midpointY };
     }
     //#endregion
 }   
