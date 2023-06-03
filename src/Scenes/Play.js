@@ -44,13 +44,10 @@ class Play extends Phaser.Scene {
         collisionLayer.setCollisionByProperty({ collides: true });
 
         // 
-        this.lights.enable().setAmbientColor(0x222222);
+        this.lights.enable().setAmbientColor(0x555555);
 
         // get inputs
         this.cursors = this.input.keyboard.createCursorKeys();
-
-
-
 
         // create players
         const p1Spawn = this.map.findObject("player_spawn", obj => obj.name === "p1spawn");
@@ -63,9 +60,6 @@ class Play extends Phaser.Scene {
 
         this.playerObjs = [this.p1, this.p2];
 
-
-
-
         // create objects
         this.interactObjects = this.add.group();
 
@@ -73,11 +67,7 @@ class Play extends Phaser.Scene {
         const objSpawn = this.map.findObject("interaction", obj => obj.name === "moveable_obj");
         this.heart = new Heart(this, objSpawn.x, objSpawn.y, 'tileAtlas', 529);
 
-
-
-
-        // #region << COLLISIONS >>
-
+        // << COLLISIONS >>
         this.physics.world.TILE_BIAS = 1000;  // increase to prevent sprite tunneling through tiles
 
         // add a collision handler
@@ -89,9 +79,14 @@ class Play extends Phaser.Scene {
         this.collisionHandler.overlapWithTrigger(this.interactObjects, this.startP1.overlapTrigger, this.startP1);
         this.collisionHandler.overlapWithTrigger(this.interactObjects, this.startP2.overlapTrigger, this.startP2);
 
-        // create camera movement
+        // << CAMERA MOVEMENT >>
         this.cameraMovement = new CameraMovement(this);
         this.cameraMovement.setup();
+
+        // Define a key to toggle editor mode
+        this.input.keyboard.on('keydown-SPACE', () => {
+            this.cameraMovement.toggleEditorMode();
+        });
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
