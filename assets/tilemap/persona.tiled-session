@@ -3,19 +3,25 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "map1.json",
     "expandedProjectPaths": [
+        "."
     ],
     "fileStates": {
         "": {
-            "scaleInDock": 4
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "map1.json": {
+            "expandedObjectLayers": [
+                3,
+                4
+            ],
             "scale": 2,
-            "selectedLayer": 2,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 171.25,
-                "y": 169.75
+                "x": 244.75,
+                "y": 142.5
             }
         },
         "map1.json#character-sheet": {
@@ -31,8 +37,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 155,
-                "y": 236.5
+                "x": 154.5,
+                "y": 372
             }
         },
         "map1.tmx#character-sheet": {
@@ -41,9 +47,27 @@
         "map1.tmx#monochrome_packed": {
             "scaleInDock": 1
         },
+        "map2.json": {
+            "expandedObjectLayers": [
+                3,
+                4
+            ],
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 283.25,
+                "y": 142.5
+            }
+        },
+        "map2.json#monochrome_packed": {
+            "scaleInDock": 1
+        },
         "monochrome.tsx": {
             "scaleInDock": 2,
             "scaleInEditor": 1
+        },
+        "monochrome_packed.json": {
+            "scaleInDock": 1
         },
         "monochrome_packed.tsx": {
             "scaleInDock": 1,
@@ -74,22 +98,25 @@
     },
     "last.exportedFilePath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/tilemap",
     "last.externalTilesetPath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/tilemap",
-    "last.imagePath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/characters",
+    "last.imagePath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/tilemap",
+    "map.fixedSize": false,
     "map.lastUsedExportFilter": "JSON map files [Tiled 1.1] (*.json)",
-    "map.lastUsedFormat": "tmx",
+    "map.lastUsedFormat": "json1",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "map.width": 20,
     "openFiles": [
+        "map1.json",
+        "map1.tmx"
     ],
     "project": "persona.tiled-project",
     "property.type": "object",
     "recentFiles": [
+        "monochrome_packed.tsx",
+        "map1.tmx",
         "map1.json",
         "tilemap01.json",
         "tilemap01.tmx",
-        "map1.tmx",
-        "monochrome_packed.tsx",
         "monochrome.tsx"
     ],
     "tileset.embedInMap": true,

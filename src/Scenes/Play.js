@@ -33,6 +33,7 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+
         // add a tile map
         this.map = this.add.tilemap("map"); 
         const tileset = this.map.addTilesetImage("monochrome_packed", "1bit_tiles");
@@ -48,6 +49,9 @@ class Play extends Phaser.Scene {
         // get inputs
         this.cursors = this.input.keyboard.createCursorKeys();
 
+
+
+
         // create players
         const p1Spawn = this.map.findObject("player_spawn", obj => obj.name === "p1spawn");
         this.p1 = new Player(this, p1Spawn.x, p1Spawn.y, 'character1', false);
@@ -59,6 +63,9 @@ class Play extends Phaser.Scene {
 
         this.playerObjs = [this.p1, this.p2];
 
+
+
+
         // create objects
         this.interactObjects = this.add.group();
 
@@ -67,105 +74,24 @@ class Play extends Phaser.Scene {
         this.heart = new Heart(this, objSpawn.x, objSpawn.y, 'tileAtlas', 529);
 
 
+
+
         // #region << COLLISIONS >>
 
         this.physics.world.TILE_BIAS = 1000;  // increase to prevent sprite tunneling through tiles
 
-        // collide with collision layer, using sprite index
-        collisionLayer.setCollisionBetween(52, 54);
-        this.physics.add.collider(this.p1, collisionLayer);
-        this.physics.add.collider(this.p2, collisionLayer);
+        // add a collision handler
+        this.collisionHandler = new CollisionHandler(this);
+        this.collisionHandler.collideWithCollisionLayer(this.p1, collisionLayer);
+        this.collisionHandler.collideWithCollisionLayer(this.p2, collisionLayer);
+        this.collisionHandler.playerOverlap(this.p1, this.p2);
+        this.collisionHandler.mainObjectCollision(this.playerObjs, this.interactObjects);
+        this.collisionHandler.overlapWithTrigger(this.interactObjects, this.startP1.overlapTrigger, this.startP1);
+        this.collisionHandler.overlapWithTrigger(this.interactObjects, this.startP2.overlapTrigger, this.startP2);
 
-        this.physics.add.overlap(this.p1, this.p2, () => {
-            //console.log('hello from the edge of the world', body);
-            this.p1.x = Math.floor(this.p1.x);
-            this.p1.y = Math.floor(this.p1.y);
-
-            // calculate the angle between the current position and the center of the world
-            const angle = Phaser.Math.Angle.Between(this.p1.x, this.p1.y, this.p2.x, this.p2.y);
-
-            // set the velocity of the object towards the center at a slower pace
-            this.physics.velocityFromRotation(-angle, 500, this.p1.velocity);
-        });
-
-        // >>  MAIN OBJECT COLLISION
-        this.physics.add.collider(this.playerObjs, this.interactObjects, (player, obj) =>{
-
-            if (player.disable) {return;}
-
-            // Turn on the player.disable property
-            player.disable = true;
-
-            // Delay timer to set the player.disableUntilIdle property to false after a certain delay
-            this.time.delayedCall(200, () => {
-                // This callback function will be executed after the delay
-                // Set the player.disableUntilIdle property to false
-                player.disable = false;
-            }, [], this);
-
-            const interaction_direction = player.getDirectionOfObj(obj);
-            console.log(player.name + " " + interaction_direction);
-
-            if (interaction_direction == "left") {
-                player.setPosition(obj.x + (obj.width), player.y);
-                player.setVelocity(10, 0);
-                obj.setVelocity(-50, 0);
-            }
-            if (interaction_direction == "right") {
-                player.setPosition(obj.x - (obj.width), player.y);
-                player.setVelocity(-10, 0);
-                obj.setVelocity(50, 0);
-
-            }
-            if (interaction_direction == "up") {
-                player.setPosition(player.x, obj.y + (obj.height));
-                player.setVelocity(0, 10);
-                obj.setVelocity(0, -50);
-            }
-            if (interaction_direction == "down") {
-                player.setPosition(player.x, obj.y - (obj.height));
-                player.setVelocity(0, -10);
-                obj.setVelocity(0, 50);
-            }
-        });
-
-        //this.physics.add.collider(this.interactObjects, collisionLayer);        
-
-        this.physics.add.overlap(this.interactObjects, this.startP1.overlapTrigger, (obj) => {
-            //console.log("overlap trigger " + obj)
-            this.startP1.currOverlapObject = obj;
-        })
-
-        this.physics.add.overlap(this.interactObjects, this.startP2.overlapTrigger, (obj) => {
-            //console.log("overlap trigger " + obj)
-            this.startP2.currOverlapObject = obj;
-        })
-
-        // #endregion
-
-        //#region << CAMERA SETUP >>
-        this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
-        this.cameraTarget = this.add.sprite(this.p1.x, this.p1.y, null).setAlpha(0);
-        this.cameras.main.startFollow(this.cameraTarget);
-        this.cameras.main.setZoom(1);
-
-        const screenWidth = this.cameras.main.width;
-        const screenHeight = this.cameras.main.height;
-        // Create camera for player 1
-        this.camera1 = this.cameras.add(0, 0, screenWidth / 2, screenHeight);
-        this.camera1.startFollow(this.p1);
-        this.camera1.setZoom(1);
-        this.camera1.setAlpha(0);
-        this.camera1.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
-        
-        // Create camera for player 2
-        this.camera2 = this.cameras.add(screenWidth / 2, 0, screenWidth / 2, screenHeight);
-        this.camera2.startFollow(this.p2);
-        this.camera2.setZoom(1);
-        this.camera2.setAlpha(0);
-        this.camera2.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
-
-        //#endregion
+        // create camera movement
+        this.cameraMovement = new CameraMovement(this);
+        this.cameraMovement.setup();
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -195,12 +121,7 @@ class Play extends Phaser.Scene {
             let temp = this.p1;
             this.p1 = this.p2;
             this.p2 = temp;
-
-            this.camera1.startFollow(this.p1);
-            this.camera2.startFollow(this.p2);
         }
-
-
 
         this.p1.update();
         this.p2.update();
@@ -209,8 +130,7 @@ class Play extends Phaser.Scene {
         this.gizmos.clear();
         this.gizmos.drawLine({x: this.p1.x, y: this.p1.y}, {x: this.p2.x, y: this.p2.y}, 0xff00ff, 1);
 
-        this.gizmos.drawExistingRect(this.overlapTrigger, this.p1.x, this.p1.y, 0xff00ff, 1, 1);
-
+        //this.gizmos.drawExistingRect(this.overlapTrigger, this.p1.x, this.p1.y, 0xff00ff, 1, 1);
 
         if (Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z))) {
             this.p1.inverted  = !this.p1.inverted;
@@ -220,34 +140,7 @@ class Play extends Phaser.Scene {
             this.p2.inverted  = !this.p2.inverted;
         }
 
-        //#region << UPDATE CAMERA >>
-        const distance = Phaser.Math.Distance.Between(this.p1.x, this.p1.y, this.p2.x, this.p2.y, {x: 0, y: 0});
-        const thresholdDistance = 300;
-
-        // ( SPLIT SCREEN TRANSITION ) 
-        const targetAlpha = distance > thresholdDistance ? 1 : 0;
-        const lerpAmount = 0.1; // Adjust this value to control the speed of the lerp
-        
-        // Lerp the alpha values of camera1 and camera2
-        this.camera1.alpha = Phaser.Math.Linear(this.camera1.alpha, targetAlpha, lerpAmount);
-        this.camera2.alpha = Phaser.Math.Linear(this.camera2.alpha, targetAlpha, lerpAmount);
-
-        // Determine the relative position of p1 and p2
-        const isP1OnLeft = this.p1.x < this.p2.x;
-    
-        // Position the cameras accordingly
-        if (isP1OnLeft) {
-            this.camera1.setPosition(0, 0);
-            this.camera2.setPosition(this.cameras.main.width / 2, 0);
-        } else {
-            this.camera1.setPosition(this.cameras.main.width / 2, 0);
-            this.camera2.setPosition(0, 0);
-        }
-
-        this.playerMidpoint = this.gizmos.calculateMidpoint({x: this.p1.x, y: this.p1.y}, {x: this.p2.x, y: this.p2.y});
-        this.cameraTarget.setPosition(this.playerMidpoint.x, this.playerMidpoint.y);
-        this.gizmos.drawCircle(this.cameraTarget.x, this.cameraTarget.y, thresholdDistance/2, 0xffffff, 0, 0.5);
-        // #endregion
+        this.cameraMovement.update(this.gizmos);
 
     }
 
