@@ -22,6 +22,7 @@ class CameraMovement {
     }
 
     setup() {
+        this.mainCamera = this.cameras.main;
         this.cameras.main.setBounds(-Infinity, -Infinity, Infinity, Infinity);
         this.mainCameraTarget = this.scene.add.sprite(this.p1.x, this.p1.y, null).setAlpha(0);
         this.cameras.main.startFollow(this.mainCameraTarget);
@@ -82,49 +83,44 @@ class CameraMovement {
         } 
         else {
 
-            const playersInSameRoom = this.p1.currRoom === this.p2.currRoom;
-
+            const playersInSameRoom = this.p1.currRoom.name === this.p2.currRoom.name;
             // if in same room
             if (playersInSameRoom) {
                 this.playerMidpoint = this.gizmos.calculateMidpoint({x: this.p1.x, y: this.p1.y}, {x: this.p2.x, y: this.p2.y});
                 this.mainCameraTarget.setPosition( this.playerMidpoint.x,  this.playerMidpoint.y);
             }
-            else{
+            else
+            {
                 const distance = Phaser.Math.Distance.Between(this.p1.x, this.p1.y, this.p2.x, this.p2.y, {x: 0, y: 0});
-                const thresholdDistance = 350;
+                const thresholdDistance = 280;
                 const targetAlpha = distance > thresholdDistance ? 1 : 0;
+                const targetAlpha_inverse = distance > thresholdDistance ? 0 : 1;
                 const lerpAmount = 0.1; 
         
+                this.mainCamera.alpha = Phaser.Math.Linear(this.mainCamera.alpha, targetAlpha_inverse, lerpAmount);
                 this.camera1.alpha = Phaser.Math.Linear(this.camera1.alpha, targetAlpha, lerpAmount);
                 this.camera2.alpha = Phaser.Math.Linear(this.camera2.alpha, targetAlpha, lerpAmount);
-        
+
                 const isP1OnLeft = this.p1.x < this.p2.x;
-                const screenWidth = this.cameras.main.width;
-                const screenHeight = this.cameras.main.height;
-                
-                if (isP1OnLeft) {
-                    // Horizontal Split Screen
-                    this.camera1.setPosition(0, 0);
-                    this.camera2.setPosition(screenWidth / 2, 0);
-                  
-                    // Follow the players with the cameras
-                    this.camera1.startFollow(this.p1, false, 1, 1, 0, 0);
-                    this.camera2.startFollow(this.p2, false, 1, 1, 0, -screen.height/4);
-                } 
-                else {
+
+                let screenhalf = screen.width/2;
+
                 // Vertical Split Screen
                 this.camera1.setPosition(0, 0);
-                this.camera2.setPosition(0, screenHeight / 2);
+                this.camera2.setPosition(screenhalf, 0);
                 
-                }
-                
+                this.camera1.width = screenhalf;
+                this.camera1.height = screen.height;
+                this.camera2.width = screenhalf;
+                this.camera2.height = screen.height;
+
                 // Follow the players with the cameras
-                this.camera1.startFollow(this.p1, false, 1, 1);
-                this.camera2.startFollow(this.p2, false, 1, 1);
+                this.camera1.startFollow(this.p1, false, 1, 1, 0, 0);
+                this.camera2.startFollow(this.p2, false, 1, 1, 0, 0);
                 
-                // Adjust the camera bounds to the full map
-                this.camera1.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
-                this.camera2.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+                // Adjust the camera bounds to the full map + screen size offset
+                this.camera1.setBounds(-screen.width, -screen.height, this.map.widthInPixels + screen.width , this.map.heightInPixels + screen.height);
+                this.camera2.setBounds(-screen.width, -screen.height, this.map.widthInPixels + screen.width, this.map.heightInPixels + screen.height);
             }
 
 
