@@ -22,7 +22,7 @@ let config = {
     physics: {
         default: "arcade",
         arcade: {
-            //debug: true,
+            debug: true,
             gravity: { y: 0 }
         }
     },
@@ -37,3 +37,54 @@ const centerY = game.config.height / 2;
 const w = game.config.width;
 const h = game.config.height;
 let cursors = null;
+
+let globalDepth = {
+    background: -3,
+    env_background: -2,
+    playerEffects: -1,
+    playArea: 0,
+    env_foreground: 1,
+    ui: 2
+}
+
+let screen = {
+    center: { 
+      x: game.config.width/2, 
+      y: game.config.height/2 
+    },
+    width: game.config.width,
+    height: game.config.height,
+  
+    topLeft: {
+      x: 0,
+      y: 0
+    },
+    topMid: {
+      x: game.config.width / 2,
+      y: 0
+    },
+    topRight: {
+      x: game.config.width,
+      y: 0
+    },
+    rightMid: {
+      x: game.config.width,
+      y: game.config.height/2
+    },
+    botRight: { 
+      x: game.config.width, 
+      y: game.config.height 
+    },
+    botMid: {
+      x: game.config.width/2,
+      y: game.config.height
+    },
+    botLeft: { 
+      x: 0, 
+      y: game.config.height 
+    },
+    leftMid: {
+      x: 0,
+      y: game.config.height/2
+    },
+  }

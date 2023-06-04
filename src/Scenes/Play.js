@@ -8,7 +8,7 @@ class Play extends Phaser.Scene {
         this.load.path = "./assets/";
         this.load.image("1bit_tiles", "tilemap/monochrome_packed.png");    // tile sheet
 
-        this.load.tilemapTiledJSON("map", "tilemap/map1.json");    // Tiled JSON file
+        this.load.tilemapTiledJSON("map", "tilemap/map2.json");    // Tiled JSON file
 
         this.load.spritesheet('tileAtlas', 'tilemap/monochrome_packed.png', {
             frameWidth: 16,
@@ -27,59 +27,83 @@ class Play extends Phaser.Scene {
 
         this.physics.add.existing(this);
         this.gizmos = new Gizmos(this);
-        this.gizmos.graphics.setDepth(1);
-        this.gizmos.visible = false;
+        this.gizmos.graphics.setDepth(2);
+        this.gizmos.enabled = false;
 
     }
 
     create() {
 
+        this.lights.enable().setAmbientColor(0x555555);
+
+        // get inputs
+        this.cursors = this.input.keyboard.createCursorKeys();
+
+        // #region [[ SETUP TILEMAP ]]
         // add a tile map
         this.map = this.add.tilemap("map"); 
         const tileset = this.map.addTilesetImage("monochrome_packed", "1bit_tiles");
 
         // setup tilemap layers
         const backgroundLayer = this.map.createLayer("background", tileset, 0, 0).setPipeline('Light2D');
+        backgroundLayer.setDepth(globalDepth.background);
+
         const collisionLayer = this.map.createLayer("collision", tileset, 0, 0).setPipeline('Light2D');
+        backgroundLayer.setDepth(globalDepth.env_background);
         collisionLayer.setCollisionByProperty({ collides: true });
 
-        // 
-        this.lights.enable().setAmbientColor(0x555555);
+        // create Room Handler from "rooms" object layer
+        this.roomHandler = new RoomHandler(this, 'rooms');
+        this.roomHandler.loadRooms();
 
-        // get inputs
-        this.cursors = this.input.keyboard.createCursorKeys();
+        // #endregion
 
-        // create players
+        // #region [[ CREATE PLAYERS ]]
         const p1Spawn = this.map.findObject("player_spawn", obj => obj.name === "p1spawn");
         this.p1 = new Player(this, p1Spawn.x, p1Spawn.y, 'character1', false);
-        this.startP1 = this.p1;
 
         const p2Spawn = this.map.findObject("player_spawn", obj => obj.name === "p2spawn");
         this.p2 = new Player(this, p2Spawn.x, p2Spawn.y, 'character2', true);
-        this.startP2 = this.p2;
 
         this.playerObjs = [this.p1, this.p2];
+        // #endregion
 
-        // create objects
+        // #region [[ CREATE OBJECTS ]]
         this.interactObjects = this.add.group();
 
         // Create the custom sprite using the specified settings
         const objSpawn = this.map.findObject("interaction", obj => obj.name === "moveable_obj");
         this.heart = new Heart(this, objSpawn.x, objSpawn.y, 'tileAtlas', 529);
+        // #endregion
 
-        // << COLLISIONS >>
+        // #region [[ CREATE COLLISIONS ]]
         this.physics.world.TILE_BIAS = 1000;  // increase to prevent sprite tunneling through tiles
 
         // add a collision handler
         this.collisionHandler = new CollisionHandler(this);
         this.collisionHandler.collideWithCollisionLayer(this.p1, collisionLayer);
         this.collisionHandler.collideWithCollisionLayer(this.p2, collisionLayer);
-        this.collisionHandler.playerOverlap(this.p1, this.p2);
-        this.collisionHandler.mainObjectCollision(this.playerObjs, this.interactObjects);
-        this.collisionHandler.overlapWithTrigger(this.interactObjects, this.startP1.overlapTrigger, this.startP1);
-        this.collisionHandler.overlapWithTrigger(this.interactObjects, this.startP2.overlapTrigger, this.startP2);
 
-        // << CAMERA MOVEMENT >>
+        this.collisionHandler.playerOverlap(this.p1, this.p2);
+
+        // - object collision --------------------------------------------------------
+        this.collisionHandler.collideWithCollisionLayer(this.heart, collisionLayer);
+        this.collisionHandler.mainObjectCollision(this.playerObjs, this.interactObjects);
+
+        // - player overlap --------------------------------------------------------
+        this.collisionHandler.overlapWithTrigger(this.p1.overlapTrigger, this.interactObjects, (player, object) => {
+            this.p1.newTetheredObject(object);
+            object.connectPlayer(this.p1);
+        });
+
+        this.collisionHandler.overlapWithTrigger(this.p2.overlapTrigger, this.interactObjects, (player, object) => {
+            this.p2.newTetheredObject(object);
+            object.connectPlayer(this.p2);
+        });
+
+        // #endregion
+
+        // #region [[ SETUP CAMERA MOVEMENT]]
         this.cameraMovement = new CameraMovement(this);
         this.cameraMovement.setup();
 
@@ -87,37 +111,44 @@ class Play extends Phaser.Scene {
         this.input.keyboard.on('keydown-SPACE', () => {
             this.cameraMovement.toggleEditorMode();
         });
+        // #endregion
 
-        this.cursors = this.input.keyboard.createCursorKeys();
+        //#region [[ HTML REFERENCES ]]
+        this.physics.world.drawDebug = false;
 
-        //#region << HTML REFERENCES >>
         // toggle gizmos
         const enableGizmosButton = document.querySelector("#enable-gamegizmos");
-        enableGizmosButton.innerHTML = "Game Gizmos: " + this.gizmos.visible;
+        enableGizmosButton.innerHTML = "Game Gizmos: " + this.gizmos.enabled;
         enableGizmosButton.addEventListener("click", () => { 
-            this.gizmos.visible = !this.gizmos.visible;
-            enableGizmosButton.innerHTML = "Game Gizmos: " + this.gizmos.visible;
+            this.gizmos.enabled = !this.gizmos.enabled;
+            enableGizmosButton.innerHTML = "Game Gizmos: " + this.gizmos.enabled;
+
+            this.toggleDebug();
+            game.config.debug = !game.config.debug;
+
         }); 
         const enablePlayerGizmosButton = document.querySelector("#enable-playergizmos");
-        enablePlayerGizmosButton.innerHTML = "Player Gizmos: " + this.p1.gizmos.visible;
         enablePlayerGizmosButton.addEventListener("click", () => { 
-            this.p1.gizmos.visible = !this.p1.gizmos.visible;
-            this.p2.gizmos.visible = !this.p2.gizmos.visible;
-            enablePlayerGizmosButton.innerHTML = "Player Gizmos: " + this.p1.gizmos.visible;
+            this.p1.toggleDebug();
+            this.p2.toggleDebug();
         }); 
         //#endregion
-    
+
+    }
+
+    toggleDebug(){
+        if (this.physics.world.drawDebug) {
+            this.physics.world.drawDebug = false;
+            this.physics.world.debugGraphic.clear();
+        }
+        else 
+        {
+            this.physics.world.drawDebug = true;
+        }
     }
 
     update (time, delta)
     {
-        //adjust references based on horz pos
-        if (this.p1.x > this.p2.x) { 
-            let temp = this.p1;
-            this.p1 = this.p2;
-            this.p2 = temp;
-        }
-
         this.p1.update();
         this.p2.update();
         this.heart.update();
@@ -127,17 +158,7 @@ class Play extends Phaser.Scene {
 
         //this.gizmos.drawExistingRect(this.overlapTrigger, this.p1.x, this.p1.y, 0xff00ff, 1, 1);
 
-        if (Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z))) {
-            this.p1.inverted  = !this.p1.inverted;
-        }
-    
-        if (Phaser.Input.Keyboard.JustDown(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X))) {
-            this.p2.inverted  = !this.p2.inverted;
-        }
-
         this.cameraMovement.update(this.gizmos);
 
     }
-
-
 }

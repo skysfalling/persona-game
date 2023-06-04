@@ -2,8 +2,8 @@ class Gizmos {
     constructor(scene) {
         this.scene = scene;
         this.graphics = scene.add.graphics();
-        //this.graphics.setDepth(depthLayers.gizmos);
-        this.visible = true;
+        this.graphics.setDepth(globalDepth.ui);
+        this.enabled = true;
 
         this.scene.events.on('update', this.update, this);
     }
@@ -25,7 +25,7 @@ class Gizmos {
     
     // [[ LINE ]]
     drawLine (startpoint, endpoint, color = 0xffffff, lineWidth = 2, opacity = 1) {
-        if (!this.visible) {return;}
+        if (!this.enabled) {return;}
         this.graphics.lineStyle(lineWidth, color);
         this.graphics.beginPath();
         this.graphics.moveTo(startpoint.x, startpoint.y);
@@ -37,7 +37,7 @@ class Gizmos {
 a
     //#region  [[ CIRCLE ]]
     drawCircle(x, y, radius, color = 0xffffff, rotation = 0, lineWidth = 2) {
-        if (!this.visible) {return;}
+        if (!this.enabled) {return;}
 
         // draw circle
         let circleConfig = new Phaser.Geom.Circle(x, y, radius);
@@ -57,16 +57,27 @@ a
         this.drawLine(center, radiusPoint, color, lineWidth);
     }
 
-    drawCircleFill(x, y, radius, color) {
-        if (!this.visible) {return;}
-        this.graphics.fillStyle(color);
+    drawCircleNoLine(x, y, radius, color = 0xffffff, rotation = 0, lineWidth = 2) {
+        if (!this.enabled) {return;}
+
+        // draw circle
+        let circleConfig = new Phaser.Geom.Circle(x, y, radius);
+        this.graphics.lineStyle(lineWidth, color, lineWidth);
+        this.graphics.strokeCircleShape(circleConfig);
+
+    }
+
+    drawCircleFill(x, y, radius, color, opacity = 1) {
+        if (!this.enabled) {return;}
+        this.graphics.fillStyle(color, opacity);
         this.graphics.fillCircle(x, y, radius);
+
     }
     //#endregion
 
     //#region  [[ RECT ]]
     createRect(x, y, width, height, color = 0xffffff, lineWidth = 5, opacity = 1, origin = {x: 0.5, y: 0.5}) {
-        if (!this.visible) {opacity = 0;}
+        if (!this.enabled) {opacity = 0;}
         this.graphics.lineStyle(lineWidth, color, 1);
         this.graphics.setAlpha(opacity);
 
@@ -81,7 +92,7 @@ a
     }
 
     drawExistingRect(rect, x , y, color = 0xffffff, lineWidth = 5, opacity = 1, origin = {x: 0.5, y: 0.5}) {
-        if (!this.visible) {return;}
+        if (!this.enabled) {return;}
         this.graphics.lineStyle(lineWidth, color, opacity);
         this.graphics.setAlpha(opacity);
         
@@ -94,7 +105,7 @@ a
     }
 
     createRectFill(x, y, width, height, color = 0xffffff, lineWidth = 2, opacity = 1, origin = {x: 0.5, y: 0.5}) {
-        if (!this.visible) {opacity = 0;}
+        if (!this.enabled) {opacity = 0;}
         this.graphics.fillStyle(color, opacity);
         this.graphics.lineStyle(lineWidth, color, opacity);
 
@@ -110,7 +121,7 @@ a
     }
 
     drawExistingRectFill(rect, color = 0xffffff, lineWidth = 2, opacity = 0.5) {
-        if (!this.visible) {return;}
+        if (!this.enabled) {return;}
         this.graphics.fillStyle(color, opacity);
         this.graphics.lineStyle(lineWidth, color);
         this.graphics.setAlpha(opacity);
@@ -124,7 +135,7 @@ a
 
     //#region  [[ LINE RANGE ]] : line from start - end ,  colored lines show height
     createLineRange(startpoint, endpoint, widthRange = 50, outerColor = 0xff0000, innerColor = 0xffffff) {
-        if (!this.visible) {
+        if (!this.enabled) {
             return;
         }
     
@@ -173,15 +184,16 @@ a
     //#region [[ TEXT ]]
     // create or update a text object
     createText(x, y, text = "gizmos", color = "#ffffff", fontSize = 20, angle = 0) {        
-        if (!this.visible) return;
+        if (!this.enabled) return;
         
-        var textObject = this.scene.add.text(x, y, text);
+        const textObject = this.scene.add.text(x, y, text);
         textObject.setOrigin(0.5, 0.5);
         textObject.setColor(color);
         textObject.setFontSize(fontSize);
         textObject.setAngle(angle);
-        textObject.setVisible(this.visible);
+        textObject.setVisible(this.enabled);
         this.scene.add.existing(textObject);
+
         return textObject;
     }
 
@@ -199,7 +211,8 @@ a
         textObject.setColor(color);
         textObject.setAngle(angle);
         textObject.setFontSize(fontSize);
-        textObject.setVisible(this.visible);
+        textObject.setVisible(this.enabled);
+        textObject.setResolution(10);
 
     }
     //#endregion

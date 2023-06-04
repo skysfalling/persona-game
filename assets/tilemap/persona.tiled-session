@@ -17,11 +17,11 @@
                 3,
                 4
             ],
-            "scale": 2,
-            "selectedLayer": 3,
+            "scale": 1,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 244.75,
-                "y": 142.5
+                "x": 235,
+                "y": 399
             }
         },
         "map1.json#character-sheet": {
@@ -37,8 +37,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 154.5,
-                "y": 372
+                "x": 158,
+                "y": 426
             }
         },
         "map1.tmx#character-sheet": {
@@ -49,17 +49,29 @@
         },
         "map2.json": {
             "expandedObjectLayers": [
+                5,
                 3,
                 4
             ],
-            "scale": 2,
-            "selectedLayer": 0,
+            "scale": 1,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 283.25,
-                "y": 142.5
+                "x": 42,
+                "y": 7
             }
         },
         "map2.json#monochrome_packed": {
+            "scaleInDock": 1
+        },
+        "map2.tmx": {
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 188,
+                "y": 227
+            }
+        },
+        "map2.tmx#monochrome_packed": {
             "scaleInDock": 1
         },
         "monochrome.tsx": {
@@ -112,6 +124,7 @@
     "project": "persona.tiled-project",
     "property.type": "object",
     "recentFiles": [
+        "map2.json",
         "monochrome_packed.tsx",
         "map1.tmx",
         "map1.json",

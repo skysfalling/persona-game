@@ -4,7 +4,7 @@ class CollisionHandler {
     }
 
     collideWithCollisionLayer(player, collisionLayer) {
-        collisionLayer.setCollisionBetween(52, 54);
+        collisionLayer.setCollisionBetween(0, 1000);
         this.scene.physics.add.collider(player, collisionLayer);
     }
 
@@ -61,9 +61,7 @@ class CollisionHandler {
         }
     }
 
-    overlapWithTrigger(interactObjects, overlapTrigger, startPlayer) {
-        this.scene.physics.add.overlap(interactObjects, overlapTrigger, (obj) => {
-            startPlayer.currOverlapObject = obj;
-        });
+    overlapWithTrigger(interactObjects, overlapTrigger, overlapCallback) {
+        this.scene.physics.add.overlap(interactObjects, overlapTrigger, overlapCallback);
     }
 }

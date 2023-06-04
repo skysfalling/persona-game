@@ -1,65 +1,74 @@
 class Heart extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture, frame) {
-      super(scene, x, y, texture, frame);
-      scene.add.existing(this);
-      scene.physics.add.existing(this);
-      this.setCollideWorldBounds(true);
-  
-      // Reference to players in the scene
-      this.name = "heart obj";
-      this.connectedPlayers = [];
+        super(scene, x, y, texture, frame);
+        scene.add.existing(this);
+        scene.physics.add.existing(this);
+
+
+
+        this.gizmos = new Gizmos(scene);
+        this.gizmos.enabled = true;
+    
+        // Reference to players in the scene
+        this.name = "heart obj";
+        this.connectedPlayers = [];
+
+        // - movement -----------------------------------------------
+        this.speed = 50;
+
+
   
       // Add this sprite to the interactObjects group
       scene.interactObjects.add(this);
     }
+    update() {
 
-    update(){
-
-        console.log("connected players: " + this.connectedPlayers.length); 
-        if (this.connectedPlayers.length >= 1)
-        {
-            let p1targetX = this.connectedPlayers[0].x;
-            let p1targetY = this.connectedPlayers[0].y;
-
-            let endTargetX = p1targetX;
-            let endTargetY = p1targetY;
+        // [[ UPDATE MOVEMENT ]--------------------------------]
+        if (this.connectedPlayers.length >= 1) {
+            let totalX = 0;
+            let totalY = 0;
     
-            if (this.connectedPlayers.length == 2)
-            {
-                let p2targetX = this.connectedPlayers[1].x;
-                let p2targetY = this.connectedPlayers[1].y;
-
-                this.playerMidpoint = this.scene.gizmos.calculateMidpoint({x: p1targetX, y: p1targetY}, {x: p2targetX, y: p2targetY});
-
-                endTargetX = this.playerMidpoint.x;
-                endTargetY = this.playerMidpoint.y;
-
+            // Calculate the total position of connected players
+            for (const player of this.connectedPlayers) {
+                totalX += player.x;
+                totalY += player.y;
             }
- 
-            // Check the distance between the grabbed object and the player
-            const distance = Phaser.Math.Distance.Between(endTargetX, endTargetY, this.x, this.y);
-
-            // Calculate the direction towards the player
-            const directionX = endTargetX - this.x;
-            const directionY = endTargetY - this.y;
+    
+            const averageX = totalX / this.connectedPlayers.length;
+            const averageY = totalY / this.connectedPlayers.length;
+    
+            const distance = Phaser.Math.Distance.Between(averageX, averageY, this.x, this.y);
+    
+            const directionX = averageX - this.x;
+            const directionY = averageY - this.y;
             const length = Math.sqrt(directionX * directionX + directionY * directionY);
             const normalizedDirectionX = directionX / length;
             const normalizedDirectionY = directionY / length;
+    
+            const lerpFactor = 1;
+            this.setVelocityX( Phaser.Math.Linear(this.body.velocity.x, normalizedDirectionX * this.speed, lerpFactor));
+            this.setVelocityY( Phaser.Math.Linear(this.body.velocity.y, normalizedDirectionY * this.speed, lerpFactor));
 
-            // Check if the object is within the desired distance
-            if (distance <= 25) {
-                const lerpFactor = 0.1; // Adjust the lerp factor as needed
-                this.setVelocity(
-                    Phaser.Math.Linear(this.body.velocity.x, 0, lerpFactor),
-                    Phaser.Math.Linear(this.body.velocity.y, 0, lerpFactor)
-                );
-            } 
-            else {
-                // Set the velocity of the grabbed object towards the player
-                const speed = 50; // Adjust the speed as needed
-                this.setVelocity(normalizedDirectionX * speed, normalizedDirectionY * speed);
+            if (this.connectedPlayers.length === 1 && distance <= 50)
+            {
+                this.setVelocityX( Phaser.Math.Linear(this.body.velocity.x, 0, 0.5));
+                this.setVelocityY( Phaser.Math.Linear(this.body.velocity.y, 0, 0.5));
+
+                if (distance < 25)
+                {
+                    this.setVelocity(0);
+                }
             }
+            else if (this.connectedPlayers.length > 1 && distance <= 10)
+            {
+                this.setVelocityX( Phaser.Math.Linear(this.body.velocity.x, 0, 0.8));
+                this.setVelocityY( Phaser.Math.Linear(this.body.velocity.y, 0, 0.8));
+            }
+            
         }
+
+        // [[ UPDATE UI ]]
+
     }
 
     connectPlayer(player) {
@@ -69,6 +78,26 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         // If the player doesn't exist, add it to the array
         if (!playerExists) {
           this.connectedPlayers.push(player);
+          console.log("<3 HEART -> new connected player: " + player.name);
         }
-      }
+    }
+
+    disconnectPlayer(player) {
+        // Find the index of the player in the connectedPlayers array
+        let playerIndex = -1;
+        for (let i = 0; i < this.connectedPlayers.length; i++) {
+            if (this.connectedPlayers[i] === player) {
+            playerIndex = i;
+            break;
+            }
+        }
+
+        // If the player is found, remove it from the array
+        if (playerIndex !== -1) {
+            this.connectedPlayers.splice(playerIndex, 1);
+            console.log("<3 HEART -> player removed: " + player.name);
+
+            player.tetheredObject = null;
+        }
+    }
 }

@@ -3,31 +3,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, characterSprite, invertedMove);
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.body.setCollideWorldBounds(true);
-        this.body.setSize(this.width/2, this.height/2);
-        this.setDepth(2);
 
-        this.name = characterSprite;
-
-        this.x = x;
-        this.y = y;
-        this.setOrigin(0.5, 0.5);
-        
-        this.gizmos = new Gizmos(scene);
-        this.gizmos.visible = false;
-
-        this.overrideGizmos = new Gizmos(scene);
-        this.overrideGizmos.visible = true;
-        this.overrideGizmos.graphics.setDepth(3);
-
-        this.moveSpeed = 100;
-        this.currMoveSpeed = this.moveSpeed;
-        
-        this.characterSprite = characterSprite
-        this.inverted = invertedMove;
-
-        this.disable = false;
-
+        // input references
         this.cursors = scene.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.UP,
             down: Phaser.Input.Keyboard.KeyCodes.DOWN,
@@ -37,6 +14,76 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             x: Phaser.Input.Keyboard.KeyCodes.X
         });
 
+        // -- positions ----------------------------------------------------------------//>>
+        this.x = x;
+        this.y = y;
+        this.setOrigin(0.5, 0.5);
+        this.body.setSize(this.width/2, this.height/2);
+        this.setDepth(2);
+
+        
+        // -- description -------------------------------------------------------------------//>>
+        this.name = characterSprite;
+        this.playerID = 1;
+        this.color = 0xffffff;
+        
+        if (characterSprite == "character1")
+        {
+            this.name = "violet";
+            this.playerID = 1;
+            this.color = 0xBF8BFF;
+            this.prefix = ">> [[ P1 ]] ";
+        }
+        else if (characterSprite == "character2")
+        {
+            this.name = "blue";
+            this.playerID = 2;
+            this.color = 0x579C9A;
+            this.prefix = ">> (( P2 )) ";
+        }
+
+        // -- lighting ----------------------------------------------------------------//>>
+        this.setPipeline('Light2D');
+        this.light = this.scene.lights.addLight(this.x, this.y, 50, 0x777777).setIntensity(1);
+
+
+        // -- ui & gizmos --------------------------------------------------------------//>>
+        this.gizmos_debug = new Gizmos(scene);
+        this.gizmos_debug.enabled = false;
+        this.gizmos_debug.graphics.setDepth(globalDepth.ui);
+
+        this.gizmo_effects = new Gizmos(scene);
+        this.gizmo_effects.enabled = true;
+        this.gizmo_effects.graphics.setDepth(globalDepth.player);
+
+        this.ui_offset = this.width;
+
+        // - movement -------------------------------------------------------//>>
+        this.disable = false;
+        this.moveSpeed = 100;
+        this.currMoveSpeed = this.moveSpeed;
+        
+        this.characterSprite = characterSprite
+        this.inverted = invertedMove;
+
+        this.currRoom = null;
+        this.facingDirection = new Phaser.Math.Vector2();
+
+        // - tether bubble ----------------------------------------------------//>>
+        this.tetherBubble = {
+            currSize: 0,
+            maxSize: 80
+        }
+
+        // - trigger ----------------------------------------------------//>>
+        this.overlapTrigger = this.scene.add.circle(this.x, this.y, this.tetherBubble.maxSize);
+        this.scene.physics.add.existing(this.overlapTrigger);
+        this.overlapTrigger.setVisible(false);
+        this.overlapTrigger.setOrigin(0.5);
+        this.overlapTrigger.body.isCircle = true;
+        this.overlapTrigger.body.width = 0;
+
+        //#region [[ ANIMATIONS ]--------------------------------] ////
         //#region DOWN ANIMATIONS
         this.scene.anims.create({
             key: 'down-idle1',
@@ -117,9 +164,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             repeat: -1
         });
         //#endregion
-        
+        //#endregion
+
+        // #region [[ MOVEMENT STATE ]] ====================================== /// 
         // Define the movement states
-        this.state = {
+        this.movementStates = {
             IDLE: {
                 name: "idle",
                 enter: () => {
@@ -147,8 +196,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                         }
                     }
 
-                    if (this.currentState == this.state.IDLE) {return;}
-                    this.currentState = this.state.IDLE;
+                    if (this.currentMovementState == this.movementStates.IDLE) {return;}
+                    this.currentMovementState = this.movementStates.IDLE;
                 }
             },
             LEFT: {
@@ -160,10 +209,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.currentFacing = "left";
 
                     // dont reset animations if in same state
-                    if (this.currentState == this.state.LEFT) {return;} 
+                    if (this.currentMovementState == this.movementStates.LEFT) {return;} 
 
                     // update state
-                    this.currentState = this.state.LEFT;
+                    this.currentMovementState = this.movementStates.LEFT;
                     this.setFlipX(false);
 
                     // set move animation
@@ -185,10 +234,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.currentFacing = "right";
 
                     // dont reset animations if in same state
-                    if (this.currentState == this.state.RIGHT) {return;} 
+                    if (this.currentMovementState == this.movementStates.RIGHT) {return;} 
 
                     // update state
-                    this.currentState = this.state.RIGHT;
+                    this.currentMovementState = this.movementStates.RIGHT;
                     this.setFlipX(true);
 
                     // set move animation
@@ -209,10 +258,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.currentFacing = "up";
 
                     // dont reset animations if in same state
-                    if (this.currentState == this.state.UP) {return;} 
+                    if (this.currentMovementState == this.movementStates.UP) {return;} 
 
                     // update state
-                    this.currentState = this.state.UP;
+                    this.currentMovementState = this.movementStates.UP;
                     this.setFlipX(false);
 
                     // set move animation
@@ -233,10 +282,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.currentFacing = "down";
 
                     // dont reset animations if in same state
-                    if (this.currentState == this.state.DOWN) {return;} 
+                    if (this.currentMovementState == this.movementStates.DOWN) {return;} 
 
                     // update state
-                    this.currentState = this.state.DOWN;
+                    this.currentMovementState = this.movementStates.DOWN;
                     this.setFlipX(false);
 
                     // set move animation
@@ -250,129 +299,169 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 },
             },
         };
+
         // Set the initial state
-        this.currentState = this.state.DOWN;
+        this.currentMovementState = this.movementStates.DOWN;
         this.currentFacing = "down";
+        // #endregion
 
-        this.overlapTrigger = this.scene.add.sprite(this.x, this.y, null);
-        this.scene.physics.add.existing(this.overlapTrigger);
-        this.overlapTrigger.setVisible(false);
-        this.overlapTrigger.setOrigin(0.5)
-        this.overlapTrigger.setSize(this.width*2, this.height*2);
+        // #endregion [[ ABILITY STATE ]] ==================================== /// 
+        if (this.playerID === 1) { this.ability_cursor = this.cursors.z;}
+        else if (this.playerID === 2) { this.ability_cursor = this.cursors.x;}
 
-        this.currOverlapObject;
-        this.currGrabbedObject;
+        this.currAbilityState;
+        this.abilityStates = {
+            NONE: {
+                name: 'none',
+                enter: () => {
+                    this.currAbilityState = this.abilityStates.NONE;
+                    console.log("[[ P" + this.playerID + " ]] ability -> " + this.currAbilityState.name);
+                },
+                update: () => {
+                    this.tetherBubble.currSize = 0;
 
-        this.stateText = this.gizmos.createText(this.x, this.y, this.currentState.name, '#ffffff', 5);
-        this.colliderGizmo = this.gizmos.createRect(this.x, this.y, this.body.width, this.body.height);
+                    if (Phaser.Input.Keyboard.JustDown(this.ability_cursor)) {
+                        this.abilityStates.TETHER_BUBBLE.enter();
+                    }
+                }
+            },
+            TETHER_BUBBLE: {
+                name: 'tether-bubble',
+                enter: () => {
+                    this.currAbilityState = this.abilityStates.TETHER_BUBBLE;
+                    console.log("[[ P" + this.playerID + " ]] ability -> " + this.currAbilityState.name);
 
-        // Create a point light
-        this.light = this.scene.lights.addLight(this.x, this.y, 50, 0x555555).setIntensity(1);
+                    if (this.tetheredObject) {
+                        this.abilityStates.TETHER_DISCONNECT.enter();
+                    }
+                },
+                update: () => {
+                    this.tetherBubble.currSize = this.tetherBubble.maxSize;
+
+                    if (Phaser.Input.Keyboard.JustUp(this.ability_cursor)) {
+                        this.abilityStates.NONE.enter();
+                    }
+                }
+            },
+            TETHER_DISCONNECT:{
+                name: 'tether-disconnect',
+                enter: () => {
+                    this.currAbilityState = this.abilityStates.TETHER_DISCONNECT;
+                    console.log("[[ P" + this.playerID + " ]] ability -> " + this.currAbilityState.name);
+
+                    if (this.tetheredObject) {this.tetheredObject.disconnectPlayer(this);}
+
+                    this.abilityStates.NONE.enter();
+                },
+                update: () => {
+                }
+            }
+        }
+        this.abilityStates.NONE.enter();
+        //#endregion
     }
 
     update() {
+        this.pos = {x: this.x, y: this.y}; // update reference position for objects
         this.handleMovement();
+        this.setFacingDirection();
 
-        // ============================================// >> *
+        this.currAbilityState.update();
+
+        // [[ UPDATE POSITIONS ]------------------------------------------------]
+        this.overlapTrigger.setPosition(this.x, this.y);
         this.light.setPosition(this.x, this.y);
-
-        this.gizmos.clear();
-        this.overrideGizmos.clear();
-
-        this.gizmos.updateText(this.stateText, this.x, this.y + this.height, this.currentState.name, '#ffffff', 7);
-
-        this.gizmos.drawExistingRect(this.colliderGizmo, this.x, this.y, 0xffffff, 1, 0.5);
-
-
-        // ============================================// >> *
-
-        if (this.currOverlapObject)
-        {
-            if (this.grabbedObject == null) {
-                this.grabbedObject = this.currOverlapObject;
-            }
-            else if (this.grabbedObject.name != this.currOverlapObject.name)
-            {
-                // ( GIZMOS )
-                this.gizmos.drawExistingRect(this.overlapTrigger, this.x, this.y, 0xff00ff, 1, 1);
-
-                let playerPos = {x: this.x, y: this.y};
-                let overlapObjPos = {x: this.currOverlapObject.x, y: this.currOverlapObject.y};
-                this.overrideGizmos.drawLine(playerPos, overlapObjPos, 0xff00ff, 1, 1);
-
-                console.log("overlap" + this.currOverlapObject.name);
-
-            }
-
-            this.currOverlapObject = null;
-        }
-        else {
-            this.gizmos.drawExistingRect(this.overlapTrigger, this.x, this.y, 0xff00ff, 1, 0.3);
-        }
-
         
-        // Update the position of the grabbed object relative to the player
-        if (this.grabbedObject)
-        {
-            this.grabbedObject.connectPlayer(this);
+        // [[ UPDATE GIZMOS ]------------------------------------------------]
+        this.gizmos_debug.clear();
+        this.gizmos_debug.updateText(this.stateText, this.x + this.ui_offset, this.y + this.ui_offset, this.currentMovementState.name, '#ffffff', 10);
+        // ==== )))
+        this.gizmo_effects.clear();
+        this.gizmo_effects.drawCircleNoLine(this.overlapTrigger.x, this.overlapTrigger.y, this.overlapTrigger.body.width/2, this.color);
+        this.gizmo_effects.drawCircleFill(this.overlapTrigger.x, this.overlapTrigger.y, this.overlapTrigger.body.width/2, this.color, 0.1);
 
-            this.gizmos.drawCircle(this.grabbedObject.x, this.grabbedObject.y, 10, 0xffffff, 0, 1);
-            let playerPos = {x: this.x, y: this.y};
-            let grabbedObjPos = {x: this.grabbedObject.x, y: this.grabbedObject.y};
-            this.overrideGizmos.drawLine(playerPos, grabbedObjPos, 0xffffff, 1, 1);
+        // [[ UPDATE TETHER BUBBLE ]]------------------------------------------------]        
+        const lerpFactor = 0.1; // Adjust the lerp factor as needed
+        const targetWidth = this.currAbilityState === this.abilityStates.TETHER_BUBBLE ? this.tetherBubble.currSize : 0;
+        const currentWidth = this.overlapTrigger.body.width;
+        const lerpedWidth = Phaser.Math.Linear(currentWidth, targetWidth, lerpFactor);
+        
+        // update trigger width
+        this.overlapTrigger.displayWidth = lerpedWidth;
+        this.overlapTrigger.displayHeight = lerpedWidth;
+
+        if (this.tetheredObject){
+            this.gizmos_debug.drawCircle(this.tetheredObject.x, this.tetheredObject.y, 10, 0xffffff, 0, 1);
+
+
+            // draw tether
+            let tetheredObjPos = {x: this.tetheredObject.x, y: this.tetheredObject.y};
+            this.gizmo_effects.drawLine(this.pos, tetheredObjPos, this.color, 1, 1);
+        }
+
+        this.currRoom = this.scene.roomHandler.getCurrentRoom(this);
+        if (this.currRoom)
+        {
+            //console.log(this.name + " " + this.currRoom.name);
         }
     }
 
     handleMovement() {
 
-        this.overlapTrigger.setPosition(this.x, this.y);
-
-        if (this.cursors.left.isDown) {
-
-            if (this.inverted) {
-                this.state.RIGHT.enter();
-            }
-            else {
-                this.state.LEFT.enter();
-            }
-        }
-        else if (this.cursors.right.isDown) {
-            if (this.inverted) {
-                this.state.LEFT.enter();
-            }
-            else {
-                this.state.RIGHT.enter();
-            }        
-        } 
-        else if (this.cursors.up.isDown) {
-            if (this.inverted) {
-                this.state.DOWN.enter();
-            }
-            else {
-                this.state.UP.enter();
-            }
-        } 
-        else if (this.cursors.down.isDown) {
-            if (this.inverted) {
-                this.state.UP.enter();
-            }
-            else {
-                this.state.DOWN.enter();
-            }
-        }
-        else{
-            this.state.IDLE.enter();
-        }
-
         // disable movement until idle again
         if (this.disable)
         {
             this.currMoveSpeed = 0;
+            return;
         }
         else {
             this.currMoveSpeed = this.moveSpeed;
         }
 
+        if (this.cursors.left.isDown) {
+
+            if (this.inverted) {
+                this.movementStates.RIGHT.enter();
+            }
+            else {
+                this.movementStates.LEFT.enter();
+            }
+        }
+        else if (this.cursors.right.isDown) {
+            if (this.inverted) {
+                this.movementStates.LEFT.enter();
+            }
+            else {
+                this.movementStates.RIGHT.enter();
+            }        
+        } 
+        else if (this.cursors.up.isDown) {
+            if (this.inverted) {
+                this.movementStates.DOWN.enter();
+            }
+            else {
+                this.movementStates.UP.enter();
+            }
+        } 
+        else if (this.cursors.down.isDown) {
+            if (this.inverted) {
+                this.movementStates.UP.enter();
+            }
+            else {
+                this.movementStates.DOWN.enter();
+            }
+        }
+        else{
+            this.movementStates.IDLE.enter();
+        }
+
+
+
+    }
+
+    newTetheredObject(object){
+        console.log(this.prefix + " - trigger overlap : " + object.name);
+        this.tetheredObject = object;
     }
 
     getDirectionOfObj(object) {
@@ -394,30 +483,37 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
-    getFacingDirection() {
-        const direction = new Phaser.Math.Vector2();
+    setFacingDirection() {
       
-        if (this.currentState == this.state.LEFT) 
+        if (this.currentMovementState == this.movementStates.LEFT) 
         {
-          direction.x = -1;
+            this.facingDirection.x = -1;
+            this.facingDirection.y = 0;
         } 
-        else if (this.currentState == this.state.RIGHT)
+        else if (this.currentMovementState == this.movementStates.RIGHT)
         {
-          direction.x = 1;
+            this.facingDirection.x = 1;
+            this.facingDirection.y = 0;
         }
-        else if (this.currentState == this.state.DOWN) 
+        else if (this.currentMovementState == this.movementStates.DOWN) 
         {
-            direction.y = -1;
+            this.facingDirection.x = 0;
+            this.facingDirection.y = -1;
         } 
-        else if (this.currentState == this.state.UP)
+        else if (this.currentMovementState == this.movementStates.UP)
         {
-            direction.y = 1;
+            this.facingDirection.x = 0;
+            this.facingDirection.y = 1;
         }
 
-      
-        direction.normalize();
-      
-        return direction;
     }
 
+    toggleDebug() {
+        this.gizmos_debug.enabled = !this.gizmos_debug.enabled;
+
+        if (this.gizmos_debug.enabled)
+        {
+            this.stateText = this.gizmos_debug.createText(this.x, this.y, this.currentMovementState.name, '#ffffff', 5);
+        }
+    }
 }
