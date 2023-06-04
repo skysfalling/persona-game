@@ -122,7 +122,7 @@
         "map1.tmx"
     ],
     "project": "persona.tiled-project",
-    "property.type": "object",
+    "property.type": "int",
     "recentFiles": [
         "map2.json",
         "monochrome_packed.tsx",

@@ -14,7 +14,7 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         this.connectedPlayers = [];
 
         // - movement -----------------------------------------------
-        this.speed = 50;
+        this.speed = 100;
 
 
   
@@ -22,6 +22,13 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
       scene.interactObjects.add(this);
     }
     update() {
+
+        this.connectedPlayers.forEach(player => {
+            const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y);
+
+            if (distance > 50) { this.disconnectPlayer(player);}
+        });
+
 
         // [[ UPDATE MOVEMENT ]--------------------------------]
         if (this.connectedPlayers.length >= 1) {

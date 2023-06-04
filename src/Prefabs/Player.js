@@ -32,6 +32,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.name = "violet";
             this.playerID = 1;
             this.color = 0xBF8BFF;
+            this.color_string = "#BF8BFF";
             this.prefix = ">> [[ P1 ]] ";
         }
         else if (characterSprite == "character2")
@@ -39,6 +40,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.name = "blue";
             this.playerID = 2;
             this.color = 0x579C9A;
+            this.color_string = "#579C9A";
             this.prefix = ">> (( P2 )) ";
         }
 
@@ -57,6 +59,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.gizmo_effects.graphics.setDepth(globalDepth.player);
 
         this.ui_offset = this.width;
+
+
+
 
         // - movement -------------------------------------------------------//>>
         this.disable = false;
@@ -332,8 +337,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     console.log("[[ P" + this.playerID + " ]] ability -> " + this.currAbilityState.name);
 
                     if (this.tetheredObject) {
-                        this.abilityStates.TETHER_DISCONNECT.enter();
+                        this.tetheredObject.disconnectPlayer(this);
+                        this.abilityStates.NONE.enter();
                     }
+
                 },
                 update: () => {
                     this.tetherBubble.currSize = this.tetherBubble.maxSize;
@@ -341,19 +348,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     if (Phaser.Input.Keyboard.JustUp(this.ability_cursor)) {
                         this.abilityStates.NONE.enter();
                     }
-                }
-            },
-            TETHER_DISCONNECT:{
-                name: 'tether-disconnect',
-                enter: () => {
-                    this.currAbilityState = this.abilityStates.TETHER_DISCONNECT;
-                    console.log("[[ P" + this.playerID + " ]] ability -> " + this.currAbilityState.name);
-
-                    if (this.tetheredObject) {this.tetheredObject.disconnectPlayer(this);}
-
-                    this.abilityStates.NONE.enter();
-                },
-                update: () => {
                 }
             }
         }

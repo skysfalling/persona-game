@@ -4,20 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Persona Game</title>
+
+    <link rel="preload" as="font" href="assets/Awasete Powder.ttf" type="font/ttf" />
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <div style="font-family:Awasete Powder; position:absolute; left:-1000px; visibility:hidden;">.</div>
+
+
     <script src="./lib/phaser360.js"></script>
     <script src="./src/gizmos.js"></script>
     <script src="./src/collision-handler.js"></script>
     <script src="./src/camera-movement.js"></script>
     <script src="./src/room-handler.js"></script>
+    <script src="./src/dialogue.js"></script>
 
 
     <script src="src/Prefabs/Player.js"></script>
     <script src="src/Prefabs/Heart.js"></script>
+    <script src="src/Prefabs/Campfire.js"></script>
+
 
     <script src="src/Scenes/Menu.js"></script>
     <script src="src/Scenes/Play.js"></script>
 
     <script src="./src/main.js"></script>
+
+
 </head>
 <body>
     <div id="phaser-game"></div>

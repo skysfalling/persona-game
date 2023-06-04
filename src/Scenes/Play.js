@@ -25,6 +25,10 @@ class Play extends Phaser.Scene {
             frameHeight: 16
         });
 
+        this.load.spritesheet('campfire', 'campfire.png', {frameWidth: 16, frameHeight: 16 });
+        this.load.spritesheet('campfire_blue', 'campfire-blue.png', {frameWidth: 16, frameHeight: 16 });
+        this.load.spritesheet('campfire_violet', 'campfire-violet.png', {frameWidth: 16, frameHeight: 16 });
+
         this.physics.add.existing(this);
         this.gizmos = new Gizmos(this);
         this.gizmos.graphics.setDepth(2);
@@ -74,6 +78,13 @@ class Play extends Phaser.Scene {
         // Create the custom sprite using the specified settings
         const objSpawn = this.map.findObject("interaction", obj => obj.name === "moveable_obj");
         this.heart = new Heart(this, objSpawn.x, objSpawn.y, 'tileAtlas', 529);
+
+        this.campfireGroup = this.add.group();
+        const campfires = this.map.filterObjects("interaction", obj => obj.name === "campfire");
+        campfires.forEach(campfire => {
+            const new_campfire = new Campfire(this, campfire.x, campfire.y); 
+            this.campfireGroup.add(new_campfire);
+        });
         // #endregion
 
         // #region [[ CREATE COLLISIONS ]]
@@ -88,17 +99,30 @@ class Play extends Phaser.Scene {
 
         // - object collision --------------------------------------------------------
         this.collisionHandler.collideWithCollisionLayer(this.heart, collisionLayer);
-        this.collisionHandler.mainObjectCollision(this.playerObjs, this.interactObjects);
+        this.collisionHandler.heartObjectCollision(this.playerObjs, this.heart);
+        
+        this.collisionHandler.objectCollision(this.playerObjs, this.campfireGroup);
 
         // - player overlap --------------------------------------------------------
-        this.collisionHandler.overlapWithTrigger(this.p1.overlapTrigger, this.interactObjects, (player, object) => {
-            this.p1.newTetheredObject(object);
-            object.connectPlayer(this.p1);
+        this.collisionHandler.overlapWithTrigger(this.p1.overlapTrigger, this.heart, (player, heart) => {
+            this.p1.newTetheredObject(heart);
+            heart.connectPlayer(this.p1);
         });
 
-        this.collisionHandler.overlapWithTrigger(this.p2.overlapTrigger, this.interactObjects, (player, object) => {
-            this.p2.newTetheredObject(object);
-            object.connectPlayer(this.p2);
+        this.collisionHandler.overlapWithTrigger(this.p2.overlapTrigger, this.heart, (player, heart) => {
+            this.p2.newTetheredObject(heart);
+            heart.connectPlayer(this.p2);
+        });
+
+
+        this.collisionHandler.overlapWithTrigger(this.p1.overlapTrigger, this.campfireGroup, (player, campfire) => {
+            this.p1.newTetheredObject(campfire);
+            campfire.connectPlayer(this.p1);
+        });
+
+        this.collisionHandler.overlapWithTrigger(this.p2.overlapTrigger, this.campfireGroup, (player, campfire) => {
+            this.p2.newTetheredObject(campfire);
+            campfire.connectPlayer(this.p2);
         });
 
         // #endregion
@@ -111,6 +135,13 @@ class Play extends Phaser.Scene {
         this.input.keyboard.on('keydown-SPACE', () => {
             this.cameraMovement.toggleEditorMode();
         });
+        // #endregion
+
+        // #region -- [[ DIALOGUE ]] --------------------------------------------------------------//>>
+        this.dialogue = new Dialogue(this, 50, screen.height, 12);
+
+        this.dialogue.typeText("Hello Mr. Afton ....", this.p1.color_string);
+
         // #endregion
 
         //#region [[ HTML REFERENCES ]]

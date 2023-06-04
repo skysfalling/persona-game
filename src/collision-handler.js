@@ -17,7 +17,11 @@ class CollisionHandler {
         });
     }
 
-    mainObjectCollision(playerObjs, interactObjects) {
+    objectCollision(object1, object2, collisionCallback) {
+        this.scene.physics.add.collider(object1, object2, collisionCallback);
+    }
+
+    heartObjectCollision(playerObjs, interactObjects) {
         this.scene.physics.add.collider(playerObjs, interactObjects, (player, obj) => {
             if (player.disable) {return;}
 

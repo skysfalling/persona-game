@@ -152,6 +152,44 @@
                  "width":16,
                  "x":160,
                  "y":160
+                }, 
+                {
+                 "height":16,
+                 "id":24,
+                 "name":"campfire",
+                 "properties":
+                    {
+                     "playerID":2
+                    },
+                 "propertytypes":
+                    {
+                     "playerID":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":240,
+                 "y":192
+                }, 
+                {
+                 "height":16,
+                 "id":25,
+                 "name":"campfire",
+                 "properties":
+                    {
+                     "playerID":1
+                    },
+                 "propertytypes":
+                    {
+                     "playerID":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":64,
+                 "y":80
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -237,7 +275,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":24,
+ "nextobjectid":26,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",
