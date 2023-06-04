@@ -454,7 +454,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     newTetheredObject(object){
-        console.log(this.prefix + " - trigger overlap : " + object.name);
+        if(this.tetheredObject) {this.tetheredObject.disconnectPlayer(this);}
+
+        console.log(this.prefix + " - tethered object : " + object.name);
         this.tetheredObject = object;
     }
 

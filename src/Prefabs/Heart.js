@@ -4,19 +4,58 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
 
-
-
         this.gizmos = new Gizmos(scene);
         this.gizmos.enabled = true;
-    
+
         // Reference to players in the scene
         this.name = "heart obj";
+        this.id_type = 0;
         this.connectedPlayers = [];
 
         // - movement -----------------------------------------------
         this.speed = 100;
 
+        //#region -- animations ---------------------------------------------
+        this.scene.anims.create({
+            key: 'default_loop',
+            frames: this.anims.generateFrameNumbers('heart', { start: 0, end: 5 }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.scene.anims.create({
+            key: 'default_spin',
+            frames: this.anims.generateFrameNumbers('heart', { start: 7, end: 12 }),
+            frameRate: 12,
+            repeat: 0
+        });
+        this.scene.anims.create({
+            key: 'violet_loop',
+            frames: this.anims.generateFrameNumbers('heart', { start: 14, end: 18 }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.scene.anims.create({
+            key: 'violet_spin',
+            frames: this.anims.generateFrameNumbers('heart', { start: 21, end: 26 }),
+            frameRate: 12,
+            repeat: 0
+        });
+        this.scene.anims.create({
+            key: 'blue_loop',
+            frames: this.anims.generateFrameNumbers('heart', { start: 28, end: 32 }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.scene.anims.create({
+            key: 'blue_spin',
+            frames: this.anims.generateFrameNumbers('heart', { start: 35, end: 40 }),
+            frameRate: 12,
+            repeat: 0
+        });
+        // #endregion
 
+
+        this.playLoopAnim();
   
       // Add this sprite to the interactObjects group
       scene.interactObjects.add(this);
@@ -84,8 +123,14 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
       
         // If the player doesn't exist, add it to the array
         if (!playerExists) {
-          this.connectedPlayers.push(player);
-          console.log("<3 HEART -> new connected player: " + player.name);
+
+            this.connectedPlayers.push(player);
+            player.newTetheredObject(this);
+
+            console.log("<3 HEART -> new connected player: " + player.name);
+            this.id_type = player.playerID;
+            this.playLoopAnim();
+
         }
     }
 
@@ -102,9 +147,43 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         // If the player is found, remove it from the array
         if (playerIndex !== -1) {
             this.connectedPlayers.splice(playerIndex, 1);
-            console.log("<3 HEART -> player removed: " + player.name);
-
             player.tetheredObject = null;
+
+            console.log("<3 HEART -> player removed: " + player.name);
+            this.id_type = player.playerID;
+            this.playSpinAnim(player.playerID);
         }
+
+    }
+
+    playLoopAnim()
+    {
+        let id = this.id_type;
+        if (id === 1) {        
+            this.anims.play('violet_loop');
+        }
+        else if (id === 2) {        
+            this.anims.play('blue_loop');
+        }
+        else
+        {
+            this.anims.play('default_loop');
+        }
+    }
+
+    playSpinAnim(id)
+    {
+        if (id === 1) {        
+            this.anims.play('violet_spin');
+        }
+        else if (id === 2) {        
+            this.anims.play('blue_spin');
+        }
+        else
+        {
+            this.anims.play('default_spin');
+        }
+
+        this.on('animationcomplete', this.playLoopAnim);
     }
 }

@@ -16,9 +16,18 @@ class CollisionHandler {
             this.scene.physics.velocityFromRotation(-angle, 500, player1.velocity);
         });
     }
+    playerOverlapConnection(player, object){
+        this.objectOverlap(player.overlapTrigger, object, (none, object) => {
+            object.connectPlayer(player);
+        });
+    }
 
     objectCollision(object1, object2, collisionCallback) {
         this.scene.physics.add.collider(object1, object2, collisionCallback);
+    }
+
+    objectOverlap(object1, object2, overlapCallback) {
+        this.scene.physics.add.overlap(object1, object2, overlapCallback);
     }
 
     heartObjectCollision(playerObjs, interactObjects) {
@@ -32,7 +41,7 @@ class CollisionHandler {
             }, [], this.scene);
 
             const interaction_direction = player.getDirectionOfObj(obj);
-            console.log(player.name + " " + interaction_direction);
+            //console.log(player.name + " " + interaction_direction);
 
             this.handleInteraction(player, obj, interaction_direction);
         });
@@ -65,7 +74,5 @@ class CollisionHandler {
         }
     }
 
-    overlapWithTrigger(interactObjects, overlapTrigger, overlapCallback) {
-        this.scene.physics.add.overlap(interactObjects, overlapTrigger, overlapCallback);
-    }
+
 }

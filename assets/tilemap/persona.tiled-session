@@ -9,7 +9,7 @@
     ],
     "fileStates": {
         "": {
-            "scaleInDock": 1,
+            "scaleInDock": 4,
             "scaleInEditor": 1
         },
         "map1.json": {
@@ -50,18 +50,20 @@
         "map2.json": {
             "expandedObjectLayers": [
                 5,
-                3,
                 4
             ],
-            "scale": 1,
+            "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 42,
-                "y": 7
+                "x": 111,
+                "y": 146.5
             }
         },
+        "map2.json#heart": {
+            "scaleInDock": 4
+        },
         "map2.json#monochrome_packed": {
-            "scaleInDock": 1
+            "scaleInDock": 4
         },
         "map2.tmx": {
             "scale": 1,
@@ -110,7 +112,7 @@
     },
     "last.exportedFilePath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/tilemap",
     "last.externalTilesetPath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/tilemap",
-    "last.imagePath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/tilemap",
+    "last.imagePath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets",
     "map.fixedSize": false,
     "map.lastUsedExportFilter": "JSON map files [Tiled 1.1] (*.json)",
     "map.lastUsedFormat": "json1",
@@ -132,11 +134,13 @@
         "tilemap01.tmx",
         "monochrome.tsx"
     ],
-    "tileset.embedInMap": true,
+    "tileset.embedInMap": false,
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 16,
         "width": 16
-    }
+    },
+    "tileset.transparentColor": "#000000",
+    "tileset.useTransparentColor": true
 }

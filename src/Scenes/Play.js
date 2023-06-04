@@ -29,6 +29,10 @@ class Play extends Phaser.Scene {
         this.load.spritesheet('campfire_blue', 'campfire-blue.png', {frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('campfire_violet', 'campfire-violet.png', {frameWidth: 16, frameHeight: 16 });
 
+        this.load.spritesheet('cat_idle', 'cat_idle.png', {frameWidth: 16, frameHeight: 16 });
+        this.load.spritesheet('cat_walk', 'cat_walk_cycle.png', {frameWidth: 16, frameHeight: 16 });
+        this.load.spritesheet('heart', 'heart.png', {frameWidth: 16, frameHeight: 16 });
+
         this.physics.add.existing(this);
         this.gizmos = new Gizmos(this);
         this.gizmos.graphics.setDepth(2);
@@ -76,14 +80,34 @@ class Play extends Phaser.Scene {
         this.interactObjects = this.add.group();
 
         // Create the custom sprite using the specified settings
-        const objSpawn = this.map.findObject("interaction", obj => obj.name === "moveable_obj");
-        this.heart = new Heart(this, objSpawn.x, objSpawn.y, 'tileAtlas', 529);
+        const objSpawn = this.map.findObject("interaction", obj => obj.name === "heart");
+        this.heart = new Heart(this, objSpawn.x, objSpawn.y, 'heart');
 
-        this.campfireGroup = this.add.group();
-        const campfires = this.map.filterObjects("interaction", obj => obj.name === "campfire");
-        campfires.forEach(campfire => {
+        this.campfires = this.add.group();
+        const campfire_positions = this.map.filterObjects("interaction", obj => obj.name === "campfire");
+        campfire_positions.forEach(campfire => {
             const new_campfire = new Campfire(this, campfire.x, campfire.y); 
-            this.campfireGroup.add(new_campfire);
+            this.campfires.add(new_campfire);
+        });
+
+
+        //-- << CREATE CATS >> -----------------------------------------------------
+        this.cats = this.add.group();
+        const cat_positions = this.map.filterObjects("interaction", obj => obj.name === "cat");
+        const cat_exits = this.map.filterObjects("interaction", obj => obj.name === "cat_exit");
+        
+        cat_positions.forEach(cat => {
+          const exitId = cat.properties.exit_id;
+          const correspondingExit = cat_exits.find(exit => exit.properties.exit_id === exitId);
+        
+          if (correspondingExit) {
+            const new_cat = new Cat(this, cat.x, cat.y, cat.properties.id_type);
+            new_cat.correspondingExit = correspondingExit;
+            this.cats.add(new_cat);
+          } 
+          else {
+            console.warn(`No corresponding cat_exit object found for cat with exit_id: ${exitId}`);
+          }
         });
         // #endregion
 
@@ -92,37 +116,24 @@ class Play extends Phaser.Scene {
 
         // add a collision handler
         this.collisionHandler = new CollisionHandler(this);
+
+        // - player collision --------------------------------------------------------
         this.collisionHandler.collideWithCollisionLayer(this.p1, collisionLayer);
         this.collisionHandler.collideWithCollisionLayer(this.p2, collisionLayer);
-
         this.collisionHandler.playerOverlap(this.p1, this.p2);
-
+        // - player object connections --------------------------------------------------------
+        this.collisionHandler.playerOverlapConnection(this.p1, this.heart);
+        this.collisionHandler.playerOverlapConnection(this.p2, this.heart);
+        this.collisionHandler.playerOverlapConnection(this.p1, this.campfires);
+        this.collisionHandler.playerOverlapConnection(this.p2, this.campfires);
         // - object collision --------------------------------------------------------
         this.collisionHandler.collideWithCollisionLayer(this.heart, collisionLayer);
         this.collisionHandler.heartObjectCollision(this.playerObjs, this.heart);
-        
-        this.collisionHandler.objectCollision(this.playerObjs, this.campfireGroup);
-
-        // - player overlap --------------------------------------------------------
-        this.collisionHandler.overlapWithTrigger(this.p1.overlapTrigger, this.heart, (player, heart) => {
-            this.p1.newTetheredObject(heart);
-            heart.connectPlayer(this.p1);
-        });
-
-        this.collisionHandler.overlapWithTrigger(this.p2.overlapTrigger, this.heart, (player, heart) => {
-            this.p2.newTetheredObject(heart);
-            heart.connectPlayer(this.p2);
-        });
-
-
-        this.collisionHandler.overlapWithTrigger(this.p1.overlapTrigger, this.campfireGroup, (player, campfire) => {
-            this.p1.newTetheredObject(campfire);
-            campfire.connectPlayer(this.p1);
-        });
-
-        this.collisionHandler.overlapWithTrigger(this.p2.overlapTrigger, this.campfireGroup, (player, campfire) => {
-            this.p2.newTetheredObject(campfire);
-            campfire.connectPlayer(this.p2);
+        this.collisionHandler.objectCollision(this.playerObjs, this.campfires);
+        this.collisionHandler.objectCollision(this.playerObjs, this.cats);
+        // - object overlap --------------------------------------------------------
+        this.collisionHandler.objectOverlap(this.heart, this.cats, (heart, cat) => {
+            cat.submit(heart.id_type);
         });
 
         // #endregion
