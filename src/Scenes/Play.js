@@ -132,8 +132,8 @@ class Play extends Phaser.Scene {
         this.collisionHandler.objectCollision(this.playerObjs, this.campfires);
         this.collisionHandler.objectCollision(this.playerObjs, this.cats);
         // - object overlap --------------------------------------------------------
-        this.collisionHandler.objectOverlap(this.heart, this.cats, (heart, cat) => {
-            cat.submit(heart.id_type);
+        this.collisionHandler.objectOverlapTrigger(this.heart, this.cats, (heart, cat) => {
+            cat.submit(this.heart.id_type);
         });
 
         // #endregion

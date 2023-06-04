@@ -30,18 +30,18 @@ class CameraMovement {
         const screenWidth = this.cameras.main.width;
         const screenHeight = this.cameras.main.height;
         // Create camera for player 1
-        this.camera1 = this.cameras.add(0, 0, screenWidth / 3, screenHeight/3);
+        this.camera1 = this.cameras.add(0, 0, screenWidth, screenHeight);
         this.camera1.startFollow(this.p1);
         this.camera1.setZoom(1);
         this.camera1.setAlpha(0);
-        this.camera1.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+        //this.camera1.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         
         // Create camera for player 2
-        this.camera2 = this.cameras.add(screenWidth / 2, 0, screenWidth / 3, screenHeight/3);
+        this.camera2 = this.cameras.add(0,  0, screenWidth, screenHeight);
         this.camera2.startFollow(this.p2);
         this.camera2.setZoom(1);
         this.camera2.setAlpha(0);
-        this.camera2.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+        //this.camera2.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     }
 
     updateEditorMode() {
@@ -82,56 +82,52 @@ class CameraMovement {
         } 
         else {
 
-            const distance = Phaser.Math.Distance.Between(this.p1.x, this.p1.y, this.p2.x, this.p2.y, {x: 0, y: 0});
-            const thresholdDistance = 100;
-            const targetAlpha = distance > thresholdDistance ? 1 : 0;
-            const inverseTargetAlpha = distance < thresholdDistance ? 1 : 0;
-            const lerpAmount = 0.5; 
-            const isP1OnLeft = this.p1.x < this.p2.x;
+            const playersInSameRoom = this.p1.currRoom === this.p2.currRoom;
 
-
-            this.playerMidpoint = this.gizmos.calculateMidpoint({x: this.p1.x, y: this.p1.y}, {x: this.p2.x, y: this.p2.y});
-            this.mainCameraTarget.setPosition( this.playerMidpoint.x,  this.playerMidpoint.y);
-
-            // << FORCE PLAYERS TO STAY IN BOUNDS >>
-
-            // Draw a rectangle representing the camera bounds
-            const cameraWidth = this.cameras.main.width - 50;
-            const cameraHeight = this.cameras.main.height - 50;
-            const cameraX = this.playerMidpoint.x - cameraWidth / 2;
-            const cameraY = this.playerMidpoint.y - cameraHeight / 2;
-
-            const collisionRect = new Phaser.Geom.Rectangle(cameraX, cameraY, cameraWidth, cameraHeight);
-            this.gizmos.drawExistingRect(collisionRect, collisionRect.x, collisionRect.y);
-
-            const boundsResetVelocity = 15;
-            function applyBoundsResetVelocity(player) {
-                const outOfBounds = !Phaser.Geom.Rectangle.Contains(collisionRect, player.x, player.y);
-                if (outOfBounds && !player.disable) {
-                  player.disable = true;
-              
-                  // Calculate the vector from player position to the center of the collision rectangle
-                  const direction = new Phaser.Math.Vector2(
-                    new Phaser.Math.Vector2(
-                      collisionRect.centerX - player.x,
-                      collisionRect.centerY - player.y
-                    )
-                  );
-              
-                  direction.normalize();
-
-                  const velocityX = direction.x * boundsResetVelocity;
-                  const velocityY = direction.y * boundsResetVelocity;
-                  player.body.setVelocity(velocityX, velocityY);
-              
-                  this.scene.time.delayedCall(200, () => {
-                    player.disable = false;
-                  });
+            // if in same room
+            if (playersInSameRoom) {
+                this.playerMidpoint = this.gizmos.calculateMidpoint({x: this.p1.x, y: this.p1.y}, {x: this.p2.x, y: this.p2.y});
+                this.mainCameraTarget.setPosition( this.playerMidpoint.x,  this.playerMidpoint.y);
+            }
+            else{
+                const distance = Phaser.Math.Distance.Between(this.p1.x, this.p1.y, this.p2.x, this.p2.y, {x: 0, y: 0});
+                const thresholdDistance = 350;
+                const targetAlpha = distance > thresholdDistance ? 1 : 0;
+                const lerpAmount = 0.1; 
+        
+                this.camera1.alpha = Phaser.Math.Linear(this.camera1.alpha, targetAlpha, lerpAmount);
+                this.camera2.alpha = Phaser.Math.Linear(this.camera2.alpha, targetAlpha, lerpAmount);
+        
+                const isP1OnLeft = this.p1.x < this.p2.x;
+                const screenWidth = this.cameras.main.width;
+                const screenHeight = this.cameras.main.height;
+                
+                if (isP1OnLeft) {
+                    // Horizontal Split Screen
+                    this.camera1.setPosition(0, 0);
+                    this.camera2.setPosition(screenWidth / 2, 0);
+                  
+                    // Follow the players with the cameras
+                    this.camera1.startFollow(this.p1, false, 1, 1, 0, 0);
+                    this.camera2.startFollow(this.p2, false, 1, 1, 0, -screen.height/4);
+                } 
+                else {
+                // Vertical Split Screen
+                this.camera1.setPosition(0, 0);
+                this.camera2.setPosition(0, screenHeight / 2);
+                
                 }
-              }
-              
-            applyBoundsResetVelocity.call(this, this.p1);
-            applyBoundsResetVelocity.call(this, this.p2);
+                
+                // Follow the players with the cameras
+                this.camera1.startFollow(this.p1, false, 1, 1);
+                this.camera2.startFollow(this.p2, false, 1, 1);
+                
+                // Adjust the camera bounds to the full map
+                this.camera1.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+                this.camera2.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+            }
+
+
         }
     }
 

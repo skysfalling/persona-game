@@ -4,6 +4,7 @@ class Cat extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.body.setImmovable(true);
+        this.setOrigin(0);
 
         this.name = 'cat';
         this.id_type = id_type;
@@ -11,13 +12,7 @@ class Cat extends Phaser.GameObjects.Sprite {
 
         this.correspondingExit;
         this.setupAnimations();
-    
-        // Create the overlap trigger
-        this.overlapTrigger = scene.add.zone(x, y).setSize(this.width*3, this.height*3);
-        scene.physics.add.existing(this.overlapTrigger);
-        this.overlapTrigger.body.setAllowGravity(false);
-        this.overlapTrigger.body.moves = false;
-        this.overlapTrigger.visible = false;
+
     }
 
     setupAnimations() {

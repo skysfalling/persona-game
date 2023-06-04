@@ -3,9 +3,17 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
         scene.physics.add.existing(this);
+        this.body.setSize(this.width, this.height)
+
+        // Create the overlap trigger
+        this.overlapTrigger = scene.add.zone(x, y).setSize(this.width*3, this.height*3);
+        scene.physics.add.existing(this.overlapTrigger);
+        this.overlapTrigger.body.setAllowGravity(false);
+        this.overlapTrigger.visible = false;
 
         this.gizmos = new Gizmos(scene);
         this.gizmos.enabled = true;
+
 
         // Reference to players in the scene
         this.name = "heart obj";
@@ -62,6 +70,7 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
     }
     update() {
 
+        // disconnect from player if too far
         this.connectedPlayers.forEach(player => {
             const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y);
 
@@ -70,6 +79,9 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
 
 
         // [[ UPDATE MOVEMENT ]--------------------------------]
+
+        this.overlapTrigger.setPosition(this.x, this.y);
+
         if (this.connectedPlayers.length >= 1) {
             let totalX = 0;
             let totalY = 0;

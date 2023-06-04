@@ -30,6 +30,11 @@ class CollisionHandler {
         this.scene.physics.add.overlap(object1, object2, overlapCallback);
     }
 
+    objectOverlapTrigger(trigger_obj, object2, overlapCallback) {
+        this.scene.physics.add.overlap(trigger_obj.overlapTrigger, object2, overlapCallback);
+    }
+
+
     heartObjectCollision(playerObjs, interactObjects) {
         this.scene.physics.add.collider(playerObjs, interactObjects, (player, obj) => {
             if (player.disable) {return;}

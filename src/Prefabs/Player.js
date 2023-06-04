@@ -60,9 +60,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.ui_offset = this.width;
 
-
-
-
         // - movement -------------------------------------------------------//>>
         this.disable = false;
         this.moveSpeed = 100;
@@ -368,7 +365,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         
         // [[ UPDATE GIZMOS ]------------------------------------------------]
         this.gizmos_debug.clear();
-        this.gizmos_debug.updateText(this.stateText, this.x + this.ui_offset, this.y + this.ui_offset, this.currentMovementState.name, '#ffffff', 10);
+        this.gizmos_debug.updateText(this.stateText, this.x + this.ui_offset, this.y + this.ui_offset, this.x + " " + this.y, '#ffffff', 10);
         // ==== )))
         this.gizmo_effects.clear();
         this.gizmo_effects.drawCircleNoLine(this.overlapTrigger.x, this.overlapTrigger.y, this.overlapTrigger.body.width/2, this.color);
@@ -393,10 +390,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.gizmo_effects.drawLine(this.pos, tetheredObjPos, this.color, 1, 1);
         }
 
-        this.currRoom = this.scene.roomHandler.getCurrentRoom(this);
-        if (this.currRoom)
+        let newroom = this.scene.roomHandler.getCurrentRoom(this);
+        if (newroom != this.currRoom)
         {
-            //console.log(this.name + " " + this.currRoom.name);
+            this.currRoom = newroom;
+            console.log(this.name + " " + this.currRoom.name);
         }
     }
 
@@ -509,7 +507,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         if (this.gizmos_debug.enabled)
         {
-            this.stateText = this.gizmos_debug.createText(this.x, this.y, this.currentMovementState.name, '#ffffff', 5);
+            this.stateText = this.gizmos_debug.createText(this.x, this.y, this.x + " " + this.y , '#ffffff', 5);
         }
     }
 }
