@@ -1,0 +1,43 @@
+Here are the RGB values converted into hex codes along with related color shade names for the Persona Color Palette:
+
+- `#FFFFFF` - Snow White
+- `#CEA6FF` - Lilac Dream
+- `#B583F2` - Lavender Mist
+- `#B079F2` - Royal Purple
+- `#AA70F3` - Regal Amethyst
+- `#B76FF2` - Enchanted Orchid
+- `#B568E8` - Mystic Violet
+- `#A45BE7` - Twilight Indigo
+- `#8D2CE7` - Deep Plum
+- `#6D21B5` - Midnight Blue
+- `#42146E` - Shadowy Abyss
+- `#996FCC` - Veiled Lilac
+- `#9E73FF` - Electric Orchid
+- `#9593FE` - Dreamy Periwinkle
+- `#7673FF` - Serene Lavender
+- `#6C66FF` - Tranquil Blue
+- `#645EFF` - Mystical Indigo
+- `#5F59F2` - Enigmatic Cobalt
+- `#5550D9` - Azure Blue
+- `#60504F` - Slate Gray
+- `#614DF7` - Mesmerizing Amethyst
+- `#6E4FFF` - Exquisite Lavender
+- `#4839C4` - Deep Blue Sea
+- `#3B2EAA` - Midnight Navy
+- `#362B99` - Shadowy Violet
+- `#2413A2` - Abyssal Depths
+- `#180D6E` - Nightfall
+- `#0B0630` - Pitch Black
+- `#89FFD9` - Ethereal Mint
+- `#7FEBBA` - Whimsical Green
+- `#6DCCAD` - Enchanted Emerald
+- `#447F6C` - Forest Serenade
+- `#F1D8CB` - Ivory Blush
+- `#FFD1B9` - Peachy Whisper
+- `#EFC5AF` - Dusty Coral
+- `#E0B198` - Honeyed Beige
+- `#E0AB8F` - Caramel Cream
+- `#E69F7A` - Toasted Sienna
+- `#CD9770` - Tawny Brown
+- `#C78D6E` - Sandy Tan
+- `#9C7560` - Mocha Delight

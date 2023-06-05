@@ -16,9 +16,9 @@ let config = {
         pixelArt: true
     },
     backgroundColor: '#000000',
-    width: 320,
-    height: 320,
-    zoom: 2,
+    width: 320, // Set the desired width of the scaled window
+    height: 320, // Set the desired height of the scaled window
+    zoom: 2, // Set the desired zoom level
     physics: {
         default: "arcade",
         arcade: {
@@ -26,7 +26,7 @@ let config = {
             gravity: { y: 0 }
         }
     },
-    scene: [ Play ]
+    scene: [Play, PlayUI]
 };
 
 const game = new Phaser.Game(config);
@@ -54,7 +54,6 @@ let screen = {
     },
     width: game.config.width,
     height: game.config.height,
-  
     topLeft: {
       x: 0,
       y: 0

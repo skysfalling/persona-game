@@ -15,15 +15,11 @@ class Play extends Phaser.Scene {
             frameHeight: 16
         });
 
-        this.load.spritesheet('character1', '/characters/character1.png', {
+        this.load.spritesheet('game_characters', '/characters/game_characters.png', {
             frameWidth: 16,
             frameHeight: 16
         });
-        
-        this.load.spritesheet('character2', '/characters/character2.png', {
-            frameWidth: 16,
-            frameHeight: 16
-        });
+
 
         this.load.spritesheet('campfire', 'campfire.png', {frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('campfire_blue', 'campfire-blue.png', {frameWidth: 16, frameHeight: 16 });
@@ -47,7 +43,7 @@ class Play extends Phaser.Scene {
         // get inputs
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        // #region [[ SETUP TILEMAP ]]
+        // #region [[ SETUP TILEMAP ]] --------------------------------------------------------------//>>
         // add a tile map
         this.map = this.add.tilemap("map"); 
         const tileset = this.map.addTilesetImage("monochrome_packed", "1bit_tiles");
@@ -66,17 +62,17 @@ class Play extends Phaser.Scene {
 
         // #endregion
 
-        // #region [[ CREATE PLAYERS ]]
+        // #region [[ CREATE PLAYERS ]] --------------------------------------------------------------//>>
         const p1Spawn = this.map.findObject("player_spawn", obj => obj.name === "p1spawn");
-        this.p1 = new Player(this, p1Spawn.x, p1Spawn.y, 'character1', false);
+        this.p1 = new Player(this, p1Spawn.x, p1Spawn.y, 'violet', 1, false);
 
         const p2Spawn = this.map.findObject("player_spawn", obj => obj.name === "p2spawn");
-        this.p2 = new Player(this, p2Spawn.x, p2Spawn.y, 'character2', true);
+        this.p2 = new Player(this, p2Spawn.x, p2Spawn.y, 'blue', 2, true);
 
         this.playerObjs = [this.p1, this.p2];
         // #endregion
 
-        // #region [[ CREATE OBJECTS ]]
+        // #region [[ CREATE OBJECTS ]] --------------------------------------------------------------//>>
         this.interactObjects = this.add.group();
 
         // Create the custom sprite using the specified settings
@@ -111,7 +107,7 @@ class Play extends Phaser.Scene {
         });
         // #endregion
 
-        // #region [[ CREATE COLLISIONS ]]
+        // #region [[ CREATE COLLISIONS ]] --------------------------------------------------------------//>>
         this.physics.world.TILE_BIAS = 1000;  // increase to prevent sprite tunneling through tiles
 
         // add a collision handler
@@ -138,21 +134,16 @@ class Play extends Phaser.Scene {
 
         // #endregion
 
-        // #region [[ SETUP CAMERA MOVEMENT]]
+        // #region [[ SETUP CAMERA MOVEMENT]] --------------------------------------------------------------//>>
         this.cameraMovement = new CameraMovement(this);
         this.cameraMovement.setup();
 
         // Define a key to toggle editor mode
+        /*
         this.input.keyboard.on('keydown-SPACE', () => {
-            this.cameraMovement.toggleEditorMode();
+            //this.cameraMovement.toggleEditorMode();
         });
-        // #endregion
-
-        // #region -- [[ DIALOGUE ]] --------------------------------------------------------------//>>
-        this.dialogue = new Dialogue(this, 50, screen.height, 12);
-
-        this.dialogue.typeText("Hello Mr. Afton ....", this.p1.color_string);
-
+        */
         // #endregion
 
         //#region [[ HTML REFERENCES ]]
@@ -202,5 +193,40 @@ class Play extends Phaser.Scene {
 
         this.cameraMovement.update(this.gizmos);
 
+    }
+}
+
+class PlayUI extends Phaser.Scene {
+
+    constructor ()
+    {
+        super({ key: 'UIScene', active: true });
+    }
+
+    preload(){
+        
+        this.load.bitmapFont('awasete', 'assets/fonts/awasete.png', 'assets/fonts/awasete.xml');
+
+        this.load.spritesheet('character_profiles', 'assets/characters/character_profiles.png', {
+            frameWidth: 32,
+            frameHeight: 32
+        });
+
+        this.cursors = this.input.keyboard.createCursorKeys();
+
+    }
+
+    create ()
+    {
+        // #region -- [[ SETUP DIALOGUE ]] --------------------------------------------------------------//>>
+        const textList = [
+            "The game spaces represent various psychological states and dilemmas. Players must navigate these spaces, confronting and overcoming fears represented by different scenes.",
+            "The main player action involves moving through these spaces and finding the correct path, which often requires coordinating the movements of Blue and Violet.",
+            "This is line 3."
+          ];
+          
+        const testDialogue = new Dialogue(this, textList);
+        testDialogue.start();
+        // #endregion
     }
 }

@@ -1,6 +1,6 @@
 class Player extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, characterSprite, invertedMove) {
-        super(scene, x, y, characterSprite, invertedMove);
+    constructor(scene, x, y, name, id, invertedMove) {
+        super(scene, x, y, "game_characters", name, invertedMove);
         scene.add.existing(this);
         scene.physics.add.existing(this);
 
@@ -21,13 +21,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.body.setSize(this.width/2, this.height/2);
         this.setDepth(2);
 
-        
         // -- description -------------------------------------------------------------------//>>
-        this.name = characterSprite;
-        this.playerID = 1;
+        this.name = name;
+        this.playerID = id;
         this.color = 0xffffff;
         
-        if (characterSprite == "character1")
+        if (id === 1)
         {
             this.name = "violet";
             this.playerID = 1;
@@ -35,18 +34,18 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.color_string = "#BF8BFF";
             this.prefix = ">> [[ P1 ]] ";
         }
-        else if (characterSprite == "character2")
+        else if (id === 2)
         {
             this.name = "blue";
             this.playerID = 2;
-            this.color = 0x579C9A;
-            this.color_string = "#579C9A";
+            this.color = 0xA45BE7;
+            this.color_string = "#8D2CE7";
             this.prefix = ">> (( P2 )) ";
         }
 
         // -- lighting ----------------------------------------------------------------//>>
         this.setPipeline('Light2D');
-        this.light = this.scene.lights.addLight(this.x, this.y, 50, 0x777777).setIntensity(1);
+        this.light = this.scene.lights.addLight(this.x, this.y, 50, 0xcccccc).setIntensity(1);
 
 
         // -- ui & gizmos --------------------------------------------------------------//>>
@@ -64,8 +63,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.disable = false;
         this.moveSpeed = 100;
         this.currMoveSpeed = this.moveSpeed;
-        
-        this.characterSprite = characterSprite
         this.inverted = invertedMove;
 
         this.currRoom = null;
@@ -89,25 +86,25 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         //#region DOWN ANIMATIONS
         this.scene.anims.create({
             key: 'down-idle1',
-            frames: this.scene.anims.generateFrameNumbers("character1", { start: 0, end: 1 }),
+            frames: this.scene.anims.generateFrameNumbers("game_characters", { start: 0, end: 1 }),
             frameRate: 2,
             repeat: -1
         });
         this.scene.anims.create({
             key: 'down-idle2',
-            frames: this.scene.anims.generateFrameNumbers("character2", { start: 0, end: 1 }),
+            frames: this.scene.anims.generateFrameNumbers("game_characters", { start: 12, end: 13 }),
             frameRate: 2,
             repeat: -1
         });
         this.scene.anims.create({
             key: 'down-move1',
-            frames: this.scene.anims.generateFrameNumbers("character1", { start: 2, end: 3 }),
+            frames: this.scene.anims.generateFrameNumbers("game_characters", { start: 2, end: 3 }),
             frameRate: 4,
             repeat: -1
         });
         this.scene.anims.create({
             key: 'down-move2',
-            frames: this.scene.anims.generateFrameNumbers("character2", { start: 2, end: 3 }),
+            frames: this.scene.anims.generateFrameNumbers("game_characters", { start: 14, end: 15 }),
             frameRate: 4,
             repeat: -1
         });
@@ -116,25 +113,25 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         //#region HORZ ANIMATIONS
         this.scene.anims.create({
             key: 'horz-idle1',
-            frames: this.scene.anims.generateFrameNumbers("character1", { start: 4, end: 5 }),
+            frames: this.scene.anims.generateFrameNumbers("game_characters", { start: 4, end: 5 }),
             frameRate: 2,
             repeat: -1
         });
         this.scene.anims.create({
             key: 'horz-idle2',
-            frames: this.scene.anims.generateFrameNumbers("character2", { start: 4, end: 5 }),
+            frames: this.scene.anims.generateFrameNumbers("game_characters", { start: 16, end: 17 }),
             frameRate: 2,
             repeat: -1
         });
         this.scene.anims.create({
             key: 'horz-move1',
-            frames: this.scene.anims.generateFrameNumbers("character1", { start: 6, end: 7 }),
+            frames: this.scene.anims.generateFrameNumbers("game_characters", { start: 6, end: 7 }),
             frameRate: 4,
             repeat: -1
         });
         this.scene.anims.create({
             key: 'horz-move2',
-            frames: this.scene.anims.generateFrameNumbers("character2", { start: 6, end: 7 }),
+            frames: this.scene.anims.generateFrameNumbers("game_characters", { start: 18, end: 19 }),
             frameRate: 4,
             repeat: -1
         });
@@ -143,25 +140,25 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         //#region UP ANIMATIONS
         this.scene.anims.create({
             key: 'up-idle1',
-            frames: this.scene.anims.generateFrameNumbers("character1", { start: 8, end: 9 }),
+            frames: this.scene.anims.generateFrameNumbers("game_characters", { start: 8, end: 9 }),
             frameRate: 2,
             repeat: -1
         });
         this.scene.anims.create({
             key: 'up-idle2',
-            frames: this.scene.anims.generateFrameNumbers("character2", { start: 8, end: 9 }),
+            frames: this.scene.anims.generateFrameNumbers("game_characters", { start: 20, end: 21 }),
             frameRate: 2,
             repeat: -1
         });
         this.scene.anims.create({
             key: 'up-move1',
-            frames: this.scene.anims.generateFrameNumbers("character1", { start: 10, end: 11 }),
+            frames: this.scene.anims.generateFrameNumbers("game_characters", { start: 10, end: 11 }),
             frameRate: 4,
             repeat: -1
         });
         this.scene.anims.create({
             key: 'up-move2',
-            frames: this.scene.anims.generateFrameNumbers("character2", { start: 10, end: 11 }),
+            frames: this.scene.anims.generateFrameNumbers("game_characters", { start: 22, end: 23 }),
             frameRate: 4,
             repeat: -1
         });
@@ -307,7 +304,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.currentFacing = "down";
         // #endregion
 
-        // #endregion [[ ABILITY STATE ]] ==================================== /// 
+        // #region [[ ABILITY STATE ]] ==================================== /// 
         if (this.playerID === 1) { this.ability_cursor = this.cursors.z;}
         else if (this.playerID === 2) { this.ability_cursor = this.cursors.x;}
 
@@ -383,7 +380,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         if (this.tetheredObject){
             this.gizmos_debug.drawCircle(this.tetheredObject.x, this.tetheredObject.y, 10, 0xffffff, 0, 1);
-
 
             // draw tether
             let tetheredObjPos = {x: this.tetheredObject.x, y: this.tetheredObject.y};
