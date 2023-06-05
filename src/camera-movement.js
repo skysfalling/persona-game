@@ -92,7 +92,7 @@ class CameraMovement {
             else
             {
                 const distance = Phaser.Math.Distance.Between(this.p1.x, this.p1.y, this.p2.x, this.p2.y, {x: 0, y: 0});
-                const thresholdDistance = 280;
+                const thresholdDistance = 250;
                 const targetAlpha = distance > thresholdDistance ? 1 : 0;
                 const targetAlpha_inverse = distance > thresholdDistance ? 0 : 1;
                 const lerpAmount = 0.1; 

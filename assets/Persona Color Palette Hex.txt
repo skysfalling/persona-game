@@ -21,7 +21,7 @@ Electric Orchid (#9E73FF)
 Dreamy Periwinkle (#9593FE)
 Serene Lavender (#7673FF)
 Tranquil Blue (#6C66FF)
-Mystical Indigo (#645EFF)
+Mystical Indigo (#645EFF) << blue
 Enigmatic Cobalt (#5F59F2)
 Azure Blue (#5550D9)
 Slate Gray (#60504F)

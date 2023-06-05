@@ -22,9 +22,6 @@ class Play extends Phaser.Scene {
 
 
         this.load.spritesheet('campfire', 'campfire.png', {frameWidth: 16, frameHeight: 16 });
-        this.load.spritesheet('campfire_blue', 'campfire-blue.png', {frameWidth: 16, frameHeight: 16 });
-        this.load.spritesheet('campfire_violet', 'campfire-violet.png', {frameWidth: 16, frameHeight: 16 });
-
         this.load.spritesheet('cat_idle', 'cat_idle.png', {frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('cat_walk', 'cat_walk_cycle.png', {frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('heart', 'heart.png', {frameWidth: 16, frameHeight: 16 });
@@ -201,6 +198,7 @@ class PlayUI extends Phaser.Scene {
     constructor ()
     {
         super({ key: 'UIScene', active: true });
+
     }
 
     preload(){
@@ -213,7 +211,6 @@ class PlayUI extends Phaser.Scene {
         });
 
         this.cursors = this.input.keyboard.createCursorKeys();
-
     }
 
     create () {

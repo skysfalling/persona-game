@@ -54,7 +54,7 @@ class DialogueManager {
         this.backgroundRect = scene.add.rectangle(this.origin.x, this.origin.y, screen.width - this.screenMargin, 75, 0x000000, 0.8);
         this.backgroundRect.setScrollFactor(0);
         this.backgroundRect.setOrigin(0.5, 0.5);
-        this.backgroundRect.setAlpha(0.5);
+        this.backgroundRect.setAlpha(0.75);
 
         this.hide();
     }
@@ -138,7 +138,10 @@ class DialogueManager {
 class Dialogue {
     constructor(scene, characterID = 0, textList = "I have nothing to say [[ NO TEXT GIVINE ]]") {
         this.scene = scene;
-        this.dialogueManager = new DialogueManager(scene);
+
+        // create dialogue manager if needed
+        if (!this.scene.dialogueManager) {this.scene.dialogueManager = new DialogueManager(scene);}
+        this.dialogueManager = this.scene.dialogueManager;
 
         // profile texture
         this.characterID = characterID;

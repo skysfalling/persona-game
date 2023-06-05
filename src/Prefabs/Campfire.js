@@ -20,14 +20,14 @@ class Campfire extends Phaser.GameObjects.Sprite {
             repeat: -1
         });
         this.scene.anims.create({
-            key: 'campfire_blue_loop',
-            frames: this.anims.generateFrameNumbers('campfire_blue', { start: 0, end: 4 }),
+            key: 'campfire_violet_loop',
+            frames: this.anims.generateFrameNumbers('campfire', { start: 5, end: 9 }),
             frameRate: 4,
             repeat: -1
         });
         this.scene.anims.create({
-            key: 'campfire_violet_loop',
-            frames: this.anims.generateFrameNumbers('campfire_violet', { start: 0, end: 4 }),
+            key: 'campfire_blue_loop',
+            frames: this.anims.generateFrameNumbers('campfire', { start: 10, end: 14 }),
             frameRate: 4,
             repeat: -1
         });
