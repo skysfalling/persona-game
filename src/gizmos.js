@@ -34,7 +34,7 @@ class Gizmos {
         this.graphics.strokePath();
         this.graphics.setAlpha(opacity);
     }
-a
+
     //#region  [[ CIRCLE ]]
     drawCircle(x, y, radius, color = 0xffffff, rotation = 0, lineWidth = 2) {
         if (!this.enabled) {return;}

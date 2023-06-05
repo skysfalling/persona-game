@@ -24,7 +24,7 @@ class DialogueManager {
         this.characterWrapLimit = 40; // Adjust the character wrap limit as needed
 
         // -- create dialog text object --------------------------------------------------------
-        this.dialogueTextObj = scene.add.bitmapText(this.origin.x - this.screenMargin, this.origin.y - this.screenMargin/2, 'awasete', "default dialog text", this.fontSize);
+        this.dialogueTextObj = scene.add.bitmapText(this.origin.x - this.screenMargin, this.origin.y - this.screenMargin*0.6, 'awasete', "default dialog text", this.fontSize);
         this.dialogueTextObj.setScrollFactor(0);
         this.dialogueTextObj.setDepth(globalDepth.ui + 1);
         this.dialogueTextObj.setScale(0.5);
@@ -32,29 +32,30 @@ class DialogueManager {
         this.currCharIndex = 0;
         this.isTyping = false;
 
-        this.skipPromptText = scene.add.bitmapText(this.origin.x, this.origin.y + this.screenMargin*0.75, 'awasete', "<< spacebar to skip >>", 16);
+        // -- create skip prompt --------------------------------------------------------
+        this.skipPromptText = scene.add.bitmapText(this.origin.x, this.origin.y + this.screenMargin*0.9, 'awasete', "<< spacebar to skip >>", 16);
         this.skipPromptText.setScrollFactor(0);
         this.skipPromptText.setDepth(globalDepth.ui + 1);
         this.skipPromptText.setScale(0.5);
         this.skipPromptText.setOrigin(0.5);
-        this.skipPromptText.setTint(0x333333);
+        this.skipPromptText.setTint(0x555555);
 
-        // -- create dialog box --------------------------------------------------------
+        // -- create profile image --------------------------------------------------------
         this.currentProfile = "violet";
         this.profile_image = scene.add.sprite(this.left_point.x, this.left_point.y, 'character_profiles');
         this.profile_image.setScale(2);
         this.profile_image.setScrollFactor(0);
         this.profile_image.setOrigin(0.25, 0.5);
         this.profile_image.setDepth(globalDepth.ui + 1);
+        this.profile_image.minFrame = 0;
+        this.profile_image.maxFrame = 2;
 
         // grey background
         this.backgroundRect = scene.add.rectangle(this.origin.x, this.origin.y, screen.width - this.screenMargin, 75, 0x000000, 0.8);
         this.backgroundRect.setScrollFactor(0);
         this.backgroundRect.setOrigin(0.5, 0.5);
+        this.backgroundRect.setAlpha(0.5);
 
-        // -- [[ CHARACTER PROFILES ]] --------------------------------------------------------
-        this.randomSwitchProfileFrame(this.profile_image, 'character_profiles', 0, 2);
-        
         this.hide();
     }
     // adds 'newline' so that the text wraps
@@ -91,12 +92,16 @@ class DialogueManager {
         this.backgroundRect.setVisible(false); // Hide the dialogue box
     }
 
-    // -- [[ TYPE TEXT ]] --------------------------------------------------------
-    typeText(text, color) {
+    setColorTheme(textColor, backgroundColor, profileBackgroundColor) {
+        this.dialogueTextObj.setTint(textColor.int);
+        this.backgroundRect.setFillStyle(backgroundColor.int);
+    }
+
+    //#region -- [[ TYPE TEXT ]] --------------------------------------------------------
+    typeText(text) {
         this.currText = this.wrapTextString(text, this.characterWrapLimit); // use newlines to wrap text
         this.currCharIndex = 0;
         this.dialogueTextObj.setText(''); // reset dialog text obj
-        this.dialogueTextObj.setTint(color);
         this.isTyping = true; // isTyping flag
 
         // typing event that loops through characters
@@ -126,39 +131,58 @@ class DialogueManager {
             this.typingEvent.destroy(); // Stop the typing event
         }
     }
+    //#endregion
 
-// -- [[ CHARACTER PROFILE ]] ----------------------------------------------------
-
-    randomSwitchProfileFrame(image, spritesheet, minFrame, maxFrame) {
-        const texture = this.scene.textures.get(spritesheet);
-        const frameNames = texture.getFrameNames();
-        
-        this.scene.time.addEvent({
-          delay: Phaser.Math.Between(100, 300), // random frame duration
-          callback: () => {
-
-            // choose the first frame 80% of the time
-            const randomValue = Math.random();
-            const selectedFrame = randomValue <= 0.9 ? minFrame : Phaser.Math.Between(minFrame, maxFrame);
-            image.setFrame(frameNames[selectedFrame]);
-          },
-          callbackScope: this,
-          loop: true
-        });
-    }
 }
 
 class Dialogue {
-    constructor(scene, textList) {
-      this.scene = scene;
-      this.textList = textList;
-      this.currentLineIndex = 0;
-      this.dialogueManager = new DialogueManager(scene); // Create an instance of the Dialogue class
+    constructor(scene, characterID = 0, textList = "I have nothing to say [[ NO TEXT GIVINE ]]") {
+        this.scene = scene;
+        this.dialogueManager = new DialogueManager(scene);
+
+        // profile texture
+        this.characterID = characterID;
+        this.characterProfileTexture = this.scene.textures.get('character_profiles');
+        this.profileFrames = this.characterProfileTexture.getFrameNames();
+
+        // character profile values ------------------------------------------------------ //
+        this.characterName = "none";
+        this.minProfileFrame = 0;
+        this.maxProfileFrame = 0;
+        this.characterColor = global_colors.white;
+
+        // dialog values ---------------------------------------------------- //
+        this.textList = textList;
+        this.currentLineIndex = 0;
+
+        if (this.characterID == 1) {
+            this.characterName = "violet";
+            this.minProfileFrame = 0;
+            this.maxProfileFrame = 2;
+            this.characterColor = global_colors.violet;
+
+            this.dialogueManager.setColorTheme(this.characterColor.light1, global_colors.black, global_colors.black)
+        }
+
+        if (this.characterID == 2) {
+            this.characterName = "blue";
+            this.minProfileFrame = 6;
+            this.maxProfileFrame = 8;
+            this.characterColor = global_colors.blue;
+
+            this.dialogueManager.setColorTheme(this.characterColor, global_colors.black, global_colors.black)
+        }
+
+        this.dialogueManager.profile_image.setFrame(this.profileFrames[this.minProfileFrame]);
+
     }
 
     start(){
         this.dialogueManager.show();
         this.nextLine();
+
+        // -- [[ CHARACTER PROFILES ]] --------------------------------------------------------
+        this.randomSwitchProfileFrame(this.dialogueManager.profile_image, this.minProfileFrame, this.maxProfileFrame);
 
         this.scene.input.keyboard.on('keydown-SPACE', () => {
             this.nextLine();
@@ -187,7 +211,24 @@ class Dialogue {
         this.currentLineIndex++;
 
     }
-  }
+
+    
+    // -- [[ CHARACTER PROFILE ]] ----------------------------------------------------
+    randomSwitchProfileFrame(image, minFrame, maxFrame) {        
+        // start random animation loop
+        this.scene.time.addEvent({
+          delay: Phaser.Math.Between(100, 300), // random frame duration
+          callback: () => {
+            // choose the first frame 80% of the time
+            const randomValue = Math.random();
+            const selectedFrame = randomValue <= 0.9 ? minFrame : Phaser.Math.Between(minFrame, maxFrame);
+            image.setFrame(this.profileFrames[selectedFrame]);
+          },
+          callbackScope: this,
+          loop: true
+        });
+    }
+}
   
   
   

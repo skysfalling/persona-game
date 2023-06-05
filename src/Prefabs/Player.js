@@ -26,27 +26,23 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.playerID = id;
         this.color = 0xffffff;
         
-        if (id === 1)
-        {
+        if (this.playerID === 1) {
             this.name = "violet";
-            this.playerID = 1;
-            this.color = 0xBF8BFF;
-            this.color_string = "#BF8BFF";
-            this.prefix = ">> [[ P1 ]] ";
+            this.color = global_colors.violet.int;
+            this.color_string = global_colors.violet.hex;
+            this.prefix = ">> [[ 1 ]] ";
         }
-        else if (id === 2)
-        {
+        
+        if (this.playerID === 2) {
             this.name = "blue";
-            this.playerID = 2;
-            this.color = 0xA45BE7;
-            this.color_string = "#8D2CE7";
-            this.prefix = ">> (( P2 )) ";
+            this.color = global_colors.blue.int;
+            this.color_string = global_colors.blue.hex;
+            this.prefix = ">> (( 2 )) ";
         }
 
         // -- lighting ----------------------------------------------------------------//>>
         this.setPipeline('Light2D');
         this.light = this.scene.lights.addLight(this.x, this.y, 50, 0xcccccc).setIntensity(1);
-
 
         // -- ui & gizmos --------------------------------------------------------------//>>
         this.gizmos_debug = new Gizmos(scene);
@@ -314,7 +310,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 name: 'none',
                 enter: () => {
                     this.currAbilityState = this.abilityStates.NONE;
-                    console.log("[[ P" + this.playerID + " ]] ability -> " + this.currAbilityState.name);
+                    console.log(this.prefix + " ability -> " + this.currAbilityState.name);
                 },
                 update: () => {
                     this.tetherBubble.currSize = 0;
@@ -328,7 +324,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 name: 'tether-bubble',
                 enter: () => {
                     this.currAbilityState = this.abilityStates.TETHER_BUBBLE;
-                    console.log("[[ P" + this.playerID + " ]] ability -> " + this.currAbilityState.name);
+                    console.log(this.prefix + " ability -> " + this.currAbilityState.name);
 
                     if (this.tetheredObject) {
                         this.tetheredObject.disconnectPlayer(this);

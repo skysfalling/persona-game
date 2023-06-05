@@ -216,8 +216,7 @@ class PlayUI extends Phaser.Scene {
 
     }
 
-    create ()
-    {
+    create () {
         // #region -- [[ SETUP DIALOGUE ]] --------------------------------------------------------------//>>
         const textList = [
             "The game spaces represent various psychological states and dilemmas. Players must navigate these spaces, confronting and overcoming fears represented by different scenes.",
@@ -225,7 +224,7 @@ class PlayUI extends Phaser.Scene {
             "This is line 3."
           ];
           
-        const testDialogue = new Dialogue(this, textList);
+        const testDialogue = new Dialogue(this, 2, textList);
         testDialogue.start();
         // #endregion
     }
