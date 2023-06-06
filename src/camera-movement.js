@@ -11,6 +11,8 @@ class CameraMovement {
         this.gizmos = new Gizmos(scene);
         this.gizmos.enabled = false;
 
+        this.splitscreen = false;
+
         this.editorMode = false; // Initialize editor mode as off
         this.cursors = scene.input.keyboard.createCursorKeys(); // Capture cursor keys
         this.zoomKeys = {
@@ -28,21 +30,34 @@ class CameraMovement {
         this.cameras.main.startFollow(this.mainCameraTarget);
         this.cameras.main.setZoom(1);
 
-        const screenWidth = this.cameras.main.width;
-        const screenHeight = this.cameras.main.height;
         // Create camera for player 1
-        this.camera1 = this.cameras.add(0, 0, screenWidth, screenHeight);
+        this.camera1 = this.cameras.add(0, 0, screen.width, screen.height);
         this.camera1.startFollow(this.p1);
         this.camera1.setZoom(1);
         this.camera1.setAlpha(0);
         //this.camera1.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         
         // Create camera for player 2
-        this.camera2 = this.cameras.add(0,  0, screenWidth, screenHeight);
+        this.camera2 = this.cameras.add(0, 0, screen.width, screen.height);
         this.camera2.startFollow(this.p2);
         this.camera2.setZoom(1);
         this.camera2.setAlpha(0);
         //this.camera2.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+
+        const violetEchoOverlayRect = this.scene.add.graphics();
+        violetEchoOverlayRect.fillStyle(global_colors.violet.int, 0.5); // Set the fill color and alpha
+        violetEchoOverlayRect.fillRect(0, 0, screen.width, screen.height);
+        violetEchoOverlayRect.setScrollFactor(0);
+
+        const blueEchoOverlayRect = this.scene.add.graphics();
+        blueEchoOverlayRect.fillStyle(global_colors.blue.int, 0.5); // Set the fill color and alpha
+        blueEchoOverlayRect.fillRect(0, 0, screen.width, screen.height);
+        blueEchoOverlayRect.setScrollFactor(0);
+
+        this.mainCamera.ignore([violetEchoOverlayRect, blueEchoOverlayRect]);
+        this.camera1.ignore([blueEchoOverlayRect]);
+        this.camera2.ignore([violetEchoOverlayRect]);
+
     }
 
     updateEditorMode() {
@@ -89,45 +104,56 @@ class CameraMovement {
             if (dualPlayerMovement === false)
             {
                 this.mainCameraTarget.setPosition( this.p1.x,  this.p1.y);
+                this.mainCamera.setAlpha(1);
             }
-            // if in same room
-            else if (playersInSameRoom && dualPlayerMovement) {
-                this.playerMidpoint = this.gizmos.calculateMidpoint({x: this.p1.x, y: this.p1.y}, {x: this.p2.x, y: this.p2.y});
-                this.mainCameraTarget.setPosition( this.playerMidpoint.x,  this.playerMidpoint.y);
-            }
-            else if (playersInSameRoom === false && dualPlayerMovement)
-            {
+            else {
                 const distance = Phaser.Math.Distance.Between(this.p1.x, this.p1.y, this.p2.x, this.p2.y, {x: 0, y: 0});
                 const thresholdDistance = 150;
-                const targetAlpha = distance > thresholdDistance ? 1 : 0;
-                const targetAlpha_inverse = distance > thresholdDistance ? 0 : 1;
-                const lerpAmount = 0.05; 
+                const targetAlpha = (distance > thresholdDistance) && !playersInSameRoom ? 1 : 0;
+                const targetAlpha_inverse = (distance > thresholdDistance) && !playersInSameRoom ? 0 : 1;
+                const lerpAmount = 0.1; 
         
                 this.mainCamera.alpha = Phaser.Math.Linear(this.mainCamera.alpha, targetAlpha_inverse, lerpAmount);
                 this.camera1.alpha = Phaser.Math.Linear(this.camera1.alpha, targetAlpha, lerpAmount);
                 this.camera2.alpha = Phaser.Math.Linear(this.camera2.alpha, targetAlpha, lerpAmount);
 
-                const isP1OnLeft = this.p1.x < this.p2.x;
+                this.p1.echoActive = this.splitscreen;
+                this.p2.echoActive = this.splitscreen;
 
-                let screenhalf = screen.width/2;
+                // << NORMAL VIEW >>
+                if (playersInSameRoom) {
+                    this.splitscreen = false;
+                    
+                    this.playerMidpoint = this.gizmos.calculateMidpoint({x: this.p1.x, y: this.p1.y}, {x: this.p2.x, y: this.p2.y});
+                    this.mainCameraTarget.setPosition( this.playerMidpoint.x,  this.playerMidpoint.y);
+                }
 
-                // Vertical Split Screen
-                this.camera1.setPosition(0, 0);
-                this.camera2.setPosition(screenhalf, 0);
-                
-                this.camera1.width = screenhalf;
-                this.camera1.height = screen.height;
-                this.camera2.width = screenhalf;
-                this.camera2.height = screen.height;
+                // << SPLITSCREEN VIEW >>
+                else {
+                    this.splitscreen = true;
+                    let screenhalf = screen.width/2;
+    
+                    // Vertical Split Screen
+                    this.camera1.setPosition(0, 0);
+                    this.camera2.setPosition(screenhalf, 0);
+                    
+                    this.camera1.width = screenhalf;
+                    this.camera1.height = screen.height;
+    
+                    this.camera2.width = screenhalf;
+                    this.camera2.height = screen.height;
+    
+                    // Follow the players with the cameras
+                    this.camera1.startFollow(this.p1, false, 1, 1, 0, 0);
+                    this.camera2.startFollow(this.p2, false, 1, 1, 0, 0);
+                    
+                    // Adjust the camera bounds to the full map + screen size offset
+                    this.camera1.setBounds(-screen.width, -screen.height, this.map.widthInPixels + screen.width , this.map.heightInPixels + screen.height);
+                    this.camera2.setBounds(-screen.width, -screen.height, this.map.widthInPixels + screen.width, this.map.heightInPixels + screen.height);
+                }
 
-                // Follow the players with the cameras
-                this.camera1.startFollow(this.p1, false, 1, 1, 0, 0);
-                this.camera2.startFollow(this.p2, false, 1, 1, 0, 0);
-                
-                // Adjust the camera bounds to the full map + screen size offset
-                this.camera1.setBounds(-screen.width, -screen.height, this.map.widthInPixels + screen.width , this.map.heightInPixels + screen.height);
-                this.camera2.setBounds(-screen.width, -screen.height, this.map.widthInPixels + screen.width, this.map.heightInPixels + screen.height);
             }
+
 
 
         }

@@ -20,7 +20,6 @@ class Play extends Phaser.Scene {
             frameHeight: 16
         });
 
-
         // Load Spritesheets
         this.load.spritesheet('campfire', 'sprites/campfire.png', {frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('cat_idle', 'sprites/cat_idle.png', {frameWidth: 16, frameHeight: 16 });
@@ -66,8 +65,8 @@ class Play extends Phaser.Scene {
 
         const p2Spawn = this.map.findObject("player_spawn", obj => obj.name === "p2spawn");
         this.p2 = new Player(this, p2Spawn.x, p2Spawn.y, 'blue', 2, true);
-        this.p2.enabled = false;
-        this.p2.setVisible(false);
+        //this.p2.enabled = false;
+        //this.p2.setVisible(false);
 
         this.playerObjs = [this.p1, this.p2];
         // #endregion
@@ -148,6 +147,8 @@ class Play extends Phaser.Scene {
         // #region [[ SETUP CAMERA MOVEMENT]] --------------------------------------------------------------//>>
         this.cameraMovement = new CameraMovement(this);
         this.cameraMovement.setup();
+
+        
 
         // Define a key to toggle editor mode
         /*

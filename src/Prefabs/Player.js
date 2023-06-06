@@ -5,7 +5,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
 
         this.enabled = true;
-
+        this.echoActive = false;
 
         // input references
         this.cursors = scene.input.keyboard.addKeys({
@@ -43,8 +43,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.prefix = ">> (( 2 )) ";
         }
 
-        // -- lighting ----------------------------------------------------------------//>>
-        this.setPipeline('Light2D');
+        // -- lighting -------------------------------------------------------//>>
+        //this.setPipeline('Light2D');
         this.light = this.scene.lights.addLight(this.x, this.y, 50, 0xcccccc).setIntensity(1);
 
         // -- ui & gizmos --------------------------------------------------------------//>>

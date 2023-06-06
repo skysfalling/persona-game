@@ -13,17 +13,20 @@ class HiddenObject extends Phaser.GameObjects.Sprite {
     }
   
     update(player) {
-      const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y);
-  
-      if (distance <= this.distanceThreshold) {
-        // Object is within the distance threshold, show it
-        this.targetAlpha = 1;
-        this.showObject();
-      } else {
-        // Object is outside the distance threshold, fade it away
-        this.targetAlpha = 0;
-        this.hideObject();
-      }
+
+        if (player.echoActive){
+            const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y);
+    
+            if (distance <= this.distanceThreshold) {
+                // Object is within the distance threshold, show it
+                this.targetAlpha = 1;
+                this.showObject();
+            } else {
+                // Object is outside the distance threshold, fade it away
+                this.targetAlpha = 0;
+                this.hideObject();
+            }
+        }
     }
   
     showObject() {
