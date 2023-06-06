@@ -4,7 +4,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
 
-        this.enabled = true;
+        this.enableMove = true;
         this.echoActive = false;
 
         // input references
@@ -393,54 +393,53 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     handleMovement() {
-
         // disable movement until idle again
-        if (this.enabled == false)
-        {
+        if (this.enableMove === false){
             this.currMoveSpeed = 0;
             this.movementStates.IDLE.enter();
             return;
         }
         else {
             this.currMoveSpeed = this.moveSpeed;
+            if (this.cursors.left.isDown) {
+
+                if (this.inverted) {
+                    this.movementStates.RIGHT.enter();
+                }
+                else {
+                    this.movementStates.LEFT.enter();
+                }
+            }
+            else if (this.cursors.right.isDown) {
+                if (this.inverted) {
+                    this.movementStates.LEFT.enter();
+                }
+                else {
+                    this.movementStates.RIGHT.enter();
+                }        
+            } 
+            else if (this.cursors.up.isDown) {
+                if (this.inverted) {
+                    this.movementStates.DOWN.enter();
+                }
+                else {
+                    this.movementStates.UP.enter();
+                }
+            } 
+            else if (this.cursors.down.isDown) {
+                if (this.inverted) {
+                    this.movementStates.UP.enter();
+                }
+                else {
+                    this.movementStates.DOWN.enter();
+                }
+            }
+            else{
+                this.movementStates.IDLE.enter();
+            }
         }
 
-        if (this.cursors.left.isDown) {
 
-            if (this.inverted) {
-                this.movementStates.RIGHT.enter();
-            }
-            else {
-                this.movementStates.LEFT.enter();
-            }
-        }
-        else if (this.cursors.right.isDown) {
-            if (this.inverted) {
-                this.movementStates.LEFT.enter();
-            }
-            else {
-                this.movementStates.RIGHT.enter();
-            }        
-        } 
-        else if (this.cursors.up.isDown) {
-            if (this.inverted) {
-                this.movementStates.DOWN.enter();
-            }
-            else {
-                this.movementStates.UP.enter();
-            }
-        } 
-        else if (this.cursors.down.isDown) {
-            if (this.inverted) {
-                this.movementStates.UP.enter();
-            }
-            else {
-                this.movementStates.DOWN.enter();
-            }
-        }
-        else{
-            this.movementStates.IDLE.enter();
-        }
 
 
 

@@ -109,11 +109,6 @@ class Play extends Phaser.Scene {
         const hiddenObjectPositions = this.map.filterObjects("violet_echos", obj => obj.name === "heart");
 
         this.violet_echos = this.add.group();
-        hiddenObjectPositions.forEach(hiddenObject => {
-            const newHiddenObject = new HiddenObject(this, hiddenObject.x, hiddenObject.y, "heart");
-            console.log("new hidden object : " + newHiddenObject.name);
-            this.violet_echos.add(newHiddenObject);
-        });
 
         // #endregion
 

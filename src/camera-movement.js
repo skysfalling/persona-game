@@ -48,11 +48,14 @@ class CameraMovement {
         violetEchoOverlayRect.fillStyle(global_colors.violet.int, 0.5); // Set the fill color and alpha
         violetEchoOverlayRect.fillRect(0, 0, screen.width, screen.height);
         violetEchoOverlayRect.setScrollFactor(0);
+        violetEchoOverlayRect.setDepth(globalDepth.playerEffects);
 
         const blueEchoOverlayRect = this.scene.add.graphics();
         blueEchoOverlayRect.fillStyle(global_colors.blue.int, 0.5); // Set the fill color and alpha
         blueEchoOverlayRect.fillRect(0, 0, screen.width, screen.height);
         blueEchoOverlayRect.setScrollFactor(0);
+        blueEchoOverlayRect.setDepth(globalDepth.playerEffects);
+
 
         this.mainCamera.ignore([violetEchoOverlayRect, blueEchoOverlayRect]);
         this.camera1.ignore([blueEchoOverlayRect]);

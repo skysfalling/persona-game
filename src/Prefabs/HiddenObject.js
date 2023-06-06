@@ -1,22 +1,25 @@
-class HiddenObject extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, texture) {
-      super(scene, x, y, texture);
-      this.scene = scene;
-      this.name = texture;
-      this.scene.add.existing(this);
-  
-      this.setAlpha(0); // Start with zero opacity
-      this.targetAlpha = 0; // Target opacity for lerping
-      this.distanceThreshold = 50; 
-      this.lerpSpeed = 0.05;
-  
+class HiddenObject {
+    constructor(scene, object, playerEcho) {
+        this.scene = scene;
+        this.scene.add.existing(this);
+        this.object = object;
+        this.playerEcho = playerEcho;
+    
+        this.object.setAlpha(0);
+        this.targetAlpha = 0; // Target opacity for lerping
+        this.distanceThreshold = 50; 
+        this.lerpSpeed = 0.05;
+
+        this.scene.events.on('update', this.update); 
     }
   
-    update(player) {
+    update() {
 
-        if (player.echoActive){
+        if (this.playerEcho)
+        {
+            const player = this.object.playerEcho;
             const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y);
-    
+        
             if (distance <= this.distanceThreshold) {
                 // Object is within the distance threshold, show it
                 this.targetAlpha = 1;
@@ -30,15 +33,15 @@ class HiddenObject extends Phaser.GameObjects.Sprite {
     }
   
     showObject() {
-      if (this.alpha < this.targetAlpha) {
-        this.alpha = Phaser.Math.Linear(this.alpha, this.targetAlpha, this.lerpSpeed);
-      }
-    }
-  
-    hideObject() {
-      if (this.alpha > this.targetAlpha) {
-        this.alpha = Phaser.Math.Linear(this.alpha, this.targetAlpha, this.lerpSpeed); 
-      }
+        if (this.object.alpha < this.targetAlpha) {
+            this.object.alpha = Phaser.Math.Linear(this.alpha, this.targetAlpha, this.lerpSpeed);
+        }
+        }
+    
+        hideObject() {
+        if (this.object.alpha > this.targetAlpha) {
+            this.object.alpha = Phaser.Math.Linear(this.alpha, this.targetAlpha, this.lerpSpeed); 
+        }
     }
 }
   

@@ -9,7 +9,6 @@ class Campfire extends Phaser.GameObjects.Sprite {
 
         this.connectedPlayer;
         this.setupAnimations();
-
     }
   
     setupAnimations() {
@@ -43,7 +42,7 @@ class Campfire extends Phaser.GameObjects.Sprite {
         }
 
         this.connectedPlayer = player;
-        this.connectedPlayer.disable = true;
+        this.connectedPlayer.enableMove = false;
         this.connectedPlayer.newTetheredObject(this);
 
         if (this.connectedPlayer.playerID == 1) { this.anims.play('campfire_violet_loop', true); }
@@ -52,7 +51,7 @@ class Campfire extends Phaser.GameObjects.Sprite {
     }
 
     disconnectPlayer(player) {
-        player.disable = false;
+        player.enableMove = true;
         this.connectedPlayer.tetheredObject = null;
         this.connectedPlayer = null;
 

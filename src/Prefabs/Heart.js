@@ -11,8 +11,7 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         this.overlapTrigger.body.setAllowGravity(false);
         this.overlapTrigger.visible = false;
 
-        // setup hidden object functionality
-        this.playerEcho = playerEcho;
+
 
         // setup gizmos
         this.gizmos = new Gizmos(scene);
@@ -22,6 +21,13 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         this.name = "heart obj";
         this.id_type = 0;
         this.connectedPlayers = [];
+
+        // setup hidden object functionality
+        this.playerEcho = playerEcho;
+        if (this.playerEcho) { 
+            this.hiddenObject = new HiddenObject(this.scene, this, playerEcho);
+            this.id_type = this.playerEcho.playerID;
+        }
 
         // - movement -----------------------------------------------
         this.speed = 100;
@@ -64,8 +70,6 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
             repeat: 0
         });
         // #endregion
-
-
         this.playLoopAnim();
   
       // Add this sprite to the interactObjects group
@@ -74,10 +78,8 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
     
     update() {
 
-
         // update hidden object
-        if (this.playerEcho) { this.updateHiddenObject(this.playerEcho, 100);}
-
+        if (this.playerEcho && this.playerEcho.echoActive) { this.updateHiddenObject(this.playerEcho, 100);}
 
         // #region [[ UPDATE MOVEMENT ]--------------------------------]
 
@@ -219,5 +221,6 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         }
 
         this.alpha = Phaser.Math.Linear(this.alpha, this.targetAlpha, lerpSpeed);
+ 
     }
 }
