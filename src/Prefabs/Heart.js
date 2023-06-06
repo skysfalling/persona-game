@@ -11,8 +11,6 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         this.overlapTrigger.body.setAllowGravity(false);
         this.overlapTrigger.visible = false;
 
-
-
         // setup gizmos
         this.gizmos = new Gizmos(scene);
         this.gizmos.enabled = true;
@@ -24,7 +22,7 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
 
         // setup hidden object functionality
         this.playerEcho = playerEcho;
-        if (this.playerEcho) { 
+        if (playerEcho) { 
             this.hiddenObject = new HiddenObject(this.scene, this, playerEcho);
             this.id_type = this.playerEcho.playerID;
         }
@@ -79,7 +77,10 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
     update() {
 
         // update hidden object
-        if (this.playerEcho && this.playerEcho.echoActive) { this.updateHiddenObject(this.playerEcho, 100);}
+        if (this.playerEcho) 
+        { 
+            this.hiddenObject.update();
+        }
 
         // #region [[ UPDATE MOVEMENT ]--------------------------------]
 
@@ -141,6 +142,9 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
     }
 
     connectPlayer(player) {
+
+        if (this.hiddenObject.hidden) { return;}
+
         // Check if the player already exists in the array
         const playerExists = this.connectedPlayers.some(p => p === player);
       
@@ -173,10 +177,15 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
             player.tetheredObject = null;
 
             console.log("<3 HEART -> player removed: " + player.name);
-            this.id_type = player.playerID;
+
+            // change colore to connected player color
+            if (this.connectedPlayers.length > 0) 
+            {
+                this.id_type = this.connectedPlayers[0].playerID;
+            }
+            else { this.id_type = 0; }
             this.playSpinAnim(player.playerID);
         }
-
     }
 
     playLoopAnim()
@@ -210,17 +219,4 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         this.on('animationcomplete', this.playLoopAnim);
     }
 
-    updateHiddenObject(player, distanceThreshold, lerpSpeed = 0.1){
-        const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y);
-        if (distance <= distanceThreshold) 
-        {
-            this.targetAlpha = 1;
-        } 
-        else {
-            this.targetAlpha = 0;
-        }
-
-        this.alpha = Phaser.Math.Linear(this.alpha, this.targetAlpha, lerpSpeed);
- 
-    }
 }
