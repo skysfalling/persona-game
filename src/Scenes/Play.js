@@ -77,7 +77,7 @@ class Play extends Phaser.Scene {
 
         // (( HEARTS ))
         const objSpawn = this.map.findObject("interaction", obj => obj.name === "heart");
-        this.heart = new Heart(this, objSpawn.x, objSpawn.y, 'heart');
+        this.heart = new Heart(this, objSpawn.x, objSpawn.y, 'heart', this.p1);
 
         // (( CAMPFIRES ))
         this.campfires = this.add.group();

@@ -1,6 +1,6 @@
 class Heart extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, texture, frame) {
-        super(scene, x, y, texture, frame);
+    constructor(scene, x, y, texture, playerEcho) {
+        super(scene, x, y, texture);
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.body.setSize(this.width/2, this.height/2)
@@ -11,9 +11,12 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         this.overlapTrigger.body.setAllowGravity(false);
         this.overlapTrigger.visible = false;
 
+        // setup hidden object functionality
+        this.playerEcho = playerEcho;
+
+        // setup gizmos
         this.gizmos = new Gizmos(scene);
         this.gizmos.enabled = true;
-
 
         // Reference to players in the scene
         this.name = "heart obj";
@@ -68,7 +71,15 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
       // Add this sprite to the interactObjects group
       scene.interactObjects.add(this);
     }
+    
     update() {
+
+
+        // update hidden object
+        if (this.playerEcho) { this.updateHiddenObject(this.playerEcho, 100);}
+
+
+        // #region [[ UPDATE MOVEMENT ]--------------------------------]
 
         // disconnect from player if too far
         this.connectedPlayers.forEach(player => {
@@ -76,9 +87,6 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
 
             if (distance > 50) { this.disconnectPlayer(player);}
         });
-
-
-        // [[ UPDATE MOVEMENT ]--------------------------------]
 
         this.overlapTrigger.setPosition(this.x, this.y);
 
@@ -124,6 +132,7 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
             }
             
         }
+        //#endregion
 
         // [[ UPDATE UI ]]
 
@@ -197,5 +206,18 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         }
 
         this.on('animationcomplete', this.playLoopAnim);
+    }
+
+    updateHiddenObject(player, distanceThreshold, lerpSpeed = 0.1){
+        const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y);
+        if (distance <= distanceThreshold) 
+        {
+            this.targetAlpha = 1;
+        } 
+        else {
+            this.targetAlpha = 0;
+        }
+
+        this.alpha = Phaser.Math.Linear(this.alpha, this.targetAlpha, lerpSpeed);
     }
 }
