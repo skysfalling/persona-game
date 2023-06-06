@@ -6,11 +6,11 @@ class Play extends Phaser.Scene {
     preload() {
         // load assets
         this.load.path = "./assets/";
-        this.load.image("1bit_tiles", "tilemap/monochrome_packed.png");    // tile sheet
+        this.load.image("1bit_tiles", "tilemap/persona-tileset.png");    // tile sheet
 
         this.load.tilemapTiledJSON("map", "tilemap/map2.json");    // Tiled JSON file
 
-        this.load.spritesheet('tileAtlas', 'tilemap/monochrome_packed.png', {
+        this.load.spritesheet('tileAtlas', 'tilemap/persona-tileset.png', {
             frameWidth: 16,
             frameHeight: 16
         });
@@ -35,7 +35,7 @@ class Play extends Phaser.Scene {
 
     create() {
 
-        this.lights.enable().setAmbientColor(0x555555);
+        this.lights.enable().setAmbientColor(0xaaaaaa);
 
         // get inputs
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -43,7 +43,8 @@ class Play extends Phaser.Scene {
         // #region [[ SETUP TILEMAP ]] --------------------------------------------------------------//>>
         // add a tile map
         this.map = this.add.tilemap("map"); 
-        const tileset = this.map.addTilesetImage("monochrome_packed", "1bit_tiles");
+        const tileset = this.map.addTilesetImage("persona", "1bit_tiles");
+        const inverse_tileset = this.map.addTilesetImage("monochrome_inverse", "1bit_tiles");
 
         // setup tilemap layers
         const backgroundLayer = this.map.createLayer("background", tileset, 0, 0).setPipeline('Light2D');

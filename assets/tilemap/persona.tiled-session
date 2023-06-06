@@ -9,8 +9,12 @@
     ],
     "fileStates": {
         "": {
-            "scaleInDock": 4,
+            "scaleInDock": 1.5,
             "scaleInEditor": 1
+        },
+        "cat_idle.tsx": {
+            "scaleInDock": 5.5,
+            "scaleInEditor": 8
         },
         "map1.json": {
             "expandedObjectLayers": [
@@ -20,8 +24,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 235,
-                "y": 399
+                "x": -10.5,
+                "y": 81
             }
         },
         "map1.json#character-sheet": {
@@ -37,8 +41,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 158,
-                "y": 426
+                "x": -87.5,
+                "y": 243
             }
         },
         "map1.tmx#character-sheet": {
@@ -55,28 +59,40 @@
                 4
             ],
             "scale": 1.5,
-            "selectedLayer": 4,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 77.33333333333334,
-                "y": 502.33333333333337
+                "x": 142.33333333333331,
+                "y": 230.66666666666669
             }
         },
         "map2.json#heart": {
             "scaleInDock": 4
         },
         "map2.json#monochrome_packed": {
-            "scaleInDock": 2
+            "scaleInDock": 2,
+            "scaleInEditor": 1
+        },
+        "map2.json#persona": {
+            "scaleInDock": 0.75
         },
         "map2.tmx": {
-            "scale": 1,
+            "scale": 0.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 188,
-                "y": 227
+                "x": 565,
+                "y": 300
             }
         },
-        "map2.tmx#monochrome_packed": {
+        "map2.tmx#monochrome_inverse": {
             "scaleInDock": 1
+        },
+        "map2.tmx#monochrome_packed": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "map2.tmx#persona": {
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
         },
         "monochrome.tsx": {
             "scaleInDock": 2,
@@ -88,6 +104,10 @@
         "monochrome_packed.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "persona.tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 0.75
         },
         "tilemap01.json": {
             "scale": 0.64125,
@@ -114,7 +134,7 @@
     },
     "last.exportedFilePath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/tilemap",
     "last.externalTilesetPath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/tilemap",
-    "last.imagePath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets",
+    "last.imagePath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/tilemap",
     "map.fixedSize": false,
     "map.lastUsedExportFilter": "JSON map files [Tiled 1.1] (*.json)",
     "map.lastUsedFormat": "json1",
@@ -128,15 +148,18 @@
     "project": "persona.tiled-project",
     "property.type": "int",
     "recentFiles": [
+        "map2.tmx",
         "map2.json",
-        "monochrome_packed.tsx",
+        "persona.tsx",
+        "cat_idle.tsx",
         "map1.tmx",
         "map1.json",
+        "monochrome_packed.tsx",
         "tilemap01.json",
         "tilemap01.tmx",
         "monochrome.tsx"
     ],
-    "tileset.embedInMap": false,
+    "tileset.embedInMap": true,
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

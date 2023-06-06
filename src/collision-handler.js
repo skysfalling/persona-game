@@ -4,7 +4,7 @@ class CollisionHandler {
     }
 
     collideWithCollisionLayer(player, collisionLayer) {
-        collisionLayer.setCollisionBetween(0, 1000);
+        collisionLayer.setCollisionBetween(0, 9999);
         this.scene.physics.add.collider(player, collisionLayer);
     }
 
