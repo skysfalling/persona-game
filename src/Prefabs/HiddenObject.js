@@ -15,12 +15,14 @@ class HiddenObject {
     }
   
     update() {
-        if (this.playerEcho && this.playerEcho.echoActive)
+
+        if (this.playerEcho)
         {
             const player = this.playerEcho;
             const distance = Phaser.Math.Distance.Between(player.x, player.y, this.object.x, this.object.y);
-
-            if (distance <= this.distanceThreshold) {
+        
+            // SHOW HIDDEN OBJECT
+            if (distance <= this.distanceThreshold &&this.playerEcho.echoActive) {
                 this.targetAlpha = 1;
                 this.showObject();
             } 
@@ -33,6 +35,8 @@ class HiddenObject {
   
     showObject() {
         this.hidden = false;
+        this.object.body.setEnable(true);
+
         if (this.object.alpha < this.targetAlpha) {
             this.object.alpha = Phaser.Math.Linear(this.object.alpha, this.targetAlpha, this.lerpSpeed);
         }
@@ -40,6 +44,7 @@ class HiddenObject {
 
     hideObject() {
         this.hidden = true;
+        this.object.body.setEnable(false);
         if (this.object.alpha > this.targetAlpha) {
             this.object.alpha = Phaser.Math.Linear(this.object.alpha, this.targetAlpha, this.lerpSpeed); 
         }

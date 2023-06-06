@@ -20,9 +20,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         // -- positions ----------------------------------------------------------------//>>
         this.x = x;
         this.y = y;
-        this.setOrigin(0.5, 0.5);
+        this.setOrigin(0.5);
         this.body.setSize(this.width/2, this.height/2);
-        this.setDepth(2);
+        this.setDepth(globalDepth.playArea);
 
         // -- description -------------------------------------------------------------------//>>
         this.name = name;
@@ -317,7 +317,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 update: () => {
                     this.tetherBubble.currSize = 0;
 
-                    if (Phaser.Input.Keyboard.JustDown(this.ability_cursor)) {
+                    if (Phaser.Input.Keyboard.JustDown(this.ability_cursor) && this.enableMove) {
                         this.abilityStates.TETHER_BUBBLE.enter();
                     }
                 }

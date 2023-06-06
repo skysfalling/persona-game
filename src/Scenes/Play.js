@@ -8,7 +8,7 @@ class Play extends Phaser.Scene {
         this.load.path = "./assets/";
         this.load.image("1bit_tiles", "tilemap/persona-tileset.png");    // tile sheet
 
-        this.load.tilemapTiledJSON("map", "tilemap/map2.json");    // Tiled JSON file
+        this.load.tilemapTiledJSON("map", "tilemap/whispering_pines_01.json");    // Tiled JSON file
 
         this.load.spritesheet('tileAtlas', 'tilemap/persona-tileset.png', {
             frameWidth: 16,
@@ -50,6 +50,9 @@ class Play extends Phaser.Scene {
         const backgroundLayer = this.map.createLayer("background", tileset, 0, 0).setPipeline('Light2D');
         backgroundLayer.setDepth(globalDepth.background);
 
+        const backgroundEnvLayer = this.map.createLayer("background_env", tileset, 0, 0).setPipeline('Light2D');
+        backgroundLayer.setDepth(globalDepth.env_background);
+
         const collisionLayer = this.map.createLayer("collision", tileset, 0, 0).setPipeline('Light2D');
         backgroundLayer.setDepth(globalDepth.env_background);
         collisionLayer.setCollisionByProperty({ collides: true });
@@ -66,10 +69,26 @@ class Play extends Phaser.Scene {
 
         const p2Spawn = this.map.findObject("player_spawn", obj => obj.name === "p2spawn");
         this.p2 = new Player(this, p2Spawn.x, p2Spawn.y, 'blue', 2, true);
-        //this.p2.enabled = false;
-        //this.p2.setVisible(false);
+        this.p2.enableMove = false;
+        this.p2.setVisible(false);
+        //this.p2.setAlpha(0.5);
 
         this.playerObjs = [this.p1, this.p2];
+        // #endregion
+
+        // #region [[ SETUP CAMERA MOVEMENT]] --------------------------------------------------------------//>>
+        this.cameraMovement = new CameraMovement(this, this.p1, this.p2);
+        this.cameraMovement.setup();
+        this.cameraMovement.dualPlayerMovement = false;
+
+        
+
+        // Define a key to toggle editor mode
+        /*
+        this.input.keyboard.on('keydown-SPACE', () => {
+            //this.cameraMovement.toggleEditorMode();
+        });
+        */
         // #endregion
 
         // #region [[ CREATE OBJECTS ]] --------------------------------------------------------------//>>
@@ -97,9 +116,11 @@ class Play extends Phaser.Scene {
           const correspondingExit = cat_exits.find(exit => exit.properties.exit_id === exitId);
         
           if (correspondingExit) {
-            const new_cat = new Cat(this, cat.x, cat.y, cat.properties.id_type);
+            const new_cat = new Cat(this, cat.x, cat.y, 'cat_idle', cat.properties[1].value);
             new_cat.correspondingExit = correspondingExit;
             this.cats.add(new_cat);
+
+            console.log('cat properties ' + JSON.stringify(cat.properties));
           } 
           else {
             console.warn(`No corresponding cat_exit object found for cat with exit_id: ${exitId}`);
@@ -140,20 +161,6 @@ class Play extends Phaser.Scene {
 
         // #endregion
 
-        // #region [[ SETUP CAMERA MOVEMENT]] --------------------------------------------------------------//>>
-        this.cameraMovement = new CameraMovement(this);
-        this.cameraMovement.setup();
-
-        
-
-        // Define a key to toggle editor mode
-        /*
-        this.input.keyboard.on('keydown-SPACE', () => {
-            //this.cameraMovement.toggleEditorMode();
-        });
-        */
-        // #endregion
-
         //#region [[ HTML REFERENCES ]]
         this.physics.world.drawDebug = false;
 
@@ -174,7 +181,17 @@ class Play extends Phaser.Scene {
             this.p2.toggleDebug();
         }); 
         //#endregion
+    }
 
+    levelStart(){
+
+        // << LEVEL SETUP >>
+        this.p1.echoActive = true;
+        // Create a new instance of LevelRoutine with the JSON file
+        const levelRoutine = new LevelRoutine(this, 'level_routine.json');
+
+        // Start the routine
+        levelRoutine.start();
     }
 
     toggleDebug(){

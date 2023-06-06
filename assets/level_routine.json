@@ -1,0 +1,15 @@
+[
+    {
+      "wait": 2,
+      "text": "Step 1: This is the first console text."
+    },
+    {
+      "wait": 3,
+      "text": "Step 2: This is the second console text."
+    },
+    {
+      "wait": 1,
+      "text": "Step 3: This is the third console text."
+    }
+  ]
+  

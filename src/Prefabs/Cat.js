@@ -1,6 +1,6 @@
 class Cat extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, id_type) {
-      super(scene, x, y, 'cat_idle');
+    constructor(scene, x, y, texture='cat_idle', id_type=0) {
+      super(scene, x, y, texture);
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.body.setImmovable(true);
@@ -51,15 +51,15 @@ class Cat extends Phaser.GameObjects.Sprite {
     }
 
     playIdle(id){
-        if (id == 1){ this.anims.play('violet_cat_idle', true); }
-        else if (id == 2){ this.anims.play('blue_cat_idle', true); }
+        if (id === 1){ this.anims.play('violet_cat_idle', true); }
+        else if (id === 2){ this.anims.play('blue_cat_idle', true); }
         else { this.anims.play('default_cat_idle', true); }
     }
 
     playWalk(id)
     {
-        if (id == 1){ this.anims.play('violet_cat_walk', true); }
-        else if (id == 2){ this.anims.play('blue_cat_walk', true); }
+        if (id === 1){ this.anims.play('violet_cat_walk', true); }
+        else if (id === 2){ this.anims.play('blue_cat_walk', true); }
     }
 
     submit(id)

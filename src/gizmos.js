@@ -36,11 +36,11 @@ class Gizmos {
     }
 
     //#region  [[ CIRCLE ]]
-    drawCircle(x, y, radius, color = 0xffffff, rotation = 0, lineWidth = 2) {
+    drawCircle(x, y, radius, color = 0xffffff, rotation = 0, lineWidth = 2, origin = 0) {
         if (!this.enabled) {return;}
 
         // draw circle
-        let circleConfig = new Phaser.Geom.Circle(x, y, radius);
+        let circleConfig = new Phaser.Geom.Circle(x, y, radius).setOrigin(origin);
         this.graphics.lineStyle(lineWidth, color, lineWidth);
         this.graphics.strokeCircleShape(circleConfig);
 
@@ -57,7 +57,7 @@ class Gizmos {
         this.drawLine(center, radiusPoint, color, lineWidth);
     }
 
-    drawCircleNoLine(x, y, radius, color = 0xffffff, rotation = 0, lineWidth = 2) {
+    drawCircleNoLine(x, y, radius, color = 0xffffff, rotation = 0, lineWidth = 2, origin = 0) {
         if (!this.enabled) {return;}
 
         // draw circle

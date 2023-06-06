@@ -1,12 +1,12 @@
 class CameraMovement {
-    constructor(scene) {
+    constructor(scene, p1, p2) {
         this.scene = scene;
         this.physics = scene.physics;
         this.cameras = scene.cameras;
         this.map = scene.map;
         this.currRoom;
-        this.p1 = scene.p1;
-        this.p2 = scene.p2;
+        this.p1 = p1;
+        this.p2 = p2;
 
         this.gizmos = new Gizmos(scene);
         this.gizmos.enabled = false;
@@ -44,22 +44,21 @@ class CameraMovement {
         this.camera2.setAlpha(0);
         //this.camera2.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
 
-        const violetEchoOverlayRect = this.scene.add.graphics();
-        violetEchoOverlayRect.fillStyle(global_colors.violet.int, 0.25); // Set the fill color and alpha
-        violetEchoOverlayRect.fillRect(0, 0, screen.width, screen.height);
-        violetEchoOverlayRect.setScrollFactor(0);
-        violetEchoOverlayRect.setDepth(globalDepth.playerEffects);
+        this.violetEchoOverlayRect = this.scene.add.graphics();
+        this.violetEchoOverlayRect.fillStyle(global_colors.violet.int, 0.35); // Set the fill color and default alpha
+        this.violetEchoOverlayRect.fillRect(0, 0, screen.width, screen.height);
+        this.violetEchoOverlayRect.setScrollFactor(0);
+        this.violetEchoOverlayRect.setDepth(globalDepth.playerEffects);
 
-        const blueEchoOverlayRect = this.scene.add.graphics();
-        blueEchoOverlayRect.fillStyle(global_colors.blue.int, 0.25); // Set the fill color and alpha
-        blueEchoOverlayRect.fillRect(0, 0, screen.width, screen.height);
-        blueEchoOverlayRect.setScrollFactor(0);
-        blueEchoOverlayRect.setDepth(globalDepth.playerEffects);
+        this.blueEchoOverlayRect = this.scene.add.graphics();
+        this.blueEchoOverlayRect.fillStyle(global_colors.blue.int, 0.35); // Set the fill color and default alpha
+        this.blueEchoOverlayRect.fillRect(0, 0, screen.width, screen.height);
+        this.blueEchoOverlayRect.setScrollFactor(0);
+        this.blueEchoOverlayRect.setDepth(globalDepth.playerEffects);
 
-
-        this.mainCamera.ignore([violetEchoOverlayRect, blueEchoOverlayRect]);
-        this.camera1.ignore([blueEchoOverlayRect]);
-        this.camera2.ignore([violetEchoOverlayRect]);
+        //this.mainCamera.ignore([this.violetEchoOverlayRect, this.blueEchoOverlayRect]);
+        this.camera1.ignore([this.blueEchoOverlayRect]);
+        this.camera2.ignore([this.violetEchoOverlayRect]);
 
     }
 
@@ -102,14 +101,28 @@ class CameraMovement {
         else {
 
             const playersInSameRoom = this.p1.currRoom.name === this.p2.currRoom.name;
-            const dualPlayerMovement =  this.p1.enabled && this.p2.enabled;
             
-            if (dualPlayerMovement === false)
+            if (this.dualPlayerMovement === false)
             {
+                //console.log("single player movement");
                 this.mainCameraTarget.setPosition( this.p1.x,  this.p1.y);
                 this.mainCamera.setAlpha(1);
+
+                let violetEchoAlphaTarget = 0;
+                let blueEchoAlphaTarget = 0;
+                const lerpAmount = 0.1;
+                if (this.p1.echoActive)
+                {
+                    violetEchoAlphaTarget = 1;
+                    blueEchoAlphaTarget = 0;
+                    this.blueEchoOverlayRect.setAlpha(0);
+                }
+                this.violetEchoOverlayRect.alpha = Phaser.Math.Linear(this.violetEchoOverlayRect.alpha, violetEchoAlphaTarget, lerpAmount);
+                this.blueEchoOverlayRect.alpha = Phaser.Math.Linear(this.blueEchoOverlayRect.alpha, blueEchoAlphaTarget, lerpAmount);
+
             }
-            else {
+            else 
+            {
                 const distance = Phaser.Math.Distance.Between(this.p1.x, this.p1.y, this.p2.x, this.p2.y, {x: 0, y: 0});
                 const thresholdDistance = 150;
                 const targetAlpha = (distance > thresholdDistance) && !playersInSameRoom ? 1 : 0;
@@ -130,7 +143,6 @@ class CameraMovement {
                     this.playerMidpoint = this.gizmos.calculateMidpoint({x: this.p1.x, y: this.p1.y}, {x: this.p2.x, y: this.p2.y});
                     this.mainCameraTarget.setPosition( this.playerMidpoint.x,  this.playerMidpoint.y);
                 }
-
                 // << SPLITSCREEN VIEW >>
                 else {
                     this.splitscreen = true;

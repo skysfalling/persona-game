@@ -178,13 +178,12 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
 
             console.log("<3 HEART -> player removed: " + player.name);
 
-            // change colore to connected player color
+            // change color to connected player color
             if (this.connectedPlayers.length > 0) 
             {
                 this.id_type = this.connectedPlayers[0].playerID;
             }
-            else { this.id_type = 0; }
-            this.playSpinAnim(player.playerID);
+            this.playSpinAnim();
         }
     }
 
@@ -203,8 +202,9 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
-    playSpinAnim(id)
+    playSpinAnim()
     {
+        let id = this.id_type;
         if (id === 1) {        
             this.anims.play('violet_spin');
         }
