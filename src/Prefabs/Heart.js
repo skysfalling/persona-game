@@ -3,7 +3,7 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.body.setSize(this.width, this.height)
+        this.body.setSize(this.width/2, this.height/2)
 
         // Create the overlap trigger
         this.overlapTrigger = scene.add.zone(x, y).setSize(this.width*3, this.height*3);

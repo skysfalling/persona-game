@@ -84,18 +84,24 @@ class CameraMovement {
         else {
 
             const playersInSameRoom = this.p1.currRoom.name === this.p2.currRoom.name;
+            const dualPlayerMovement =  this.p1.enabled && this.p2.enabled;
+            
+            if (dualPlayerMovement === false)
+            {
+                this.mainCameraTarget.setPosition( this.p1.x,  this.p1.y);
+            }
             // if in same room
-            if (playersInSameRoom) {
+            else if (playersInSameRoom && dualPlayerMovement) {
                 this.playerMidpoint = this.gizmos.calculateMidpoint({x: this.p1.x, y: this.p1.y}, {x: this.p2.x, y: this.p2.y});
                 this.mainCameraTarget.setPosition( this.playerMidpoint.x,  this.playerMidpoint.y);
             }
-            else
+            else if (playersInSameRoom === false && dualPlayerMovement)
             {
                 const distance = Phaser.Math.Distance.Between(this.p1.x, this.p1.y, this.p2.x, this.p2.y, {x: 0, y: 0});
-                const thresholdDistance = 250;
+                const thresholdDistance = 150;
                 const targetAlpha = distance > thresholdDistance ? 1 : 0;
                 const targetAlpha_inverse = distance > thresholdDistance ? 0 : 1;
-                const lerpAmount = 0.1; 
+                const lerpAmount = 0.05; 
         
                 this.mainCamera.alpha = Phaser.Math.Linear(this.mainCamera.alpha, targetAlpha_inverse, lerpAmount);
                 this.camera1.alpha = Phaser.Math.Linear(this.camera1.alpha, targetAlpha, lerpAmount);

@@ -4,6 +4,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
 
+        this.enabled = true;
+
+
         // input references
         this.cursors = scene.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.UP,
@@ -56,7 +59,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.ui_offset = this.width;
 
         // - movement -------------------------------------------------------//>>
-        this.disable = false;
         this.moveSpeed = 100;
         this.currMoveSpeed = this.moveSpeed;
         this.inverted = invertedMove;
@@ -393,9 +395,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     handleMovement() {
 
         // disable movement until idle again
-        if (this.disable)
+        if (this.enabled == false)
         {
             this.currMoveSpeed = 0;
+            this.movementStates.IDLE.enter();
             return;
         }
         else {

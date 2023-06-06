@@ -21,10 +21,11 @@ class Play extends Phaser.Scene {
         });
 
 
-        this.load.spritesheet('campfire', 'campfire.png', {frameWidth: 16, frameHeight: 16 });
-        this.load.spritesheet('cat_idle', 'cat_idle.png', {frameWidth: 16, frameHeight: 16 });
-        this.load.spritesheet('cat_walk', 'cat_walk_cycle.png', {frameWidth: 16, frameHeight: 16 });
-        this.load.spritesheet('heart', 'heart.png', {frameWidth: 16, frameHeight: 16 });
+        // Load Spritesheets
+        this.load.spritesheet('campfire', 'sprites/campfire.png', {frameWidth: 16, frameHeight: 16 });
+        this.load.spritesheet('cat_idle', 'sprites/cat_idle.png', {frameWidth: 16, frameHeight: 16 });
+        this.load.spritesheet('cat_walk', 'sprites/cat_walk_cycle.png', {frameWidth: 16, frameHeight: 16 });
+        this.load.spritesheet('heart', 'sprites/heart.png', {frameWidth: 16, frameHeight: 16 });
 
         this.physics.add.existing(this);
         this.gizmos = new Gizmos(this);
@@ -65,6 +66,8 @@ class Play extends Phaser.Scene {
 
         const p2Spawn = this.map.findObject("player_spawn", obj => obj.name === "p2spawn");
         this.p2 = new Player(this, p2Spawn.x, p2Spawn.y, 'blue', 2, true);
+        this.p2.enabled = false;
+        this.p2.setVisible(false);
 
         this.playerObjs = [this.p1, this.p2];
         // #endregion
@@ -72,10 +75,11 @@ class Play extends Phaser.Scene {
         // #region [[ CREATE OBJECTS ]] --------------------------------------------------------------//>>
         this.interactObjects = this.add.group();
 
-        // Create the custom sprite using the specified settings
+        // (( HEARTS ))
         const objSpawn = this.map.findObject("interaction", obj => obj.name === "heart");
         this.heart = new Heart(this, objSpawn.x, objSpawn.y, 'heart');
 
+        // (( CAMPFIRES ))
         this.campfires = this.add.group();
         const campfire_positions = this.map.filterObjects("interaction", obj => obj.name === "campfire");
         campfire_positions.forEach(campfire => {
@@ -83,8 +87,7 @@ class Play extends Phaser.Scene {
             this.campfires.add(new_campfire);
         });
 
-
-        //-- << CREATE CATS >> -----------------------------------------------------
+        // (( CREATE CATS ))
         this.cats = this.add.group();
         const cat_positions = this.map.filterObjects("interaction", obj => obj.name === "cat");
         const cat_exits = this.map.filterObjects("interaction", obj => obj.name === "cat_exit");
@@ -102,6 +105,17 @@ class Play extends Phaser.Scene {
             console.warn(`No corresponding cat_exit object found for cat with exit_id: ${exitId}`);
           }
         });
+
+        // (( CREATE HIDDEN OBJECTS ))
+        const hiddenObjectPositions = this.map.filterObjects("violet_echos", obj => obj.name === "heart");
+
+        this.violet_echos = this.add.group();
+        hiddenObjectPositions.forEach(hiddenObject => {
+            const newHiddenObject = new HiddenObject(this, hiddenObject.x, hiddenObject.y, "heart");
+            console.log("new hidden object : " + newHiddenObject.name);
+            this.violet_echos.add(newHiddenObject);
+        });
+
         // #endregion
 
         // #region [[ CREATE COLLISIONS ]] --------------------------------------------------------------//>>
@@ -183,6 +197,10 @@ class Play extends Phaser.Scene {
         this.p2.update();
         this.heart.update();
 
+        this.violet_echos.children.iterate(hiddenObject => {
+            hiddenObject.update(this.p1);
+        });
+
         this.gizmos.clear();
         this.gizmos.drawLine({x: this.p1.x, y: this.p1.y}, {x: this.p2.x, y: this.p2.y}, 0xff00ff, 1);
 
@@ -222,7 +240,7 @@ class PlayUI extends Phaser.Scene {
           ];
           
         const testDialogue = new Dialogue(this, 2, textList);
-        testDialogue.start();
+        //testDialogue.start();
         // #endregion
     }
 }
