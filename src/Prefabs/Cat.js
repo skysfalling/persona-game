@@ -16,36 +16,60 @@ class Cat extends Phaser.GameObjects.Sprite {
     }
 
     setupAnimations() {
+
+        // #region IDLE ANIMATIONS
         this.scene.anims.create({
-            key: 'default_cat_idle',
+            key: 'violet_cat_idle',
             frames: this.anims.generateFrameNumbers('cat_idle', { start: 0, end: 9 }),
             frameRate: 4,
             repeat: -1
         });
         this.scene.anims.create({
-            key: 'violet_cat_idle',
+            key: 'blue_cat_idle',
             frames: this.anims.generateFrameNumbers('cat_idle', { start: 10, end: 19 }),
             frameRate: 4,
             repeat: -1
         });
         this.scene.anims.create({
-            key: 'blue_cat_idle',
+            key: 'black_cat_idle',
             frames: this.anims.generateFrameNumbers('cat_idle', { start: 20, end: 29 }),
             frameRate: 4,
             repeat: -1
         });
         this.scene.anims.create({
+            key: 'white_cat_idle',
+            frames: this.anims.generateFrameNumbers('cat_idle', { start: 30, end: 39 }),
+            frameRate: 4,
+            repeat: -1
+        });
+        // #endregion
+
+        // #region WALK ANIMATIONS
+        this.scene.anims.create({
             key: 'violet_cat_walk',
-            frames: this.anims.generateFrameNumbers('cat_walk', { start: 4, end: 8 }),
+            frames: this.anims.generateFrameNumbers('cat_walk', { start: 0, end: 3 }),
             frameRate: 4,
             repeat: -1
         });
         this.scene.anims.create({
             key: 'blue_cat_walk',
-            frames: this.anims.generateFrameNumbers('cat_walk', { start: 0, end: 3 }),
+            frames: this.anims.generateFrameNumbers('cat_walk', { start: 4, end: 7 }),
             frameRate: 4,
             repeat: -1
         });
+        this.scene.anims.create({
+            key: 'black_cat_walk',
+            frames: this.anims.generateFrameNumbers('cat_walk', { start: 8, end: 11 }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.scene.anims.create({
+            key: 'white_cat_walk',
+            frames: this.anims.generateFrameNumbers('cat_walk', { start: 12, end: 15 }),
+            frameRate: 4,
+            repeat: -1
+        });
+        //#endregion
 
         this.playIdle(this.id_type);
     }

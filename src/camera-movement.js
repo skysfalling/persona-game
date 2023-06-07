@@ -49,12 +49,14 @@ class CameraMovement {
         this.violetEchoOverlayRect.fillRect(0, 0, screen.width, screen.height);
         this.violetEchoOverlayRect.setScrollFactor(0);
         this.violetEchoOverlayRect.setDepth(globalDepth.playerEffects);
+        this.violetEchoOverlayRect.setAlpha(0);
 
         this.blueEchoOverlayRect = this.scene.add.graphics();
         this.blueEchoOverlayRect.fillStyle(global_colors.blue.int, 0.35); // Set the fill color and default alpha
         this.blueEchoOverlayRect.fillRect(0, 0, screen.width, screen.height);
         this.blueEchoOverlayRect.setScrollFactor(0);
         this.blueEchoOverlayRect.setDepth(globalDepth.playerEffects);
+        this.blueEchoOverlayRect.setAlpha(0);
 
         //this.mainCamera.ignore([this.violetEchoOverlayRect, this.blueEchoOverlayRect]);
         this.camera1.ignore([this.blueEchoOverlayRect]);
@@ -101,16 +103,19 @@ class CameraMovement {
         else {
 
             const playersInSameRoom = this.p1.currRoom.name === this.p2.currRoom.name;
-            
+            //console.log("Players in room " + playersInSameRoom);
+
             if (this.dualPlayerMovement === false)
             {
                 //console.log("single player movement");
-                this.mainCameraTarget.setPosition( this.p1.x,  this.p1.y);
+                const lerpAmount = 0.1;
+                this.mainCameraTarget.x = Phaser.Math.Linear(this.mainCameraTarget.x, this.p1.x, lerpAmount);
+                this.mainCameraTarget.y = Phaser.Math.Linear(this.mainCameraTarget.y, this.p1.y, lerpAmount);
                 this.mainCamera.setAlpha(1);
 
                 let violetEchoAlphaTarget = 0;
                 let blueEchoAlphaTarget = 0;
-                const lerpAmount = 0.1;
+                const alphaLerpAmount = 0.1;
                 
                 if (this.p1.echoActive)
                 {
@@ -118,8 +123,8 @@ class CameraMovement {
                     blueEchoAlphaTarget = 0;
                     this.blueEchoOverlayRect.setAlpha(0);
                 }
-                this.violetEchoOverlayRect.alpha = Phaser.Math.Linear(this.violetEchoOverlayRect.alpha, violetEchoAlphaTarget, lerpAmount);
-                this.blueEchoOverlayRect.alpha = Phaser.Math.Linear(this.blueEchoOverlayRect.alpha, blueEchoAlphaTarget, lerpAmount);
+                this.violetEchoOverlayRect.alpha = Phaser.Math.Linear(this.violetEchoOverlayRect.alpha, violetEchoAlphaTarget, alphaLerpAmount);
+                this.blueEchoOverlayRect.alpha = Phaser.Math.Linear(this.blueEchoOverlayRect.alpha, blueEchoAlphaTarget, alphaLerpAmount);
 
             }
             else 
@@ -131,8 +136,13 @@ class CameraMovement {
                 const lerpAmount = 0.1; 
         
                 this.mainCamera.alpha = Phaser.Math.Linear(this.mainCamera.alpha, targetAlpha_inverse, lerpAmount);
+
                 this.camera1.alpha = Phaser.Math.Linear(this.camera1.alpha, targetAlpha, lerpAmount);
+                this.violetEchoOverlayRect.alpha = Phaser.Math.Linear(this.violetEchoOverlayRect.alpha, targetAlpha, lerpAmount);
+
+
                 this.camera2.alpha = Phaser.Math.Linear(this.camera2.alpha, targetAlpha, lerpAmount);
+                this.blueEchoOverlayRect.alpha = Phaser.Math.Linear(this.blueEchoOverlayRect.alpha, targetAlpha, lerpAmount);
 
                 this.p1.echoActive = this.splitscreen;
                 this.p2.echoActive = this.splitscreen;

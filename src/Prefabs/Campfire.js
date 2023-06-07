@@ -35,7 +35,6 @@ class Campfire extends Phaser.GameObjects.Sprite {
     }
 
     connectPlayer(player) {
-
         if (this.connectedPlayer)
         {
             this.disconnectPlayer(this.connectedPlayer);
@@ -48,6 +47,8 @@ class Campfire extends Phaser.GameObjects.Sprite {
         if (this.connectedPlayer.playerID == 1) { this.anims.play('campfire_violet_loop', true); }
         else if (this.connectedPlayer.playerID == 2) { this.anims.play('campfire_blue_loop', true); }
         else { this.anims.play('campfire_loop', true); }
+
+        console.log("connect player campfire");
     }
 
     disconnectPlayer(player) {
@@ -56,6 +57,7 @@ class Campfire extends Phaser.GameObjects.Sprite {
         this.connectedPlayer = null;
 
         this.anims.play('campfire_loop', true);
+        console.log(this.name + " disconnected " + this.player);
     }
 }
   

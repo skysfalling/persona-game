@@ -31,42 +31,70 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         this.speed = 100;
 
         //#region -- animations ---------------------------------------------
+
+        //#region WHITE HEART -------
         this.scene.anims.create({
-            key: 'default_loop',
-            frames: this.anims.generateFrameNumbers('heart', { start: 0, end: 5 }),
+            key: 'white_loop',
+            frames: this.anims.generateFrameNumbers('heart', { start: 0, end: 7 }),
             frameRate: 4,
             repeat: -1
         });
         this.scene.anims.create({
-            key: 'default_spin',
-            frames: this.anims.generateFrameNumbers('heart', { start: 7, end: 12 }),
+            key: 'white_spin',
+            frames: this.anims.generateFrameNumbers('heart', { start: 8, end: 13 }),
             frameRate: 12,
             repeat: 0
         });
         this.scene.anims.create({
+            key: 'white_break',
+            frames: this.anims.generateFrameNumbers('heart', { start: 14, end: 29 }),
+            frameRate: 12,
+            repeat: 0
+        });
+        // #endregion
+
+        //#region VIOLET HEART -------
+        this.scene.anims.create({
             key: 'violet_loop',
-            frames: this.anims.generateFrameNumbers('heart', { start: 14, end: 18 }),
+            frames: this.anims.generateFrameNumbers('heart', { start: 30, end: 37 }),
             frameRate: 4,
             repeat: -1
         });
         this.scene.anims.create({
             key: 'violet_spin',
-            frames: this.anims.generateFrameNumbers('heart', { start: 21, end: 26 }),
+            frames: this.anims.generateFrameNumbers('heart', { start: 38, end: 43 }),
             frameRate: 12,
             repeat: 0
         });
         this.scene.anims.create({
+            key: 'violet_break',
+            frames: this.anims.generateFrameNumbers('heart', { start: 44, end: 59 }),
+            frameRate: 12,
+            repeat: 0
+        });
+        // #endregion
+
+        //#region BLUE HEART -------
+        this.scene.anims.create({
             key: 'blue_loop',
-            frames: this.anims.generateFrameNumbers('heart', { start: 28, end: 32 }),
+            frames: this.anims.generateFrameNumbers('heart', { start: 60, end: 67 }),
             frameRate: 4,
             repeat: -1
         });
         this.scene.anims.create({
             key: 'blue_spin',
-            frames: this.anims.generateFrameNumbers('heart', { start: 35, end: 40 }),
+            frames: this.anims.generateFrameNumbers('heart', { start: 68, end: 73 }),
             frameRate: 12,
             repeat: 0
         });
+        this.scene.anims.create({
+            key: 'blue_break',
+            frames: this.anims.generateFrameNumbers('heart', { start: 74, end: 89 }),
+            frameRate: 12,
+            repeat: 0
+        });
+        // #endregion
+
         // #endregion
         this.playLoopAnim();
   
@@ -143,7 +171,8 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
 
     connectPlayer(player) {
 
-        if (this.hiddenObject.hidden) { return;}
+        if (this.hiddenObject && this.hiddenObject.hidden) { return;}
+        if (player.currAbilityState.name === "none") { return;}
 
         // Check if the player already exists in the array
         const playerExists = this.connectedPlayers.some(p => p === player);
@@ -198,7 +227,7 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         }
         else
         {
-            this.anims.play('default_loop');
+            this.anims.play('white_loop');
         }
     }
 
@@ -211,9 +240,8 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         else if (id === 2) {        
             this.anims.play('blue_spin');
         }
-        else
-        {
-            this.anims.play('default_spin');
+        else {
+            this.anims.play('white_spin');
         }
 
         this.on('animationcomplete', this.playLoopAnim);

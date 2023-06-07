@@ -6,7 +6,8 @@ class Play extends Phaser.Scene {
     preload() {
         // load assets
         this.load.path = "./assets/";
-        this.load.image("1bit_tiles", "tilemap/persona-tileset.png");    // tile sheet
+        this.load.image("tiles", "tilemap/whispering_pines_tileset.png");    // tile sheet
+        this.load.image("persona", "tilemap/persona-tileset.png");    // tile sheet
 
         this.load.tilemapTiledJSON("map", "tilemap/whispering_pines_01.json");    // Tiled JSON file
 
@@ -23,7 +24,7 @@ class Play extends Phaser.Scene {
         // Load Spritesheets
         this.load.spritesheet('campfire', 'sprites/campfire.png', {frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('cat_idle', 'sprites/cat_idle.png', {frameWidth: 16, frameHeight: 16 });
-        this.load.spritesheet('cat_walk', 'sprites/cat_walk_cycle.png', {frameWidth: 16, frameHeight: 16 });
+        this.load.spritesheet('cat_walk', 'sprites/cat_walk.png', {frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('heart', 'sprites/heart.png', {frameWidth: 16, frameHeight: 16 });
 
         this.physics.add.existing(this);
@@ -43,15 +44,18 @@ class Play extends Phaser.Scene {
         // #region [[ SETUP TILEMAP ]] --------------------------------------------------------------//>>
         // add a tile map
         this.map = this.add.tilemap("map"); 
-        const tileset = this.map.addTilesetImage("persona", "1bit_tiles");
-        const inverse_tileset = this.map.addTilesetImage("monochrome_inverse", "1bit_tiles");
+        const tileset = this.map.addTilesetImage("whispering_pines_tileset", "tiles");
+        const persona = this.map.addTilesetImage("persona", "persona");
 
         // setup tilemap layers
         const backgroundLayer = this.map.createLayer("background", tileset, 0, 0).setPipeline('Light2D');
         backgroundLayer.setDepth(globalDepth.background);
 
-        const backgroundEnvLayer = this.map.createLayer("background_env", tileset, 0, 0).setPipeline('Light2D');
-        backgroundLayer.setDepth(globalDepth.env_background);
+        const backgroundEnvLayer = this.map.createLayer("background_env", persona, 0, 0).setPipeline('Light2D');
+        backgroundEnvLayer.setDepth(globalDepth.env_background);
+
+        const backgroundEnvLayer2 = this.map.createLayer("background_env2", tileset, 0, 0).setPipeline('Light2D');
+        backgroundEnvLayer2.setDepth(globalDepth.env_background);
 
         const collisionLayer = this.map.createLayer("collision", tileset, 0, 0).setPipeline('Light2D');
         backgroundLayer.setDepth(globalDepth.env_background);
@@ -69,8 +73,8 @@ class Play extends Phaser.Scene {
 
         const p2Spawn = this.map.findObject("player_spawn", obj => obj.name === "p2spawn");
         this.p2 = new Player(this, p2Spawn.x, p2Spawn.y, 'blue', 2, true);
-        this.p2.enableMove = false;
-        this.p2.setVisible(false);
+        //this.p2.enableMove = false;
+        //this.p2.setVisible(false);
         //this.p2.setAlpha(0.5);
 
         this.playerObjs = [this.p1, this.p2];
@@ -78,10 +82,7 @@ class Play extends Phaser.Scene {
 
         // #region [[ SETUP CAMERA MOVEMENT]] --------------------------------------------------------------//>>
         this.cameraMovement = new CameraMovement(this, this.p1, this.p2);
-        this.cameraMovement.setup();
-        this.cameraMovement.dualPlayerMovement = false;
-
-        
+        this.cameraMovement.setup();        
 
         // Define a key to toggle editor mode
         /*
@@ -95,8 +96,12 @@ class Play extends Phaser.Scene {
         this.interactObjects = this.add.group();
 
         // (( HEARTS ))
-        const objSpawn = this.map.findObject("interaction", obj => obj.name === "heart");
-        this.heart = new Heart(this, objSpawn.x, objSpawn.y, 'heart', this.p1);
+        this.hearts = this.add.group();
+        const heart_positions = this.map.filterObjects("interaction", obj => obj.name === "heart");
+        heart_positions.forEach(heart => {
+            const new_heart = new Heart(this, heart.x, heart.y, 'heart', null);
+            this.hearts.add(new_heart);
+        });
 
         // (( CAMPFIRES ))
         this.campfires = this.add.group();
@@ -116,7 +121,7 @@ class Play extends Phaser.Scene {
           const correspondingExit = cat_exits.find(exit => exit.properties.exit_id === exitId);
         
           if (correspondingExit) {
-            const new_cat = new Cat(this, cat.x, cat.y, 'cat_idle', cat.properties[1].value);
+            const new_cat = new Cat(this, cat.x, cat.y, 'cat_idle', cat.properties.id_type);
             new_cat.correspondingExit = correspondingExit;
             this.cats.add(new_cat);
 
@@ -145,19 +150,27 @@ class Play extends Phaser.Scene {
         this.collisionHandler.collideWithCollisionLayer(this.p2, collisionLayer);
         this.collisionHandler.playerOverlap(this.p1, this.p2);
         // - player object connections --------------------------------------------------------
-        this.collisionHandler.playerOverlapConnection(this.p1, this.heart);
-        this.collisionHandler.playerOverlapConnection(this.p2, this.heart);
+
         this.collisionHandler.playerOverlapConnection(this.p1, this.campfires);
         this.collisionHandler.playerOverlapConnection(this.p2, this.campfires);
         // - object collision --------------------------------------------------------
-        this.collisionHandler.collideWithCollisionLayer(this.heart, collisionLayer);
-        this.collisionHandler.heartObjectCollision(this.playerObjs, this.heart);
+        
+        this.collisionHandler.collideWithCollisionLayer(this.hearts, collisionLayer);
+        this.collisionHandler.heartObjectCollision(this.playerObjs, this.hearts);
         this.collisionHandler.objectCollision(this.playerObjs, this.campfires);
         this.collisionHandler.objectCollision(this.playerObjs, this.cats);
         // - object overlap --------------------------------------------------------
-        this.collisionHandler.objectOverlapTrigger(this.heart, this.cats, (heart, cat) => {
-            cat.submit(this.heart.id_type);
+        this.hearts.children.iterate(heartObj => {
+            this.collisionHandler.playerOverlapConnection(this.p1, heartObj);
+            this.collisionHandler.playerOverlapConnection(this.p2, heartObj);
+
+            // interact with cats
+            this.collisionHandler.objectOverlapTrigger(heartObj , this.cats, (heart, cat) => {
+                cat.submit(heartObj.id_type);
+            });
         });
+
+
 
         // #endregion
 
@@ -181,19 +194,6 @@ class Play extends Phaser.Scene {
             this.p2.toggleDebug();
         }); 
         //#endregion
-
-        this.levelStart();
-    }
-
-    levelStart(){
-
-        // << LEVEL SETUP >>
-        this.p1.echoActive = true;
-        // Create a new instance of LevelRoutine with the JSON file
-        const levelRoutine = new LevelRoutine(this, 'level_routine.json');
-
-        // Start the routine
-        levelRoutine.start();
     }
 
     toggleDebug(){
@@ -211,7 +211,10 @@ class Play extends Phaser.Scene {
     {
         this.p1.update();
         this.p2.update();
-        this.heart.update();
+
+        this.hearts.children.iterate(heart => {
+            heart.update();
+        });
 
         this.violet_echos.children.iterate(hiddenObject => {
             hiddenObject.update(this.p1);
@@ -248,15 +251,12 @@ class PlayUI extends Phaser.Scene {
     }
 
     create () {
-        // #region -- [[ SETUP DIALOGUE ]] --------------------------------------------------------------//>>
-        const textList = [
-            "The game spaces represent various psychological states and dilemmas. Players must navigate these spaces, confronting and overcoming fears represented by different scenes.",
-            "The main player action involves moving through these spaces and finding the correct path, which often requires coordinating the movements of Blue and Violet.",
-            "This is line 3."
-          ];
-          
-        const testDialogue = new Dialogue(this, 2, textList);
-        //testDialogue.start();
-        // #endregion
+
+        // << LEVEL SETUP >>
+        // Create a new instance of LevelRoutine with the JSON file
+        const levelRoutine = new LevelRoutine(this, '/assets/level_routine.json');
+
+        // Start the routine
+        levelRoutine.start();
     }
 }

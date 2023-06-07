@@ -317,7 +317,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 update: () => {
                     this.tetherBubble.currSize = 0;
 
-                    if (Phaser.Input.Keyboard.JustDown(this.ability_cursor) && this.enableMove) {
+
+
+                    if (Phaser.Input.Keyboard.JustDown(this.ability_cursor)) {
                         this.abilityStates.TETHER_BUBBLE.enter();
                     }
                 }
@@ -337,7 +339,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 update: () => {
                     this.tetherBubble.currSize = this.tetherBubble.maxSize;
 
-                    if (Phaser.Input.Keyboard.JustUp(this.ability_cursor)) {
+                    if (Phaser.Input.Keyboard.JustUp(this.ability_cursor) ) {
                         this.abilityStates.NONE.enter();
                     }
                 }
@@ -353,6 +355,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.setFacingDirection();
 
         this.currAbilityState.update();
+        //console.log(this.playerID + " " + this.currAbilityState.name);
 
         // [[ UPDATE POSITIONS ]------------------------------------------------]
         this.overlapTrigger.setPosition(this.x, this.y);
@@ -385,7 +388,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         let newroom = this.scene.roomHandler.getCurrentRoom(this);
-        if (newroom != this.currRoom)
+        if (newroom && newroom != this.currRoom)
         {
             this.currRoom = newroom;
             console.log(this.name + " " + this.currRoom.name);

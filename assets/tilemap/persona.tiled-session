@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "whispering_pines_01.json",
+    "activeFile": "map1.json",
     "expandedProjectPaths": [
         "."
     ],
@@ -12,12 +12,13 @@
             "scaleInDock": 1.5,
             "scaleInEditor": 1
         },
-        "#persona": {
-            "scaleInDock": 1
-        },
         "cat_idle.tsx": {
             "scaleInDock": 5.5,
             "scaleInEditor": 8
+        },
+        "heart.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 3
         },
         "map1.json": {
             "expandedObjectLayers": [
@@ -27,8 +28,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 242.5,
-                "y": 185
+                "x": -10.5,
+                "y": 81
             }
         },
         "map1.json#character-sheet": {
@@ -44,8 +45,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 161,
-                "y": 161
+                "x": -87.5,
+                "y": 243
             }
         },
         "map1.tmx#character-sheet": {
@@ -56,16 +57,16 @@
         },
         "map2.json": {
             "expandedObjectLayers": [
-                3,
+                5,
                 7,
-                4,
-                5
+                3,
+                4
             ],
             "scale": 1,
-            "selectedLayer": 3,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 584,
-                "y": 286.5
+                "x": 208,
+                "y": 344
             }
         },
         "map2.json#heart": {
@@ -76,17 +77,14 @@
             "scaleInEditor": 1
         },
         "map2.json#persona": {
-            "scaleInDock": 0.75
+            "scaleInDock": 3
         },
         "map2.tmx": {
-            "expandedObjectLayers": [
-                4
-            ],
-            "scale": 1,
-            "selectedLayer": 3,
+            "scale": 0.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 606,
-                "y": 253.5
+                "x": 194,
+                "y": 262
             }
         },
         "map2.tmx#monochrome_inverse": {
@@ -97,7 +95,7 @@
             "scaleInEditor": 1
         },
         "map2.tmx#persona": {
-            "scaleInDock": 1,
+            "scaleInDock": 1.5,
             "scaleInEditor": 1
         },
         "monochrome.tsx": {
@@ -140,68 +138,68 @@
         "whispering_pines_01.json": {
             "expandedObjectLayers": [
                 6,
-                5
+                5,
+                7
             ],
             "scale": 3,
-            "selectedLayer": 4,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 398,
-                "y": 513.1666666666666
+                "x": 402.3333333333333,
+                "y": 516.6666666666666
             }
         },
         "whispering_pines_01.json#persona": {
-            "scaleInDock": 1.5
+            "scaleInDock": 1
+        },
+        "whispering_pines_01.json#whispering_pines_tileset": {
+            "scaleInDock": 3
         },
         "whispering_pines_01.tmx": {
             "expandedObjectLayers": [
                 6,
-                7,
-                5
+                5,
+                7
             ],
             "scale": 2,
-            "selectedLayer": 4,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 443,
-                "y": 613.25
+                "x": 567.5,
+                "y": 541.5
             }
         },
         "whispering_pines_01.tmx#persona": {
             "scaleInDock": 1
         }
     },
-    "last.exportedFilePath": "/Users/theocasey/Desktop/persona-game/assets/tilemap",
+    "last.exportedFilePath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/tilemap",
     "last.externalTilesetPath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/tilemap",
     "last.imagePath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/tilemap",
     "map.fixedSize": true,
     "map.height": 100,
-    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedExportFilter": "All Files (*)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "map.width": 100,
     "openFiles": [
         "map1.json",
-        "map1.tmx",
-        "map2.tmx",
-        "map2.json",
-        "whispering_pines_01.tmx",
-        "whispering_pines_01.json"
+        "map1.tmx"
     ],
     "project": "persona.tiled-project",
     "property.type": "int",
     "recentFiles": [
-        "map1.json",
-        "map1.tmx",
-        "map2.tmx",
-        "map2.json",
-        "whispering_pines_01.tmx",
         "whispering_pines_01.json",
-        "persona.tsx",
+        "whispering_pines_01.tmx",
+        "heart.tsx",
+        "map2.json",
+        "map2.tmx",
         "cat_idle.tsx",
+        "persona.tsx",
+        "map1.tmx",
+        "map1.json",
         "monochrome_packed.tsx",
         "tilemap01.json",
-        "tilemap01.tmx",
-        "monochrome.tsx"
+        "tilemap01.tmx"
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",

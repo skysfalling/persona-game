@@ -33,12 +33,12 @@ class DialogueManager {
         this.isTyping = false;
 
         // -- create skip prompt --------------------------------------------------------
-        this.skipPromptText = scene.add.bitmapText(this.origin.x, this.origin.y + this.screenMargin*0.9, 'awasete', "<< spacebar to skip >>", 16);
+        this.skipPromptText = scene.add.bitmapText(this.origin.x, this.origin.y - this.screenMargin, 'awasete', "<< spacebar to skip >>", 16);
         this.skipPromptText.setScrollFactor(0);
         this.skipPromptText.setDepth(globalDepth.ui + 1);
         this.skipPromptText.setScale(0.5);
         this.skipPromptText.setOrigin(0.5);
-        this.skipPromptText.setTint(0x555555);
+        this.skipPromptText.setTint(0xffffff);
 
         // -- create profile image --------------------------------------------------------
         this.currentProfile = "violet";
@@ -197,6 +197,14 @@ class Dialogue {
         if (this.currentLineIndex >= this.textList.length) {
             this.dialogueManager.hide();
             console.log("DIALOGUE :: << END OF DIALOGUE >>");
+
+            // Call the onComplete callback if it is defined
+            if (typeof this.onCompleteCallback === 'function') {
+                this.dialogueManager.typingEvent.destroy(); // Stop the typing event
+                this.profileSwtichEvent.destroy();
+                this.onCompleteCallback();
+            }
+
             return;
         }
 
@@ -215,11 +223,10 @@ class Dialogue {
 
     }
 
-    
     // -- [[ CHARACTER PROFILE ]] ----------------------------------------------------
     randomSwitchProfileFrame(image, minFrame, maxFrame) {        
         // start random animation loop
-        this.scene.time.addEvent({
+        this.profileSwtichEvent = this.scene.time.addEvent({
           delay: Phaser.Math.Between(100, 300), // random frame duration
           callback: () => {
             // choose the first frame 80% of the time
@@ -230,6 +237,20 @@ class Dialogue {
           callbackScope: this,
           loop: true
         });
+    }
+
+    onComplete(callback) {        
+        // Set the onComplete callback function
+        if (typeof callback === 'function') {
+          this.onCompleteCallback = callback;
+        }
+    }
+
+    destroy() {
+        this.dialogueManager.hide();
+        this.dialogueManager.typingEvent.destroy();
+        this.profileSwtichEvent.destroy();
+        this.scene.input.keyboard.off('keydown-SPACE');
     }
 }
   
