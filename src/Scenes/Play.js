@@ -181,6 +181,8 @@ class Play extends Phaser.Scene {
             this.p2.toggleDebug();
         }); 
         //#endregion
+
+        this.levelStart();
     }
 
     levelStart(){

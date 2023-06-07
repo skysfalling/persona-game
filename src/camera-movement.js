@@ -111,6 +111,7 @@ class CameraMovement {
                 let violetEchoAlphaTarget = 0;
                 let blueEchoAlphaTarget = 0;
                 const lerpAmount = 0.1;
+                
                 if (this.p1.echoActive)
                 {
                     violetEchoAlphaTarget = 1;
