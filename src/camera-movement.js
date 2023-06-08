@@ -139,8 +139,6 @@ class CameraMovement {
 
                 this.camera1.alpha = Phaser.Math.Linear(this.camera1.alpha, targetAlpha, lerpAmount);
                 this.violetEchoOverlayRect.alpha = Phaser.Math.Linear(this.violetEchoOverlayRect.alpha, targetAlpha, lerpAmount);
-
-
                 this.camera2.alpha = Phaser.Math.Linear(this.camera2.alpha, targetAlpha, lerpAmount);
                 this.blueEchoOverlayRect.alpha = Phaser.Math.Linear(this.blueEchoOverlayRect.alpha, targetAlpha, lerpAmount);
 
@@ -170,18 +168,21 @@ class CameraMovement {
                     this.camera2.height = screen.height;
     
                     // Follow the players with the cameras
-                    this.camera1.startFollow(this.p1, false, 1, 1, 0, 0);
-                    this.camera2.startFollow(this.p2, false, 1, 1, 0, 0);
-                    
+                    if (this.p1.x < this.p2.x){
+                        this.camera1.startFollow(this.p1, false, 1, 1, 0, 0);
+                        this.camera2.startFollow(this.p2, false, 1, 1, 0, 0);
+                    }
+                    else{
+                        this.camera2.startFollow(this.p1, false, 1, 1, 0, 0);
+                        this.camera1.startFollow(this.p2, false, 1, 1, 0, 0);
+                    }
+
+
                     // Adjust the camera bounds to the full map + screen size offset
                     this.camera1.setBounds(-screen.width, -screen.height, this.map.widthInPixels + screen.width , this.map.heightInPixels + screen.height);
                     this.camera2.setBounds(-screen.width, -screen.height, this.map.widthInPixels + screen.width, this.map.heightInPixels + screen.height);
                 }
-
             }
-
-
-
         }
     }
 

@@ -73,7 +73,7 @@ class Play extends Phaser.Scene {
 
         const p2Spawn = this.map.findObject("player_spawn", obj => obj.name === "p2spawn");
         this.p2 = new Player(this, p2Spawn.x, p2Spawn.y, 'blue', 2, true);
-        //this.p2.enableMove = false;
+        this.p2.enableMove = false;
         //this.p2.setVisible(false);
         //this.p2.setAlpha(0.5);
 
@@ -117,11 +117,13 @@ class Play extends Phaser.Scene {
         const cat_exits = this.map.filterObjects("interaction", obj => obj.name === "cat_exit");
         
         cat_positions.forEach(cat => {
+
+        
           const exitId = cat.properties.exit_id;
           const correspondingExit = cat_exits.find(exit => exit.properties.exit_id === exitId);
         
           if (correspondingExit) {
-            const new_cat = new Cat(this, cat.x, cat.y, 'cat_idle', cat.properties.id_type);
+            const new_cat = new Cat(this, cat.x, cat.y, 'cat_idle', cat.properties[1].value);
             new_cat.correspondingExit = correspondingExit;
             this.cats.add(new_cat);
 
@@ -257,6 +259,6 @@ class PlayUI extends Phaser.Scene {
         const levelRoutine = new LevelRoutine(this, '/assets/level_routine.json');
 
         // Start the routine
-        levelRoutine.start();
+        //levelRoutine.start();
     }
 }

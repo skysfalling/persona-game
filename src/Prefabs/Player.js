@@ -20,7 +20,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         // -- positions ----------------------------------------------------------------//>>
         this.x = x;
         this.y = y;
-        this.setOrigin(0.5);
+        this.setOrigin(0);
         this.body.setSize(this.width/2, this.height/2);
         this.setDepth(globalDepth.playArea);
 

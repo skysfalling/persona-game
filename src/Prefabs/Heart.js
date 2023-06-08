@@ -116,7 +116,7 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         this.connectedPlayers.forEach(player => {
             const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y);
 
-            if (distance > 50) { this.disconnectPlayer(player);}
+            if (distance > 100) { this.disconnectPlayer(player);}
         });
 
         this.overlapTrigger.setPosition(this.x, this.y);

@@ -9,7 +9,7 @@
     ],
     "fileStates": {
         "": {
-            "scaleInDock": 1.5,
+            "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "cat_idle.tsx": {
@@ -28,8 +28,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": -10.5,
-                "y": 81
+                "x": 297.5,
+                "y": 127.5
             }
         },
         "map1.json#character-sheet": {
@@ -45,8 +45,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": -87.5,
-                "y": 243
+                "x": -18.5,
+                "y": 238.5
             }
         },
         "map1.tmx#character-sheet": {
@@ -138,14 +138,14 @@
         "whispering_pines_01.json": {
             "expandedObjectLayers": [
                 6,
-                5,
-                7
+                7,
+                5
             ],
-            "scale": 3,
-            "selectedLayer": 2,
+            "scale": 1,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 402.3333333333333,
-                "y": 516.6666666666666
+                "x": 503.5,
+                "y": 531.5
             }
         },
         "whispering_pines_01.json#persona": {
@@ -173,7 +173,7 @@
     },
     "last.exportedFilePath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/tilemap",
     "last.externalTilesetPath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/tilemap",
-    "last.imagePath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/tilemap",
+    "last.imagePath": "/Users/theocasey/Desktop/persona-game/assets/tilemap",
     "map.fixedSize": true,
     "map.height": 100,
     "map.lastUsedExportFilter": "All Files (*)",
