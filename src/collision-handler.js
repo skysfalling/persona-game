@@ -58,22 +58,22 @@ class CollisionHandler {
         let playerVelocity = 10;
 
         if (direction == "left") {
-            player.setPosition(obj.x + positionOffset, player.y);
+            //player.setPosition(obj.x + positionOffset, player.y);
             player.setVelocity(playerVelocity, 0);
             obj.setVelocity(-velocity, 0);
         }
         else if (direction == "right") {
-            player.setPosition(obj.x - positionOffset, player.y);
+            //player.setPosition(obj.x - positionOffset, player.y);
             player.setVelocity(-playerVelocity, 0);
             obj.setVelocity(velocity, 0);
         }
         else if (direction == "up") {
-            player.setPosition(player.x, obj.y + obj.height);
+            //player.setPosition(player.x, obj.y + obj.height);
             player.setVelocity(0, playerVelocity);
             obj.setVelocity(0, -velocity);
         }
         else if (direction == "down") {
-            player.setPosition(player.x, obj.y - obj.height);
+            //player.setPosition(player.x, obj.y - obj.height);
             player.setVelocity(0, -playerVelocity);
             obj.setVelocity(0, velocity);
         }

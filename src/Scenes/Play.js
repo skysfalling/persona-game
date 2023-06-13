@@ -48,18 +48,24 @@ class Play extends Phaser.Scene {
         const persona = this.map.addTilesetImage("persona", "persona");
 
         // setup tilemap layers
-        const backgroundLayer = this.map.createLayer("background", tileset, 0, 0).setPipeline('Light2D');
-        backgroundLayer.setDepth(globalDepth.background);
+        const env_foregroundLayer = this.map.createLayer("env_foreground", tileset, 0, 0).setPipeline('Light2D');
+        env_foregroundLayer.setDepth(globalDepth.env_foreground);
+        console.log(env_foregroundLayer.depth);
 
-        const backgroundEnvLayer = this.map.createLayer("background_env", persona, 0, 0).setPipeline('Light2D');
-        backgroundEnvLayer.setDepth(globalDepth.env_background);
-
-        const backgroundEnvLayer2 = this.map.createLayer("background_env2", tileset, 0, 0).setPipeline('Light2D');
-        backgroundEnvLayer2.setDepth(globalDepth.env_background);
+        const env_backgroundLayer = this.map.createLayer("env_background", tileset, 0, 0).setPipeline('Light2D');
+        env_backgroundLayer.setDepth(globalDepth.env_background);
 
         const collisionLayer = this.map.createLayer("collision", tileset, 0, 0).setPipeline('Light2D');
-        backgroundLayer.setDepth(globalDepth.env_background);
+        collisionLayer.setDepth(globalDepth.env_background);
         collisionLayer.setCollisionByProperty({ collides: true });
+
+        const debugGraphics = this.add.graphics().setAlpha(0.75);
+        collisionLayer.renderDebug(debugGraphics, {
+            tileColor: null, // Color of non-colliding tiles
+            collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
+            faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
+        });
+        
 
         // create Room Handler from "rooms" object layer
         this.roomHandler = new RoomHandler(this, 'rooms');
@@ -120,12 +126,12 @@ class Play extends Phaser.Scene {
           const exitId = cat.properties.exit_id;
           const correspondingExit = cat_exits.find(exit => exit.properties.exit_id === exitId);
         
+          console.log('cat properties ' + JSON.stringify(cat.properties));
+
           if (correspondingExit) {
-            const new_cat = new Cat(this, cat.x, cat.y, 'cat_idle', cat.properties[1].value);
+            const new_cat = new Cat(this, cat.x, cat.y, 'cat_idle', cat.properties[1]);
             new_cat.correspondingExit = correspondingExit;
             this.cats.add(new_cat);
-
-            console.log('cat properties ' + JSON.stringify(cat.properties));
           } 
           else {
             console.warn(`No corresponding cat_exit object found for cat with exit_id: ${exitId}`);

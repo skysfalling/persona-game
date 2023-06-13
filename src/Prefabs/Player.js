@@ -349,6 +349,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
+
         this.pos = {x: this.x, y: this.y}; // update reference position for objects
         this.center_pos = { x: this.x + this.width/2, y: this.y + this.height/2 } //center position
         this.handleMovement();
@@ -385,7 +386,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
             // draw tether to objects
             let tetheredObjPos = {x: this.tetheredObject.x, y: this.tetheredObject.y};
-            this.gizmo_effects.drawLine(this.pos, tetheredObjPos, this.color, 1, 1);
+            this.gizmo_effects.drawLine(this.center_pos, tetheredObjPos, this.color, 1, 1);
         }
 
         let newroom = this.scene.roomHandler.getCurrentRoom(this);

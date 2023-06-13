@@ -4,9 +4,10 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.body.setSize(this.width/2, this.height/2)
+        this.setOrigin(0);
 
         // Create the overlap trigger
-        this.overlapTrigger = scene.add.zone(x, y).setSize(this.width*3, this.height*3);
+        this.overlapTrigger = scene.add.zone(x, y).setSize(this.width*2, this.height*2);
         scene.physics.add.existing(this.overlapTrigger);
         this.overlapTrigger.body.setAllowGravity(false);
         this.overlapTrigger.visible = false;
@@ -19,6 +20,7 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         this.name = "heart obj";
         this.id_type = 0;
         this.connectedPlayers = [];
+        this.prefix = "<3 HEART ->";
 
         // setup hidden object functionality
         this.playerEcho = playerEcho;
@@ -98,8 +100,8 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         // #endregion
         this.playLoopAnim();
   
-      // Add this sprite to the interactObjects group
-      scene.interactObjects.add(this);
+        // Add this sprite to the interactObjects group
+        scene.interactObjects.add(this);
     }
     
     update() {
@@ -156,10 +158,18 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
                     this.setVelocity(0);
                 }
             }
-            else if (this.connectedPlayers.length > 1 && distance <= 10)
+            else if (this.connectedPlayers.length > 1)
             {
-                this.setVelocityX( Phaser.Math.Linear(this.body.velocity.x, 0, 0.8));
-                this.setVelocityY( Phaser.Math.Linear(this.body.velocity.y, 0, 0.8));
+
+                if (distance < 10)
+                {
+                    this.setVelocityX(0);
+                    this.setVelocityY(0);
+                }
+                else if (distance < 25){
+                    this.setVelocityX( Phaser.Math.Linear(this.body.velocity.x, 0, 0.8));
+                    this.setVelocityY( Phaser.Math.Linear(this.body.velocity.y, 0, 0.8));
+                }
             }
             
         }
@@ -183,9 +193,17 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
             this.connectedPlayers.push(player);
             player.newTetheredObject(this);
 
-            console.log("<3 HEART -> new connected player: " + player.name);
-            this.id_type = player.playerID;
+            if (this.connectedPlayers.length > 1){
+                console.log(this.prefix + " connected to both players");
+                this.id_type = 0;
+            }
+            else
+            {
+                console.log(this.prefix + " new connected player: " + player.name);
+                this.id_type = player.playerID;
+            }
             this.playLoopAnim();
+
 
         }
     }
@@ -205,12 +223,16 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
             this.connectedPlayers.splice(playerIndex, 1);
             player.tetheredObject = null;
 
-            console.log("<3 HEART -> player removed: " + player.name);
+            console.log(this.prefix + " player removed: " + player.name);
 
             // change color to connected player color
             if (this.connectedPlayers.length > 0) 
             {
                 this.id_type = this.connectedPlayers[0].playerID;
+            }
+            else 
+            {
+                this.id_type = 0;
             }
             this.playSpinAnim();
         }
