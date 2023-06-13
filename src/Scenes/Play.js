@@ -72,8 +72,8 @@ class Play extends Phaser.Scene {
         this.p1 = new Player(this, p1Spawn.x, p1Spawn.y, 'violet', 1, false);
 
         const p2Spawn = this.map.findObject("player_spawn", obj => obj.name === "p2spawn");
-        this.p2 = new Player(this, p2Spawn.x, p2Spawn.y, 'blue', 2, true);
-        this.p2.enableMove = false;
+        this.p2 = new Player(this, p2Spawn.x, p2Spawn.y, 'blue', 2, false);
+        //this.p2.enableMove = false;
         //this.p2.setVisible(false);
         //this.p2.setAlpha(0.5);
 
@@ -117,8 +117,6 @@ class Play extends Phaser.Scene {
         const cat_exits = this.map.filterObjects("interaction", obj => obj.name === "cat_exit");
         
         cat_positions.forEach(cat => {
-
-        
           const exitId = cat.properties.exit_id;
           const correspondingExit = cat_exits.find(exit => exit.properties.exit_id === exitId);
         

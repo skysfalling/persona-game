@@ -174,7 +174,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     // set move animation
                     if (this.currentFacing == "up" || this.currentFacing == "down")
                     {
-                        if (!this.inverted)
+                        if (this.playerID == 1)
                         {
                             this.anims.play(this.currentFacing + '-idle1');
                         }
@@ -184,7 +184,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     }
                     else {
                         // set move animation
-                        if (!this.inverted)
+                        if (this.playerID == 1)
                         {
                             this.anims.play('horz-idle1');
                         }
@@ -213,7 +213,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.setFlipX(false);
 
                     // set move animation
-                    if (!this.inverted)
+                    if (this.playerID == 1)
                     {
                         this.anims.play('horz-move1');
                     }
@@ -238,7 +238,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.setFlipX(true);
 
                     // set move animation
-                    if (!this.inverted)
+                    if (this.playerID == 1)
                     {
                         this.anims.play('horz-move1');
                     }
@@ -262,7 +262,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.setFlipX(false);
 
                     // set move animation
-                    if (!this.inverted)
+                    if (this.playerID == 1)
                     {
                         this.anims.play('up-move1');
                     }
@@ -286,11 +286,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.setFlipX(false);
 
                     // set move animation
-                    if (!this.inverted)
+                    if (this.playerID == 1)
                     {
                         this.anims.play('down-move1');
                     }
-                    else{
+                    else
+                    {
                         this.anims.play('down-move2');
                     }
                 },
@@ -316,8 +317,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 },
                 update: () => {
                     this.tetherBubble.currSize = 0;
-
-
 
                     if (Phaser.Input.Keyboard.JustDown(this.ability_cursor)) {
                         this.abilityStates.TETHER_BUBBLE.enter();
@@ -351,6 +350,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     update() {
         this.pos = {x: this.x, y: this.y}; // update reference position for objects
+        this.center_pos = { x: this.x + this.width/2, y: this.y + this.height/2 } //center position
         this.handleMovement();
         this.setFacingDirection();
 
@@ -358,8 +358,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         //console.log(this.playerID + " " + this.currAbilityState.name);
 
         // [[ UPDATE POSITIONS ]------------------------------------------------]
-        this.overlapTrigger.setPosition(this.x, this.y);
-        this.light.setPosition(this.x, this.y);
+        this.overlapTrigger.setPosition(this.center_pos.x, this.center_pos.y);
+        this.light.setPosition(this.center_pos.x, this.center_pos.y);
         
         // [[ UPDATE GIZMOS ]------------------------------------------------]
         this.gizmos_debug.clear();
@@ -380,9 +380,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.overlapTrigger.displayHeight = lerpedWidth;
 
         if (this.tetheredObject){
+            // draw tether to object
             this.gizmos_debug.drawCircle(this.tetheredObject.x, this.tetheredObject.y, 10, 0xffffff, 0, 1);
 
-            // draw tether
+            // draw tether to objects
             let tetheredObjPos = {x: this.tetheredObject.x, y: this.tetheredObject.y};
             this.gizmo_effects.drawLine(this.pos, tetheredObjPos, this.color, 1, 1);
         }
