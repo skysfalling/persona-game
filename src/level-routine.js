@@ -1,45 +1,41 @@
 class LevelRoutine {
-  constructor(scene, jsonFile) {
-
-      this.scene = scene;
-      this.p1 = scene.p1; 
-      this.p2 = scene.p2; 
+  constructor(uiScene, playScene, jsonFile) {
+      this.uiScene = uiScene;
+      this.playScene = playScene;
+      this.p1 = playScene.p1; 
+      this.p2 = playScene.p2; 
+      this.cats = playScene.cats;
 
       this.playerFreezeStates = [];
-      this.waitForObjectiveComplete = [];
-      this.waitPeriods = [];
+      this.objectiveIds = [];
+      this.startDelays = [];
       this.characterIds = [];
       this.consoleTexts = [];
   
+      this.prefix = "|| LEVEL ROUTINE >> ";
+
       // Load and parse the JSON file
       this.loadJSON(jsonFile);
   }
 
   loadJSON(jsonFile) {
-    this.scene.load.json('levelData', jsonFile);
+    this.playScene.load.json('levelData', jsonFile);
   }
+  
 
   start() {
-    this.scene.load.start();
-
-    this.scene.load.once('complete', () => {
-      const data = this.scene.cache.json.get('levelData');
+    this.playScene.load.start();
+    this.playScene.load.once('complete', () => {
+      const data = this.playScene.cache.json.get('levelData');
 
       // Extract wait periods and console texts from the JSON data
       for (const entry of data) {
-        this.waitPeriods.push(entry.wait);
-        this.characterIds.push(entry.id);
+        this.startDelays.push(entry.delay);
+        this.playerFreezeStates.push(entry.freezePlayer);
+        this.characterIds.push(entry.character_id);
+        this.objectiveIds.push(entry.objective_id)
         this.consoleTexts.push(entry.text);
-
-        // Only update freezePlayer or objectiveCompleted if they are explicitly defined
-        if (entry.hasOwnProperty('freezePlayer')) {
-            this.playerFreezeStates.push(entry.freezePlayer);
-        } else {
-            const prevValue = this.playerFreezeStates.length > 0 ? this.playerFreezeStates[this.playerFreezeStates.length - 1] : false;
-            this.playerFreezeStates.push(prevValue);
-        }
       }
-
       this.runRoutine();
     });
   }
@@ -53,30 +49,35 @@ class LevelRoutine {
         return;
       }
 
-      const waitPeriod = this.waitPeriods[currentIndex];
+      const startDelay = this.startDelays[currentIndex];
       const characterId = this.characterIds[currentIndex];
       const consoleText = this.consoleTexts[currentIndex];
       const freezePlayer = this.playerFreezeStates[currentIndex];
-      const shouldWait = this.waitForObjectiveComplete[currentIndex];
+      const objectiveId = this.objectiveIds[currentIndex];
 
       // Toggle freeze state of player
       this.togglePlayerFreeze(freezePlayer);
 
+      //console.log("curr objectiveId: " + objectiveId);
+      //console.log(" count : " + this.playScene.getObjectiveCount(objectiveId));
+
       // Check if should wait for objective to be completed
-      if (shouldWait && !this.objectiveCompleted) {
+      if (this.playScene.getObjectiveCount(objectiveId) > 0) {
+
+          console.log(this.prefix + "currObjective " + objectiveId + " // Count: " + this.playScene.getObjectiveCount(objectiveId));
           // Delay the state machine for 1 second before checking again
-          this.scene.time.delayedCall(1000, stateMachine);
+          this.playScene.time.delayedCall(1000, stateMachine);
           return;
       }
 
       // State: Create dialogue
       const createDialogue = () => {
-        this.dialogue = new Dialogue(this.scene, characterId, consoleText);
+        this.dialogue = new Dialogue(this.uiScene, characterId, consoleText);
         this.dialogue.start();
         console.log("New dialogue: " + consoleText);
 
         // Transition to the next state after a delay
-        this.scene.time.delayedCall(waitPeriod * 1000, startDialogue);
+        this.uiScene.time.delayedCall(startDelay * 1000, startDialogue);
       };
 
       // State: Start dialogue
@@ -100,12 +101,8 @@ class LevelRoutine {
 
   // Method to freeze/unfreeze player
   togglePlayerFreeze(freeze) {
-    this.scene.p1.enableMove = !freeze;
-    this.scene.p2.enableMove = !freeze;
-  }
-
-  setObjectiveCompleted(value) {
-    this.objectiveCompleted = value;
+    this.playScene.p1.enableMove = !freeze;
+    this.playScene.p2.enableMove = !freeze;
   }
 }
   

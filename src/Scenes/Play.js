@@ -1,3 +1,4 @@
+
 class Play extends Phaser.Scene {
     constructor() {
         super("playScene");
@@ -10,7 +11,6 @@ class Play extends Phaser.Scene {
         this.load.image("persona", "tilemap/persona-tileset.png");    // tile sheet
 
         this.load.tilemapTiledJSON("map", "tilemap/whispering_pines_01.json");    // Tiled JSON file
-
         this.load.spritesheet('tileAtlas', 'tilemap/persona-tileset.png', {
             frameWidth: 16,
             frameHeight: 16
@@ -31,6 +31,9 @@ class Play extends Phaser.Scene {
         this.gizmos = new Gizmos(this);
         this.gizmos.graphics.setDepth(2);
         this.gizmos.enabled = false;
+
+
+        this.objectiveCount = {};
 
     }
 
@@ -87,7 +90,7 @@ class Play extends Phaser.Scene {
 
         // #region [[ SETUP CAMERA MOVEMENT]] --------------------------------------------------------------//>>
         this.cameraMovement = new CameraMovement(this, this.p1, this.p2);
-        this.cameraMovement.setup();        
+        this.cameraMovement.setup();     
 
         // Define a key to toggle editor mode
         /*
@@ -98,8 +101,7 @@ class Play extends Phaser.Scene {
         // #endregion
 
         // #region [[ CREATE OBJECTS ]] --------------------------------------------------------------//>>
-        this.interactObjects = this.add.group();
-
+        this.objectiveObjects = this.add.group();
         // (( HEARTS ))
         this.hearts = this.add.group();
         const heart_positions = this.map.filterObjects("interaction", obj => obj.name === "heart");
@@ -120,30 +122,29 @@ class Play extends Phaser.Scene {
         this.cats = this.add.group();
         const cat_positions = this.map.filterObjects("interaction", obj => obj.name === "cat");
         const cat_exits = this.map.filterObjects("interaction", obj => obj.name === "cat_exit");
-        
-        cat_positions.forEach(cat => {
-          const exitId = cat.properties.exit_id;
-          const correspondingExit = cat_exits.find(exit => exit.properties.exit_id === exitId);
-        
-          console.log('cat properties ' + JSON.stringify(cat.properties));
 
-          if (correspondingExit) {
-            const new_cat = new Cat(this, cat.x, cat.y, 'cat_idle', cat.properties[1]);
-            new_cat.correspondingExit = correspondingExit;
-            this.cats.add(new_cat);
-          } 
-          else {
-            console.warn(`No corresponding cat_exit object found for cat with exit_id: ${exitId}`);
-          }
+        cat_positions.forEach(cat => {
+            const exitId = cat.properties.exit_id;
+            const correspondingExit = cat_exits.find(exit => exit.properties.exit_id === exitId);
+
+            if (correspondingExit) {
+                const new_cat = new Cat(this, cat.x, cat.y, 'cat_idle', cat.properties);
+                new_cat.correspondingExit = correspondingExit;
+                this.cats.add(new_cat);
+            } else {
+                console.warn(`No corresponding cat_exit object found for cat with exit_id: ${exitId}`);
+            }
         });
+
 
         // (( CREATE HIDDEN OBJECTS ))
         const hiddenObjectPositions = this.map.filterObjects("violet_echos", obj => obj.name === "heart");
-
         this.violet_echos = this.add.group();
-
         // #endregion
+        
 
+        
+        
         // #region [[ CREATE COLLISIONS ]] --------------------------------------------------------------//>>
         this.physics.world.TILE_BIAS = 1000;  // increase to prevent sprite tunneling through tiles
 
@@ -211,6 +212,38 @@ class Play extends Phaser.Scene {
             this.physics.world.drawDebug = true;
         }
     }
+  
+    // UPDATE OBJECTIVE COUNT
+    updateObjectiveCount() {
+
+        const objectiveCount = {};
+        this.cats.children.iterate(cat => {
+          const objectiveId = cat.objective_id;
+      
+          if (objectiveId >= 0) {
+            if (objectiveCount.hasOwnProperty(objectiveId)) {
+              objectiveCount[objectiveId]++;
+            } else {
+              objectiveCount[objectiveId] = 1;
+            }
+          }
+        });
+      
+        this.objectiveCount = objectiveCount;
+
+        //console.log("Objective Count:", this.objectiveCount);
+        const objectiveCountElement = document.getElementById("objectiveCount");
+        if (objectiveCountElement) {
+          objectiveCountElement.textContent = "Objective Count : " + JSON.stringify(this.objectiveCount);
+        }
+    };
+
+    getObjectiveCount(objective_id) {
+        if (this.objectiveCount.hasOwnProperty(objective_id)) {
+          return this.objectiveCount[objective_id];
+        }
+        return 0;
+      }
 
     update (time, delta)
     {
@@ -226,13 +259,17 @@ class Play extends Phaser.Scene {
         });
 
         this.gizmos.clear();
-        this.gizmos.drawLine({x: this.p1.x, y: this.p1.y}, {x: this.p2.x, y: this.p2.y}, 0xff00ff, 1);
+        this.gizmos.drawLine(this.p1.center_pos, this.p2.center_pos, 0xff00ff, 1);
 
         //this.gizmos.drawExistingRect(this.overlapTrigger, this.p1.x, this.p1.y, 0xff00ff, 1, 1);
 
         this.cameraMovement.update(this.gizmos);
 
+        this.updateObjectiveCount();
+
     }
+
+
 }
 
 class PlayUI extends Phaser.Scene {
@@ -261,7 +298,7 @@ class PlayUI extends Phaser.Scene {
 
         // << LEVEL SETUP >>
         // Create a new instance of LevelRoutine with the JSON file
-        const levelRoutine = new LevelRoutine(this.playScene, 'level_routine.json');
+        const levelRoutine = new LevelRoutine(this, this.playScene, 'level_routine.json');
 
         // Start the routine
         levelRoutine.start();

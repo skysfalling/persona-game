@@ -130,7 +130,7 @@ class CameraMovement {
             else 
             {
                 const distance = Phaser.Math.Distance.Between(this.p1.x, this.p1.y, this.p2.x, this.p2.y, {x: 0, y: 0});
-                const thresholdDistance = 150;
+                const thresholdDistance = 100;
                 const targetAlpha = (distance > thresholdDistance) && !playersInSameRoom ? 1 : 0;
                 const targetAlpha_inverse = (distance > thresholdDistance) && !playersInSameRoom ? 0 : 1;
                 const lerpAmount = 0.1; 
@@ -153,13 +153,25 @@ class CameraMovement {
                     this.mainCameraTarget.setPosition( this.playerMidpoint.x,  this.playerMidpoint.y);
                 }
                 // << SPLITSCREEN VIEW >>
-                else {
+                else 
+                {
                     this.splitscreen = true;
                     let screenhalf = screen.width/2;
-    
+
+                    // Follow the players with the cameras
+                    this.camera1.startFollow(this.p1, false, 1, 1, 0, 0);
+                    this.camera2.startFollow(this.p2, false, 1, 1, 0, 0);
+
                     // Vertical Split Screen
-                    this.camera1.setPosition(0, 0);
-                    this.camera2.setPosition(screenhalf, 0);
+                    if (this.p1.x < this.p2.x){
+                        this.camera1.setPosition(0, 0);
+                        this.camera2.setPosition(screenhalf, 0);
+                    }
+                    else{
+                        this.camera1.setPosition(screenhalf, 0);
+                        this.camera2.setPosition(0, 0);
+
+                    }
                     
                     this.camera1.width = screenhalf;
                     this.camera1.height = screen.height;
@@ -167,15 +179,6 @@ class CameraMovement {
                     this.camera2.width = screenhalf;
                     this.camera2.height = screen.height;
     
-                    // Follow the players with the cameras
-                    if (this.p1.x < this.p2.x){
-                        this.camera1.startFollow(this.p1, false, 1, 1, 0, 0);
-                        this.camera2.startFollow(this.p2, false, 1, 1, 0, 0);
-                    }
-                    else{
-                        this.camera2.startFollow(this.p1, false, 1, 1, 0, 0);
-                        this.camera1.startFollow(this.p2, false, 1, 1, 0, 0);
-                    }
 
 
                     // Adjust the camera bounds to the full map + screen size offset

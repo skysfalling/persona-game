@@ -1,5 +1,5 @@
 class Cat extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, texture='cat_idle', id_type=0) {
+    constructor(scene, x, y, texture='cat_idle', properties) {
       super(scene, x, y, texture);
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -7,8 +7,12 @@ class Cat extends Phaser.GameObjects.Sprite {
         this.setOrigin(0);
 
         this.name = 'cat';
-        this.id_type = id_type;
-        console.log(":3 CAT -> setup: id_type " + this.id_type);
+        this.properties = properties;
+        this.id_type = properties.id_type;
+        this.exit_id = properties.exit_id;
+        this.objective_id = properties.objective_id;
+
+        console.log(":3 CAT -> NEW!", this.properties);
 
         this.correspondingExit;
         this.setupAnimations();
@@ -91,10 +95,12 @@ class Cat extends Phaser.GameObjects.Sprite {
 
     submit(id)
     {
-        if (id == this.id_type)
+        if (id == this.id_type && this.objective_id != -1)
         {
             console.log(" :3 CAT -> is satisfied by type " + id);
             this.moveToExit();
+
+            this.objective_id = -1; // satisfied by type
         }
     }
 

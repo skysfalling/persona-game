@@ -103,13 +103,13 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         this.playLoopAnim();
   
         // Add this sprite to the interactObjects group
-        scene.interactObjects.add(this);
+        scene.objectiveObjects.add(this);
     }
     
     update() {
         this.pos = {x: this.x, y: this.y}; // update reference position for objects
         this.center_pos = { x: this.x + this.width/2, y: this.y + this.height/2 } //center position
-        
+
         // update hidden object
         if (this.playerEcho) 
         { 

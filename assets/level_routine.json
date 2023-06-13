@@ -1,25 +1,21 @@
 [
-  {
-      "wait": 1,
-      "id": 1,
-      "text": [
-          "Hello, welcome to Persona, a horror-mystery physics puzzle game.",
-          "The gameplay revolves around exploring the disorienting world, solving puzzles, and piecing together the fragmented story to understand the characters' identities and their relationship.",
-          "You are currently playing the CMPM120 playtest version for 6/7/23. Game and Art by skysfalling"
-      ],
-      "freezePlayer": true
-  },
-  {
-      "wait": 0.5,
-      "id": 1,
-      "text": [
-          "Let's start with the basics. Use the Arrow Keys to move us.,",
-          "Blue and I... we're like reflections. When you move me up, Blue goes down and vice versa.",
-          "But hey, we're not just wandering around aimlessly, you know.",
-          "Sometimes, when Blue and I drift apart, you'll see things that you wouldn't normally see when we're close. Echoes of the past, of what once was... "
-      ],
+    {
+      "delay": 1,
       "freezePlayer": false,
-      "waitForObjectiveComplete": true
-  }
+      "character_id": 1,
+      "objective_id": 0,
+      "text": [
+          "Hello, welcome to Persona, a horror-mystery physics puzzle game."
+      ]
+    },
+    {
+        "delay": 0,
+        "freezePlayer": false,
+        "character_id": 1,
+        "objective_id": 0,
+        "text": [
+            "Hello, welcome to Persona, a horror-mystery physics puzzle game."
+        ]
+    }
 ]
   
