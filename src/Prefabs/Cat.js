@@ -104,7 +104,7 @@ class Cat extends Phaser.GameObjects.Sprite {
         if (this.correspondingExit) {
           const exitX = this.correspondingExit.x;
           const exitY = this.correspondingExit.y;
-          const duration = 1500;
+          const duration = 5000;
       
           this.scene.tweens.add({
             targets: this,

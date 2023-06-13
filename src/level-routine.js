@@ -2,7 +2,11 @@ class LevelRoutine {
   constructor(scene, jsonFile) {
 
       this.scene = scene;
+      this.p1 = scene.p1; 
+      this.p2 = scene.p2; 
 
+      this.playerFreezeStates = [];
+      this.waitForObjectiveComplete = [];
       this.waitPeriods = [];
       this.characterIds = [];
       this.consoleTexts = [];
@@ -26,6 +30,14 @@ class LevelRoutine {
         this.waitPeriods.push(entry.wait);
         this.characterIds.push(entry.id);
         this.consoleTexts.push(entry.text);
+
+        // Only update freezePlayer or objectiveCompleted if they are explicitly defined
+        if (entry.hasOwnProperty('freezePlayer')) {
+            this.playerFreezeStates.push(entry.freezePlayer);
+        } else {
+            const prevValue = this.playerFreezeStates.length > 0 ? this.playerFreezeStates[this.playerFreezeStates.length - 1] : false;
+            this.playerFreezeStates.push(prevValue);
+        }
       }
 
       this.runRoutine();
@@ -44,6 +56,18 @@ class LevelRoutine {
       const waitPeriod = this.waitPeriods[currentIndex];
       const characterId = this.characterIds[currentIndex];
       const consoleText = this.consoleTexts[currentIndex];
+      const freezePlayer = this.playerFreezeStates[currentIndex];
+      const shouldWait = this.waitForObjectiveComplete[currentIndex];
+
+      // Toggle freeze state of player
+      this.togglePlayerFreeze(freezePlayer);
+
+      // Check if should wait for objective to be completed
+      if (shouldWait && !this.objectiveCompleted) {
+          // Delay the state machine for 1 second before checking again
+          this.scene.time.delayedCall(1000, stateMachine);
+          return;
+      }
 
       // State: Create dialogue
       const createDialogue = () => {
@@ -72,6 +96,16 @@ class LevelRoutine {
     };
 
     stateMachine();
+  }
+
+  // Method to freeze/unfreeze player
+  togglePlayerFreeze(freeze) {
+    this.scene.p1.enableMove = !freeze;
+    this.scene.p2.enableMove = !freeze;
+  }
+
+  setObjectiveCompleted(value) {
+    this.objectiveCompleted = value;
   }
 }
   

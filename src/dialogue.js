@@ -33,12 +33,12 @@ class DialogueManager {
         this.isTyping = false;
 
         // -- create skip prompt --------------------------------------------------------
-        this.skipPromptText = scene.add.bitmapText(this.origin.x, this.origin.y - this.screenMargin, 'awasete', "<< spacebar to skip >>", 16);
+        this.skipPromptText = scene.add.bitmapText(this.origin.x, screen.height - 5, 'awasete', "-- press spacebar to skip --", 16);
         this.skipPromptText.setScrollFactor(0);
         this.skipPromptText.setDepth(globalDepth.ui + 1);
         this.skipPromptText.setScale(0.5);
-        this.skipPromptText.setOrigin(0.5);
-        this.skipPromptText.setTint(0xffffff);
+        this.skipPromptText.setOrigin(0.5, 1);
+        this.skipPromptText.setTint(0x555555);
 
         // -- create profile image --------------------------------------------------------
         this.currentProfile = "violet";
@@ -55,6 +55,7 @@ class DialogueManager {
         this.backgroundRect.setScrollFactor(0);
         this.backgroundRect.setOrigin(0.5, 0.5);
         this.backgroundRect.setAlpha(0.75);
+        this.backgroundRect.setDepth(globalDepth.ui);
 
         this.hide();
     }

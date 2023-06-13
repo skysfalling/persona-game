@@ -11,6 +11,8 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this.overlapTrigger);
         this.overlapTrigger.body.setAllowGravity(false);
         this.overlapTrigger.visible = false;
+        this.overlapTrigger.setOrigin(0.25);
+
 
         // setup gizmos
         this.gizmos = new Gizmos(scene);
@@ -105,7 +107,9 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
     }
     
     update() {
-
+        this.pos = {x: this.x, y: this.y}; // update reference position for objects
+        this.center_pos = { x: this.x + this.width/2, y: this.y + this.height/2 } //center position
+        
         // update hidden object
         if (this.playerEcho) 
         { 

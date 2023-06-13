@@ -56,10 +56,9 @@ class Play extends Phaser.Scene {
         env_backgroundLayer.setDepth(globalDepth.env_background);
 
         const collisionLayer = this.map.createLayer("collision", tileset, 0, 0).setPipeline('Light2D');
-        collisionLayer.setDepth(globalDepth.env_background);
-        collisionLayer.setCollisionByProperty({ collides: true });
+        collisionLayer.setDepth(globalDepth.env_foreground);
 
-        const debugGraphics = this.add.graphics().setAlpha(0.75);
+        const debugGraphics = this.add.graphics().setAlpha(0.75).setDepth(globalDepth.debug);
         collisionLayer.renderDebug(debugGraphics, {
             tileColor: null, // Color of non-colliding tiles
             collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
@@ -258,11 +257,13 @@ class PlayUI extends Phaser.Scene {
 
     create () {
 
+        this.playScene = this.scene.get('playScene');
+
         // << LEVEL SETUP >>
         // Create a new instance of LevelRoutine with the JSON file
-        const levelRoutine = new LevelRoutine(this, '/assets/level_routine.json');
+        const levelRoutine = new LevelRoutine(this.playScene, 'level_routine.json');
 
         // Start the routine
-        //levelRoutine.start();
+        levelRoutine.start();
     }
 }

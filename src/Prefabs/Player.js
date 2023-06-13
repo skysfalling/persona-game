@@ -21,7 +21,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.x = x;
         this.y = y;
         this.setOrigin(0);
-        this.body.setSize(this.width/2, this.height/2);
+        this.body.setSize(this.width*0.75, this.height*0.75);
         this.setDepth(globalDepth.playArea);
 
         // -- description -------------------------------------------------------------------//>>
@@ -385,8 +385,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.gizmos_debug.drawCircle(this.tetheredObject.x, this.tetheredObject.y, 10, 0xffffff, 0, 1);
 
             // draw tether to objects
-            let tetheredObjPos = {x: this.tetheredObject.x, y: this.tetheredObject.y};
-            this.gizmo_effects.drawLine(this.center_pos, tetheredObjPos, this.color, 1, 1);
+            this.gizmo_effects.drawLine(this.center_pos, this.tetheredObject.center_pos, this.color, 1, 1);
         }
 
         let newroom = this.scene.roomHandler.getCurrentRoom(this);

@@ -42,8 +42,9 @@ let globalDepth = {
     env_background: -2,
     playerEffects: -1,
     playArea: 0,
-    env_foreground: 10,
-    ui: 20
+    env_foreground: 1,
+    ui: 2,
+    debug: 3
 }
 
 let screen = {

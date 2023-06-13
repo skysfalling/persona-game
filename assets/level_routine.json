@@ -1,62 +1,25 @@
 [
-    {
+  {
       "wait": 1,
       "id": 1,
       "text": [
-        "Hello, welcome to Persona, a horror-mystery physics puzzle game.",
-        "The gameplay revolves around exploring the disorienting world, solving puzzles, and piecing together the fragmented story to understand the characters' identities and their relationship.",
-        "You are currently playing the CMPM120 playtest version for 6/7/23. Game and Art by skysfalling"
-      ]
-    },
-    {
+          "Hello, welcome to Persona, a horror-mystery physics puzzle game.",
+          "The gameplay revolves around exploring the disorienting world, solving puzzles, and piecing together the fragmented story to understand the characters' identities and their relationship.",
+          "You are currently playing the CMPM120 playtest version for 6/7/23. Game and Art by skysfalling"
+      ],
+      "freezePlayer": true
+  },
+  {
       "wait": 0.5,
       "id": 1,
       "text": [
-        "Let's start with the basics. Use the Arrow Keys to move us.,",
-        "Blue and I... we're like reflections. When you move me up, Blue goes down and vice versa.",
-        "But hey, we're not just wandering around aimlessly, you know.",
-        "Sometimes, when Blue and I drift apart, you'll see things that you wouldn't normally see when we're close. Echoes of the past, of what once was... "
-      ]
-    },
-    {
-      "wait": 2,
-      "id": 1,
-      "text": [
-        "There will be times when Blue and I can tether ourselves to objects. To do that, you need to press Z or X.",
-        "Some objects are stubborn, won't budge no matter how hard you try.",
-        "Other objects are swayed by our presence. You can pull them along with you.",
-        "It's useful, especially when we need to bring hearts to those lonely cats around the level."
-      ] 
-    },
-    {
-      "wait": 1,
-      "id": 2,
-      "text": [
-        ". . ."
-      ] 
-    },
-    {
-      "wait": 1,
-      "id": 1,
-      "text": [
-        "Blue likes taking care of the kitties. These cats are symbolic in many ways, representing parts of Blue's and my past... parts of ourselves. ",
-        "They're stuck in this world just like we are. And, they need our help to move on. It's sort of poetic, don't you think?", "Now, each cat has a specific color associated with it - same as the hearts that are scattered around.",
-         "Your task is to guide either me or Blue, or sometimes both of us, to tether ourselves to the heart and then bring it to the corresponding cat."
-      ] 
-    },
-    {
-      "wait": 1,
-      "id": 2,
-      "text": [
-        "~ :3"
-      ] 
-    },
-    {
-      "wait": 1,
-      "id": 1,
-      "text": [
-        "And that's all we have for you today! Have fun :)"
-      ] 
-    }
-  ]
+          "Let's start with the basics. Use the Arrow Keys to move us.,",
+          "Blue and I... we're like reflections. When you move me up, Blue goes down and vice versa.",
+          "But hey, we're not just wandering around aimlessly, you know.",
+          "Sometimes, when Blue and I drift apart, you'll see things that you wouldn't normally see when we're close. Echoes of the past, of what once was... "
+      ],
+      "freezePlayer": false,
+      "waitForObjectiveComplete": true
+  }
+]
   
