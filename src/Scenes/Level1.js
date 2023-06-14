@@ -1,14 +1,20 @@
 
-class Play extends Phaser.Scene {
+class Level1 extends Phaser.Scene {
     constructor() {
-        super("playScene");
+        super("Level1");
     }
 
     preload() {
-        this.scene.launch("UI");
+        console.log(">> Level 1 initialization");
+        this.load.path = "./assets/";
+        this.scene.launch('UI');
+
+        // Create a new instance of LevelRoutine with the JSON file
+        this.levelRoutine = new LevelRoutine(this, 'level_routine.json');
+        this.levelRoutine.start();
+        this.levelRoutine.uiScene = this.scene.get('UI');
 
         // load assets
-        this.load.path = "./assets/";
         this.load.image("tiles", "tilemap/whispering_pines_tileset.png");    // tile sheet
         this.load.image("persona", "tilemap/persona-tileset.png");    // tile sheet
 
@@ -305,39 +311,3 @@ class Play extends Phaser.Scene {
 
 }
 
-class UI extends Phaser.Scene {
-
-    constructor ()
-    {
-        super({ key: 'UI' });
-
-    }
-
-    preload(){
-
-        this.load.bitmapFont('awasete', 'assets/fonts/awasete.png', 'assets/fonts/awasete.xml');
-
-        this.load.spritesheet('character_profiles', 'assets/characters/character_profiles.png', {
-            frameWidth: 32,
-            frameHeight: 32
-        });
-
-        this.cursors = this.input.keyboard.createCursorKeys();
-    }
-
-    create () {
-        
-        this.playScene = this.scene.get('playScene');
-        console.log("play scene" , this.playScene);
-
-        // << LEVEL SETUP >>
-        // Create a new instance of LevelRoutine with the JSON file
-        const levelRoutine = new LevelRoutine(this, this.playScene, 'level_routine.json');
-
-        // Start the routine
-        levelRoutine.start(); 
-        
-
-
-    }
-}

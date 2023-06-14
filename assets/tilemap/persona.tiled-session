@@ -141,11 +141,11 @@
                 12,
                 5
             ],
-            "scale": 1,
-            "selectedLayer": 1,
+            "scale": 3,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 445.5,
-                "y": 355.5
+                "x": 493.99999999999994,
+                "y": 483.3333333333333
             }
         },
         "whispering_pines_01.json#persona": {
@@ -174,6 +174,22 @@
         },
         "whispering_pines_01.tmx#whispering_pines_tileset": {
             "scaleInDock": 1
+        },
+        "whispering_pines_02.json": {
+            "expandedObjectLayers": [
+                6,
+                12,
+                5
+            ],
+            "scale": 1,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 401,
+                "y": 964
+            }
+        },
+        "whispering_pines_02.json#whispering_pines_tileset": {
+            "scaleInDock": 2
         }
     },
     "last.exportedFilePath": "C:/Users/Theo/Desktop/Phaser/persona-game/assets/tilemap",

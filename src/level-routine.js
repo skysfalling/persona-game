@@ -1,39 +1,44 @@
 class LevelRoutine {
-  constructor(uiScene, playScene, jsonFile) {
-      this.uiScene = uiScene;
-      this.playScene = playScene;
-      this.p1 = playScene.p1; 
-      this.p2 = playScene.p2; 
-      this.cats = playScene.cats;
+  constructor(scene, jsonFile) {
+    this.prefix = '|| LEVEL ROUTINE >> ';
+    this.scene = scene;
+    console.log(this.prefix + "Play Scene", this.scene);
 
-      this.playerFreezeStates = [];
-      this.objectiveIds = [];
-      this.startDelays = [];
-      this.characterIds = [];
-      this.consoleTexts = [];
-  
-      this.prefix = "|| LEVEL ROUTINE >> ";
+    this.playerFreezeStates = [];
+    this.objectiveIds = [];
+    this.startDelays = [];
+    this.characterIds = [];
+    this.consoleTexts = [];
 
-      // Load and parse the JSON file
-      this.loadJSON(jsonFile);
+
+    // Load and parse the JSON file
+    this.json = jsonFile;
+    this.loadJSON(this.json);
   }
 
   loadJSON(jsonFile) {
-    this.playScene.load.json('levelData', jsonFile);
+    console.log(this.prefix + jsonFile);
+    this.scene.load.json('levelData', jsonFile);
   }
-  
 
   start() {
-    this.playScene.load.start();
-    this.playScene.load.once('complete', () => {
-      const data = this.playScene.cache.json.get('levelData');
+
+    this.scene.load.start();
+    this.scene.load.once('complete', () => {
+
+
+      this.p1 = this.scene.p1;
+      this.p2 = this.scene.p2;
+      this.cats = this.scene.cats;
+      
+      const data = this.scene.cache.json.get('levelData');
 
       // Extract wait periods and console texts from the JSON data
       for (const entry of data) {
         this.startDelays.push(entry.delay);
         this.playerFreezeStates.push(entry.freezePlayer);
         this.characterIds.push(entry.character_id);
-        this.objectiveIds.push(entry.objective_id)
+        this.objectiveIds.push(entry.objective_id);
         this.consoleTexts.push(entry.text);
       }
       this.runRoutine();
@@ -58,14 +63,14 @@ class LevelRoutine {
 
 
       console.log("curr objectiveId: " + objectiveId);
-      console.log(" count : " + this.playScene.getObjectiveCount(objectiveId));
+      console.log(" count : " + this.scene.getObjectiveCount(objectiveId));
 
       // Check if should wait for objective to be completed
-      if (this.playScene.getObjectiveCount(objectiveId) > 0) {
+      if (this.scene.getObjectiveCount(objectiveId) > 0) {
 
-          console.log(this.prefix + "currObjective " + objectiveId + " // Count: " + this.playScene.getObjectiveCount(objectiveId));
+          console.log(this.prefix + "currObjective " + objectiveId + " // Count: " + this.scene.getObjectiveCount(objectiveId));
           // Delay the state machine for 1 second before checking again
-          this.playScene.time.delayedCall(1000, stateMachine);
+          this.scene.time.delayedCall(1000, stateMachine);
           return;
       }
 
@@ -106,8 +111,8 @@ class LevelRoutine {
 
   // Method to freeze/unfreeze player
   playerFreeze(freeze) {
-    this.playScene.p1.enableMove = !freeze;
-    this.playScene.p2.enableMove = !freeze;
+    this.scene.p1.enableMove = !freeze;
+    this.scene.p2.enableMove = !freeze;
   }
 }
   

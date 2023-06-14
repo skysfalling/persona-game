@@ -81,7 +81,7 @@ class Cat extends Phaser.GameObjects.Sprite {
     playIdle(id){
         if (id === 1){ this.anims.play('violet_cat_idle', true); }
         else if (id === 2){ this.anims.play('blue_cat_idle', true); }
-        else if (id === 2){ this.anims.play('black_cat_idle', true); }
+        else if (id === 3){ this.anims.play('black_cat_idle', true); }
         else { this.anims.play('white_cat_idle', true); }
     }
 
@@ -89,7 +89,7 @@ class Cat extends Phaser.GameObjects.Sprite {
     {
         if (id === 1){ this.anims.play('violet_cat_walk', true); }
         else if (id === 2){ this.anims.play('blue_cat_walk', true); }
-        else if (id === 2){ this.anims.play('black_cat_walk', true); }
+        else if (id === 3){ this.anims.play('black_cat_walk', true); }
         else { this.anims.play('white_cat_walk', true); }
     }
 
