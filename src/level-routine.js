@@ -55,11 +55,10 @@ class LevelRoutine {
       const freezePlayer = this.playerFreezeStates[currentIndex];
       const objectiveId = this.objectiveIds[currentIndex];
 
-      // Toggle freeze state of player
-      this.togglePlayerFreeze(freezePlayer);
 
-      //console.log("curr objectiveId: " + objectiveId);
-      //console.log(" count : " + this.playScene.getObjectiveCount(objectiveId));
+
+      console.log("curr objectiveId: " + objectiveId);
+      console.log(" count : " + this.playScene.getObjectiveCount(objectiveId));
 
       // Check if should wait for objective to be completed
       if (this.playScene.getObjectiveCount(objectiveId) > 0) {
@@ -73,8 +72,7 @@ class LevelRoutine {
       // State: Create dialogue
       const createDialogue = () => {
         this.dialogue = new Dialogue(this.uiScene, characterId, consoleText);
-        this.dialogue.start();
-        console.log("New dialogue: " + consoleText);
+        console.log("New dialogue: " + consoleText + " (delay : " + startDelay + ")");
 
         // Transition to the next state after a delay
         this.uiScene.time.delayedCall(startDelay * 1000, startDialogue);
@@ -82,12 +80,19 @@ class LevelRoutine {
 
       // State: Start dialogue
       const startDialogue = () => {
+        this.dialogue.start();
+        this.playerFreeze(freezePlayer); // freeze player if needed
+
         this.dialogue.onComplete(() => {
           // Destroy dialogue and transition to the next state
           this.dialogue.destroy();
           this.dialogue = null;
-          console.log("Dialogue complete: " + consoleText);
+          //console.log("Dialogue complete: " + consoleText);
           currentIndex++;
+
+          // Toggle freeze state of player
+          this.playerFreeze(false);
+
           stateMachine();
         });
       };
@@ -100,7 +105,7 @@ class LevelRoutine {
   }
 
   // Method to freeze/unfreeze player
-  togglePlayerFreeze(freeze) {
+  playerFreeze(freeze) {
     this.playScene.p1.enableMove = !freeze;
     this.playScene.p2.enableMove = !freeze;
   }

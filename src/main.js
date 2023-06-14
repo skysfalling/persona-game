@@ -26,7 +26,7 @@ let config = {
             gravity: { y: 0 }
         }
     },
-    scene: [Play, PlayUI]
+    scene: [Menu, Play, UI]
 };
 
 const game = new Phaser.Game(config);

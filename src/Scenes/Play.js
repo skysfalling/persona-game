@@ -5,6 +5,8 @@ class Play extends Phaser.Scene {
     }
 
     preload() {
+        this.scene.launch("UI");
+
         // load assets
         this.load.path = "./assets/";
         this.load.image("tiles", "tilemap/whispering_pines_tileset.png");    // tile sheet
@@ -59,7 +61,13 @@ class Play extends Phaser.Scene {
         env_backgroundLayer.setDepth(globalDepth.env_background);
 
         const collisionLayer = this.map.createLayer("collision", tileset, 0, 0).setPipeline('Light2D');
-        collisionLayer.setDepth(globalDepth.env_foreground);
+        collisionLayer.setDepth(globalDepth.env_background);
+
+        const collision_foregroundLayer = this.map.createLayer("collision_foreground", tileset, 0, 0).setPipeline('Light2D');
+        collision_foregroundLayer.setDepth(globalDepth.env_foreground);
+
+        const unlitLayer = this.map.createLayer("unlit", tileset, 0, 0);
+        collision_foregroundLayer.setDepth(globalDepth.ui);
 
         const debugGraphics = this.add.graphics().setAlpha(0.75).setDepth(globalDepth.debug);
         collisionLayer.renderDebug(debugGraphics, {
@@ -76,6 +84,7 @@ class Play extends Phaser.Scene {
         // #endregion
 
         // #region [[ CREATE PLAYERS ]] --------------------------------------------------------------//>>
+
         const p1Spawn = this.map.findObject("player_spawn", obj => obj.name === "p1spawn");
         this.p1 = new Player(this, p1Spawn.x, p1Spawn.y, 'violet', 1, false);
 
@@ -86,6 +95,7 @@ class Play extends Phaser.Scene {
         //this.p2.setAlpha(0.5);
 
         this.playerObjs = [this.p1, this.p2];
+        this.updatePlayerLeft();
         // #endregion
 
         // #region [[ SETUP CAMERA MOVEMENT]] --------------------------------------------------------------//>>
@@ -154,17 +164,23 @@ class Play extends Phaser.Scene {
         // - player collision --------------------------------------------------------
         this.collisionHandler.collideWithCollisionLayer(this.p1, collisionLayer);
         this.collisionHandler.collideWithCollisionLayer(this.p2, collisionLayer);
+        this.collisionHandler.collideWithCollisionLayer(this.p1, collision_foregroundLayer);
+        this.collisionHandler.collideWithCollisionLayer(this.p2, collision_foregroundLayer);
         this.collisionHandler.playerOverlap(this.p1, this.p2);
-        // - player object connections --------------------------------------------------------
-
-        this.collisionHandler.playerOverlapConnection(this.p1, this.campfires);
-        this.collisionHandler.playerOverlapConnection(this.p2, this.campfires);
-        // - object collision --------------------------------------------------------
-        
-        this.collisionHandler.collideWithCollisionLayer(this.hearts, collisionLayer);
         this.collisionHandler.heartObjectCollision(this.playerObjs, this.hearts);
         this.collisionHandler.objectCollision(this.playerObjs, this.campfires);
         this.collisionHandler.objectCollision(this.playerObjs, this.cats);
+
+        // - player object connections --------------------------------------------------------
+        this.collisionHandler.playerOverlapConnection(this.p1, this.campfires);
+        this.collisionHandler.playerOverlapConnection(this.p2, this.campfires);
+
+        // - object collision --------------------------------------------------------
+        this.collisionHandler.collideWithCollisionLayer(this.hearts, collisionLayer);
+        this.collisionHandler.collideWithCollisionLayer(this.hearts, collision_foregroundLayer);
+        this.collisionHandler.objectCollision(this.hearts, this.cats);
+        this.collisionHandler.objectCollision(this.hearts, this.campfires);
+
         // - object overlap --------------------------------------------------------
         this.hearts.children.iterate(heartObj => {
             this.collisionHandler.playerOverlapConnection(this.p1, heartObj);
@@ -175,9 +191,6 @@ class Play extends Phaser.Scene {
                 cat.submit(heartObj.id_type);
             });
         });
-
-
-
         // #endregion
 
         //#region [[ HTML REFERENCES ]]
@@ -245,10 +258,30 @@ class Play extends Phaser.Scene {
         return 0;
       }
 
+    updatePlayerLeft(){
+        if (this.p1.x < this.p2.x){
+            this.leftPlayer = this.p1;
+            this.rightPlayer = this.p2;
+
+            this.p1.ability_cursor = this.p1.cursors.z;
+            this.p2.ability_cursor = this.p2.cursors.x;
+
+        }
+        else
+        { 
+            this.leftPlayer = this.p2;
+            this.rightPlayer = this.p1;
+
+            this.p1.ability_cursor = this.p1.cursors.x;
+            this.p2.ability_cursor = this.p2.cursors.z;
+        }
+    }
+
     update (time, delta)
     {
         this.p1.update();
         this.p2.update();
+        this.updatePlayerLeft();
 
         this.hearts.children.iterate(heart => {
             heart.update();
@@ -272,16 +305,16 @@ class Play extends Phaser.Scene {
 
 }
 
-class PlayUI extends Phaser.Scene {
+class UI extends Phaser.Scene {
 
     constructor ()
     {
-        super({ key: 'UIScene', active: true });
+        super({ key: 'UI' });
 
     }
 
     preload(){
-        
+
         this.load.bitmapFont('awasete', 'assets/fonts/awasete.png', 'assets/fonts/awasete.xml');
 
         this.load.spritesheet('character_profiles', 'assets/characters/character_profiles.png', {
@@ -293,14 +326,18 @@ class PlayUI extends Phaser.Scene {
     }
 
     create () {
-
+        
         this.playScene = this.scene.get('playScene');
+        console.log("play scene" , this.playScene);
 
         // << LEVEL SETUP >>
         // Create a new instance of LevelRoutine with the JSON file
         const levelRoutine = new LevelRoutine(this, this.playScene, 'level_routine.json');
 
         // Start the routine
-        levelRoutine.start();
+        levelRoutine.start(); 
+        
+
+
     }
 }

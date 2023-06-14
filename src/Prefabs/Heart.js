@@ -6,13 +6,15 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         this.body.setSize(this.width/2, this.height/2)
         this.setOrigin(0);
 
+        // Tether threshold
+        this.tether_threshold = 50;
+
         // Create the overlap trigger
         this.overlapTrigger = scene.add.zone(x, y).setSize(this.width*2, this.height*2);
         scene.physics.add.existing(this.overlapTrigger);
         this.overlapTrigger.body.setAllowGravity(false);
         this.overlapTrigger.visible = false;
         this.overlapTrigger.setOrigin(0.25);
-
 
         // setup gizmos
         this.gizmos = new Gizmos(scene);
@@ -99,6 +101,27 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         });
         // #endregion
 
+        //#region BLUE HEART -------
+        this.scene.anims.create({
+            key: 'black_loop',
+            frames: this.anims.generateFrameNumbers('heart', { start: 90, end: 97 }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.scene.anims.create({
+            key: 'black_spin',
+            frames: this.anims.generateFrameNumbers('heart', { start: 98, end: 103 }),
+            frameRate: 12,
+            repeat: 0
+        });
+        this.scene.anims.create({
+            key: 'black_break',
+            frames: this.anims.generateFrameNumbers('heart', { start: 104, end: 119 }),
+            frameRate: 12,
+            repeat: 0
+        });
+        // #endregion
+
         // #endregion
         this.playLoopAnim();
   
@@ -122,7 +145,7 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         this.connectedPlayers.forEach(player => {
             const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y);
 
-            if (distance > 100) { this.disconnectPlayer(player);}
+            if (distance > this.tether_threshold) { this.disconnectPlayer(player);}
         });
 
         this.overlapTrigger.setPosition(this.x, this.y);
@@ -199,7 +222,7 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
 
             if (this.connectedPlayers.length > 1){
                 console.log(this.prefix + " connected to both players");
-                this.id_type = 0;
+                this.id_type = 3;
             }
             else
             {
@@ -251,6 +274,9 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         else if (id === 2) {        
             this.anims.play('blue_loop');
         }
+        else if (id === 3) {        
+            this.anims.play('black_loop');
+        }
         else
         {
             this.anims.play('white_loop');
@@ -265,6 +291,9 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
         }
         else if (id === 2) {        
             this.anims.play('blue_spin');
+        }
+        else if (id === 3) {        
+            this.anims.play('black_spin');
         }
         else {
             this.anims.play('white_spin');

@@ -137,12 +137,14 @@ class DialogueManager {
 }
 
 class Dialogue {
-    constructor(scene, characterID = 0, textList = "I have nothing to say [[ NO TEXT GIVINE ]]") {
+    constructor(scene, characterID = 0, textList = "I have nothing to say [[ NO TEXT GIVINE ]]") 
+    {
         this.scene = scene;
 
         // create dialogue manager if needed
         if (!this.scene.dialogueManager) {this.scene.dialogueManager = new DialogueManager(scene);}
         this.dialogueManager = this.scene.dialogueManager;
+        this.dialogueManager.isTyping = false;
 
         // profile texture
         this.characterID = characterID;

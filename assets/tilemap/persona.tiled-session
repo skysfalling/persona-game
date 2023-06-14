@@ -28,8 +28,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 399.5,
-                "y": 202.5
+                "x": 898,
+                "y": 512.5
             }
         },
         "map1.json#character-sheet": {
@@ -45,8 +45,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": -19.5,
-                "y": 237.5
+                "x": -20,
+                "y": 236.5
             }
         },
         "map1.tmx#character-sheet": {
@@ -57,16 +57,16 @@
         },
         "map2.json": {
             "expandedObjectLayers": [
-                4,
                 7,
+                4,
                 5,
                 3
             ],
             "scale": 1.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 126.33333333333331,
-                "y": 311
+                "x": 126,
+                "y": 401
             }
         },
         "map2.json#heart": {
@@ -141,11 +141,11 @@
                 12,
                 5
             ],
-            "scale": 3,
-            "selectedLayer": 5,
+            "scale": 1,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 627.8333333333333,
-                "y": 472.16666666666663
+                "x": 445.5,
+                "y": 355.5
             }
         },
         "whispering_pines_01.json#persona": {
@@ -193,10 +193,10 @@
     "project": "persona.tiled-project",
     "property.type": "int",
     "recentFiles": [
+        "map1.json",
+        "map1.tmx",
         "whispering_pines_01.json",
         "whispering_pines_01.tmx",
-        "map1.tmx",
-        "map1.json",
         "heart.tsx",
         "map2.json",
         "map2.tmx",

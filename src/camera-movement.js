@@ -21,6 +21,9 @@ class CameraMovement {
         };
         this.cameraSpeed = 5; // Set the camera speed
         this.zoomSpeed = 0.02; // Set the zoom speed
+
+        this.splitScreenAlpha = 0;
+        this.mainCamAlpha = 1;
     }
 
     setup() {
@@ -130,31 +133,39 @@ class CameraMovement {
             else 
             {
                 const distance = Phaser.Math.Distance.Between(this.p1.x, this.p1.y, this.p2.x, this.p2.y, {x: 0, y: 0});
-                const thresholdDistance = 100;
-                const targetAlpha = (distance > thresholdDistance) && !playersInSameRoom ? 1 : 0;
-                const targetAlpha_inverse = (distance > thresholdDistance) && !playersInSameRoom ? 0 : 1;
-                const lerpAmount = 0.1; 
+                const thresholdDistance = 200;
+                const lerpAmount = 0.05; 
         
-                this.mainCamera.alpha = Phaser.Math.Linear(this.mainCamera.alpha, targetAlpha_inverse, lerpAmount);
+                // >> MAIN CAMERA
+                this.mainCamera.alpha = Phaser.Math.Linear(this.mainCamera.alpha, this.mainCamAlpha, lerpAmount);
 
-                this.camera1.alpha = Phaser.Math.Linear(this.camera1.alpha, targetAlpha, lerpAmount);
-                this.violetEchoOverlayRect.alpha = Phaser.Math.Linear(this.violetEchoOverlayRect.alpha, targetAlpha, lerpAmount);
-                this.camera2.alpha = Phaser.Math.Linear(this.camera2.alpha, targetAlpha, lerpAmount);
-                this.blueEchoOverlayRect.alpha = Phaser.Math.Linear(this.blueEchoOverlayRect.alpha, targetAlpha, lerpAmount);
+                // >> CAMERA 1
+                this.camera1.alpha = Phaser.Math.Linear(this.camera1.alpha, this.splitScreenAlpha, lerpAmount);
+                this.violetEchoOverlayRect.alpha = Phaser.Math.Linear(this.violetEchoOverlayRect.alpha, this.splitScreenAlpha, lerpAmount);
+
+                // >> CAMERA 2
+                this.camera2.alpha = Phaser.Math.Linear(this.camera2.alpha, this.splitScreenAlpha, lerpAmount);
+                this.blueEchoOverlayRect.alpha = Phaser.Math.Linear(this.blueEchoOverlayRect.alpha, this.splitScreenAlpha, lerpAmount);
 
                 this.p1.echoActive = this.splitscreen;
                 this.p2.echoActive = this.splitscreen;
 
                 // << NORMAL VIEW >>
-                if (playersInSameRoom) {
+                if (playersInSameRoom || distance < thresholdDistance) {
                     this.splitscreen = false;
                     
                     this.playerMidpoint = this.gizmos.calculateMidpoint({x: this.p1.x, y: this.p1.y}, {x: this.p2.x, y: this.p2.y});
                     this.mainCameraTarget.setPosition( this.playerMidpoint.x,  this.playerMidpoint.y);
+
+                    this.splitScreenAlpha = 0;
+                    this.mainCamAlpha = 1;
                 }
                 // << SPLITSCREEN VIEW >>
                 else 
                 {
+                    this.splitScreenAlpha = 1;
+                    this.mainCamAlpha = 0;
+
                     this.splitscreen = true;
                     let screenhalf = screen.width/2;
 
@@ -179,8 +190,6 @@ class CameraMovement {
                     this.camera2.width = screenhalf;
                     this.camera2.height = screen.height;
     
-
-
                     // Adjust the camera bounds to the full map + screen size offset
                     this.camera1.setBounds(-screen.width, -screen.height, this.map.widthInPixels + screen.width , this.map.heightInPixels + screen.height);
                     this.camera2.setBounds(-screen.width, -screen.height, this.map.widthInPixels + screen.width, this.map.heightInPixels + screen.height);

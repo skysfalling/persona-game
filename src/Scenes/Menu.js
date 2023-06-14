@@ -17,7 +17,7 @@ class Menu extends Phaser.Scene {
   
       // Start the Play scene when space bar is pressed
       this.input.keyboard.on('keydown-SPACE', () => {
-        this.scene.start('Play');
+        this.scene.start('playScene');
       });
     }
   }
