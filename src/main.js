@@ -3,6 +3,19 @@
 // Persona 
 // skysfalling - 2023
 // 
+/*
+
+Implemented Phaser Components :
+- Arcade Physics
+- Tile Maps
+- Timers
+- Animations
+- Camera Movement
+  + Midpoint Follow && Vertical Splitscreen
+- Point Lights
+- Bitmap Text Objects
+
+*/
 // =====================================================
 
 // debug with extreme prejudice
