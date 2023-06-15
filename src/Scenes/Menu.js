@@ -3,13 +3,15 @@ class GameManager extends Phaser.Scene {
     super('GameManager');
   }
 
-  create() {
+  preload(){
     console.log(">> GameManager initialization");
   
     this.currentScene = '';
-  
+    this.soundManager = new SoundManager(this);
+    this.soundManager.load();
+  }
 
-  
+  create() {
     // Transition to the specified scene when the space bar is pressed
     const transitionToScene = (sceneKey) => {
       if (this.currentScene !== sceneKey && this.scene.isActive('Menu')) {
@@ -43,6 +45,10 @@ class GameManager extends Phaser.Scene {
     this.input.keyboard.on('keydown-TWO', () => {
       transitionToScene('Level2');
     });
+
+    // START BACKGROUND MUSIC
+    this.soundManager.playMusic('backgroundMusic', { loop: true, volume: 0.2 });
+
   }
   
 }

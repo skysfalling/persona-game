@@ -14,6 +14,7 @@ class Cat extends Phaser.GameObjects.Sprite {
 
         console.log(":3 CAT -> NEW!", this.properties);
 
+        this.satisfied = false;
         this.correspondingExit;
         this.setupAnimations();
 
@@ -95,12 +96,15 @@ class Cat extends Phaser.GameObjects.Sprite {
 
     submit(id)
     {
-        if (id == this.id_type)
+        if (id == this.id_type && !this.satisfied )
         {
             console.log(" :3 CAT -> is satisfied by type " + id);
             this.moveToExit();
 
             this.objective_id = -1; // satisfied by type
+            this.satisfied = true;
+
+            this.scene.soundManager.playRandCatSfx();
         }
     }
 

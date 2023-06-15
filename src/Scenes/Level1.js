@@ -9,6 +9,9 @@ class Level1 extends Phaser.Scene {
         this.load.path = "./assets/";
         this.scene.launch('UI');
 
+        this.soundManager = new SoundManager(this);
+        this.soundManager.load();
+
         // Create a new instance of LevelRoutine with the JSON file
         this.levelRoutine = new LevelRoutine(this, 'level_routine.json');
         this.levelRoutine.start();
@@ -157,9 +160,6 @@ class Level1 extends Phaser.Scene {
         const hiddenObjectPositions = this.map.filterObjects("violet_echos", obj => obj.name === "heart");
         this.violet_echos = this.add.group();
         // #endregion
-        
-
-        
         
         // #region [[ CREATE COLLISIONS ]] --------------------------------------------------------------//>>
         this.physics.world.TILE_BIAS = 1000;  // increase to prevent sprite tunneling through tiles
