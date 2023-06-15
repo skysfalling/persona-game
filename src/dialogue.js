@@ -142,7 +142,7 @@ class Dialogue {
         this.scene = scene;
 
         // create dialogue manager if needed
-        if (!this.scene.dialogueManager) {this.scene.dialogueManager = new DialogueManager(scene);}
+        this.scene.dialogueManager = new DialogueManager(scene);
         this.dialogueManager = this.scene.dialogueManager;
         this.dialogueManager.isTyping = false;
 

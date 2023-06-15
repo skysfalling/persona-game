@@ -32,14 +32,14 @@
       ]
     },
     {
-        "delay": 1,
+        "delay": 0,
         "freezePlayer": true,
         "character_id": 2,
         "objective_id": 1,
         "text": [". . ."]
     },
     {
-        "delay": 0.5,
+        "delay": 0,
         "freezePlayer": true,
         "character_id": 1,
         "objective_id": 1,

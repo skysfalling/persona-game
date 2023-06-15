@@ -11,6 +11,7 @@ class Level1 extends Phaser.Scene {
 
         this.soundManager = new SoundManager(this);
         this.soundManager.load();
+        this.gameManager = this.scene.get('GameManager');
 
         // Create a new instance of LevelRoutine with the JSON file
         this.levelRoutine = new LevelRoutine(this, 'level_routine.json');
@@ -234,7 +235,6 @@ class Level1 extends Phaser.Scene {
   
     // UPDATE OBJECTIVE COUNT
     updateObjectiveCount() {
-
         const objectiveCount = {};
         this.cats.children.iterate(cat => {
           const objectiveId = cat.objective_id;
@@ -262,7 +262,7 @@ class Level1 extends Phaser.Scene {
           return this.objectiveCount[objective_id];
         }
         return 0;
-      }
+    }
 
     updatePlayerLeft(){
         if (this.p1.x < this.p2.x){
@@ -306,6 +306,14 @@ class Level1 extends Phaser.Scene {
 
         this.updateObjectiveCount();
 
+
+        // END OF GAME
+        if (this.levelRoutine.endOfRoutine)
+        {
+            this.time.delayedCall(2000, () => {
+                this.gameManager.transitionFromLevelToMenu();
+            }, [], this);        
+        }
     }
 
 

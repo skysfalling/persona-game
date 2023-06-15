@@ -10,10 +10,11 @@ class LevelRoutine {
     this.characterIds = [];
     this.consoleTexts = [];
 
-
     // Load and parse the JSON file
     this.json = jsonFile;
     this.loadJSON(this.json);
+
+    this.endOfRoutine = false;
   }
 
   loadJSON(jsonFile) {
@@ -50,7 +51,7 @@ class LevelRoutine {
 
     const stateMachine = () => {
       if (currentIndex >= this.consoleTexts.length) {
-        // End of routine
+        this.endOfRoutine = true;
         return;
       }
 
