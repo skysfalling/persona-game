@@ -129,12 +129,26 @@ class Menu extends Phaser.Scene {
   }
 
   create() {
-    // Display the menu text
+
     this.add.text(
-      this.cameras.main.centerX,
-      this.cameras.main.centerY,
+      screen.center.x,
+      screen.center.y - 25,
+      'Persona',
+      { fontSize: '24px', fill: '#fff' }
+    ).setOrigin(0.5);
+
+    this.add.text(
+      screen.center.x,
+      screen.center.y + 50,
       'Press Space to Start',
-      { fontSize: '16px', fill: '#fff' }
+      { fontSize: '12px', fill: '#fff' }
+    ).setOrigin(0.5);
+
+    this.add.text(
+      screen.center.x,
+      screen.botMid.y - 10,
+      'skysfalling. 2023. v0.2 ',
+      { fontSize: '10px', fill: '#fff', resolution: 1 }
     ).setOrigin(0.5);
 
     // Add the GIF sprite

@@ -21,7 +21,9 @@ class SoundManager {
         this.loadMusic('backgroundMusic', 'assets/sounds/death_of_an_octopus.wav');
 
         this.loadSFX('cat1', 'assets/sounds/cat_1.wav');
-        this.catSfxList = ['cat1']; // List of cat sound effect keys
+        this.loadSFX('cat2', 'assets/sounds/cat_2.wav');
+
+        this.catSfxList = ['cat1', 'cat2']; // List of cat sound effect keys
 
     }
     // #endregion

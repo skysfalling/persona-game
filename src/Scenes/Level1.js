@@ -251,10 +251,13 @@ class Level1 extends Phaser.Scene {
         this.objectiveCount = objectiveCount;
 
         //console.log("Objective Count:", this.objectiveCount);
+
+        /*
         const objectiveCountElement = document.getElementById("objectiveCount");
         if (objectiveCountElement) {
           objectiveCountElement.textContent = "Objective Count : " + JSON.stringify(this.objectiveCount);
         }
+        */
     };
 
     getObjectiveCount(objective_id) {
@@ -310,7 +313,7 @@ class Level1 extends Phaser.Scene {
         // END OF GAME
         if (this.levelRoutine.endOfRoutine)
         {
-            this.time.delayedCall(2000, () => {
+            this.time.delayedCall(1000, () => {
                 this.gameManager.transitionFromLevelToMenu();
             }, [], this);        
         }
