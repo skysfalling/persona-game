@@ -72,6 +72,10 @@ class Menu extends Phaser.Scene {
     super('Menu');
   }
 
+  preload() {
+    this.load.spritesheet('gif', 'assets/cutscene/test-cutscene.png', { frameWidth: 270, frameHeight: 270 });
+  }
+
   create() {
     // Display the menu text
     this.add.text(
@@ -81,9 +85,20 @@ class Menu extends Phaser.Scene {
       { fontSize: '16px', fill: '#fff' }
     ).setOrigin(0.5);
 
+    // Add the GIF sprite
+    //this.gif = this.add.sprite(this.cameras.main.centerX, this.cameras.main.centerY + 50, 'gif');
+
+    // Start the animation
+    this.anims.create({
+      key: 'gif',
+      frames: this.anims.generateFrameNumbers('gif', { start: 0, end: -1 }),
+      frameRate: 10, // Set the frame rate to 10 frames per second
+      repeat: -1 // Repeat indefinitely
+    });
+    //this.gif.play('gif');
+
     // Start the GameManager scene
     this.scene.launch('GameManager');
   }
 }
-
 

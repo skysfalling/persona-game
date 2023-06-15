@@ -5,17 +5,149 @@
       "character_id": 1,
       "objective_id": -1,
       "text": [
-          "Hello, welcome to Persona, a horror-mystery physics puzzle game."
+        "There's a white cat out here!",
+        "come heeeere kitty kitty"
+      ]
+    },
+    {
+      "delay": 0.5,
+      "freezePlayer": true,
+      "character_id": 1,
+      "objective_id": 0,
+      "text": [
+        "Look at these cats! They're all out playing right now!",
+        "Don't you love how these cats are just enjoying their time?",
+        "I wish we could be like that.",
+        "Come on Blue we're playing with the cats today!"
+      ]
+    },
+    {
+      "delay": 0.5,
+      "freezePlayer": true,
+      "character_id": 1,
+      "objective_id": 1,
+      "text": [
+        "It's like we're in sync!",
+        "Always part of each other."
+      ]
+    },
+    {
+        "delay": 1,
+        "freezePlayer": true,
+        "character_id": 2,
+        "objective_id": 1,
+        "text": [". . ."]
+    },
+    {
+        "delay": 0.5,
+        "freezePlayer": true,
+        "character_id": 1,
+        "objective_id": 1,
+        "text": ["I'll always be here for you Blue."]
+    },
+    {
+      "delay": 0.5,
+      "freezePlayer": true,
+      "character_id": 1,
+      "objective_id": 2,
+      "text": [
+        "You're really quiet today. It's not like you.",
+        "Don't you find the cats exciting?"
       ]
     },
     {
         "delay": 0,
         "freezePlayer": true,
+        "character_id": 2,
+        "objective_id": 2,
+        "text": [". . ."]
+    },
+    {
+      "delay": 0.5,
+      "freezePlayer": true,
+      "character_id": 1,
+      "objective_id": 3,
+      "text": [
+        "You're doing great, Blue. Just like I knew you would. Let's keep going."
+      ]
+    },
+    {
+        "delay": 0,
+        "freezePlayer": true,
+        "character_id": 2,
+        "objective_id": 3,
+        "text": [". . ."]
+    },
+    {
+      "delay": 1,
+      "freezePlayer": true,
+      "character_id": 1,
+      "objective_id": 4,
+      "text": [
+        "Sometimes I feel like we're the only two people in the world.",
+        "Isn't it exciting, how we can fill the silence with our own stories, our own secrets?"
+      ]
+    },
+    {
+        "delay": 0,
+        "freezePlayer": true,
+        "character_id": 2,
+        "objective_id": 4,
+        "text": [". . ."]
+    },
+    {
+        "delay": 2,
+        "freezePlayer": true,
         "character_id": 1,
-        "objective_id": 0,
+        "objective_id": 4,
         "text": [
-            "Line 2"
+            "What are you hiding from me Blue?",
+            "Is it about last night?"
+        ]
+    },
+    {
+        "delay": 0,
+        "freezePlayer": true,
+        "character_id": 2,
+        "objective_id": 4,
+        "text": [". . ."]
+    },
+    {
+        "delay": 1,
+        "freezePlayer": true,
+        "character_id": 1,
+        "objective_id": 4,
+        "text": [
+            "Blue, why won't you talk to me? Are you even here with me?"
+        ]
+    },
+    {
+        "delay": 0,
+        "freezePlayer": true,
+        "character_id": 2,
+        "objective_id": 4,
+        "text": [". . ."]
+    },
+    {
+        "delay": 1,
+        "freezePlayer": true,
+        "character_id": 1,
+        "objective_id": 4,
+        "text": [
+            "You're always off in wonderland",
+            "It's like you dont even love me anymore."
+        ]
+    },
+    {
+        "delay": 1,
+        "freezePlayer": true,
+        "character_id": 1,
+        "objective_id": 4,
+        "text": [
+            "Why do I even try?"
         ]
     }
-]
+  ]
+
+
   

@@ -95,7 +95,7 @@ class Cat extends Phaser.GameObjects.Sprite {
 
     submit(id)
     {
-        if (id == this.id_type && this.objective_id != -1)
+        if (id == this.id_type)
         {
             console.log(" :3 CAT -> is satisfied by type " + id);
             this.moveToExit();
