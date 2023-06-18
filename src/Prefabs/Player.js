@@ -401,6 +401,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.enableMove === false){
             this.currMoveSpeed = 0;
             this.movementStates.IDLE.enter();
+            this.scene.soundManager.enableWalkLoopSFX(false);
             return;
         }
         else {
@@ -438,15 +439,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.movementStates.DOWN.enter();
                 }
             }
-            else{
+            else
+            {
                 this.movementStates.IDLE.enter();
             }
         }
-
-
-
-
-
     }
 
     newTetheredObject(object){
@@ -454,6 +451,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         console.log(this.prefix + " - tethered object : " + object.name);
         this.tetheredObject = object;
+
+
     }
 
     getDirectionOfObj(object) {

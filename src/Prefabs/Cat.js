@@ -104,7 +104,7 @@ class Cat extends Phaser.GameObjects.Sprite {
             this.objective_id = -1; // satisfied by type
             this.satisfied = true;
 
-            this.scene.soundManager.playRandCatSfx();
+            this.scene.soundManager.playRandCatSfx();22
         }
     }
 

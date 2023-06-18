@@ -28,8 +28,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 898,
-                "y": 512.5
+                "x": 896.5,
+                "y": 511.5
             }
         },
         "map1.json#character-sheet": {
@@ -45,8 +45,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": -20,
-                "y": 236.5
+                "x": -20.5,
+                "y": 235.5
             }
         },
         "map1.tmx#character-sheet": {
@@ -137,15 +137,15 @@
         },
         "whispering_pines_01.json": {
             "expandedObjectLayers": [
+                5,
                 6,
-                12,
-                5
+                12
             ],
-            "scale": 3,
-            "selectedLayer": 7,
+            "scale": 1,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 857.3333333333333,
-                "y": 492.66666666666663
+                "x": 658.5,
+                "y": 303.5
             }
         },
         "whispering_pines_01.json#persona": {
@@ -224,9 +224,9 @@
     "project": "persona.tiled-project",
     "property.type": "color",
     "recentFiles": [
-        "map2.json",
-        "map1.json",
         "map1.tmx",
+        "map1.json",
+        "map2.json",
         "whispering_pines_01.json",
         "whispering_pines_01.tmx",
         "heart.tsx",

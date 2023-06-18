@@ -230,9 +230,10 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
                 this.id_type = player.playerID;
             }
             this.playLoopAnim();
-
-
+            this.scene.soundManager.playSFX("tether_connect", {volume: 0.1});
         }
+
+
     }
 
     disconnectPlayer(player) {
@@ -262,6 +263,8 @@ class Heart extends Phaser.Physics.Arcade.Sprite {
                 this.id_type = 0;
             }
             this.playSpinAnim();
+            this.scene.soundManager.playSFX("tether_break", {volume: 0.1});
+
         }
     }
 

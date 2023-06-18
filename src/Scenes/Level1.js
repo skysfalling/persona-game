@@ -220,6 +220,10 @@ class Level1 extends Phaser.Scene {
             this.p2.toggleDebug();
         }); 
         //#endregion
+    
+        this.soundManager.playMusic("backgroundMusic", {loop:true, volume: 0.2});
+        this.soundManager.playSFX("ambience", {loop:true});
+
     }
 
     toggleDebug(){
@@ -286,6 +290,18 @@ class Level1 extends Phaser.Scene {
         }
     }
 
+    updateAudio() {
+
+        if (this.p1.currentMovementState.name != "idle")
+        {
+            this.soundManager.enableWalkLoopSFX(true);
+        }
+        else 
+        {
+            this.soundManager.enableWalkLoopSFX(false);
+        }
+    }
+
     update (time, delta)
     {
         this.p1.update();
@@ -309,6 +325,7 @@ class Level1 extends Phaser.Scene {
 
         this.updateObjectiveCount();
 
+        this.updateAudio();
 
         // END OF GAME
         if (this.levelRoutine.endOfRoutine)

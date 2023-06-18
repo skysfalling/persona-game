@@ -63,13 +63,13 @@ class LevelRoutine {
 
 
 
-      console.log("curr objectiveId: " + objectiveId);
-      console.log(" count : " + this.scene.getObjectiveCount(objectiveId));
+      //console.log("curr objectiveId: " + objectiveId);
+      //console.log(" count : " + this.scene.getObjectiveCount(objectiveId));
 
       // Check if should wait for objective to be completed
       if (this.scene.getObjectiveCount(objectiveId) > 0) {
 
-          console.log(this.prefix + "currObjective " + objectiveId + " // Count: " + this.scene.getObjectiveCount(objectiveId));
+          //console.log(this.prefix + "currObjective " + objectiveId + " // Count: " + this.scene.getObjectiveCount(objectiveId));
           // Delay the state machine for 1 second before checking again
           this.scene.time.delayedCall(1000, stateMachine);
           return;

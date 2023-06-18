@@ -20,7 +20,7 @@ class DialogueManager {
         // Define a key to toggle editor mode
         this.skipTextActive = false;
         this.fontSize = 16;
-        this.characterDelay = 25;
+        this.characterDelay = 35;
         this.characterWrapLimit = 40; // Adjust the character wrap limit as needed
 
         // -- create dialog text object --------------------------------------------------------
@@ -58,6 +58,10 @@ class DialogueManager {
         this.backgroundRect.setDepth(globalDepth.ui);
 
         this.hide();
+
+
+        this.soundManager = new SoundManager(this.scene);
+        this.soundManager.load();
     }
     // adds 'newline' so that the text wraps
     wrapTextString(text, wrapLimit) {
@@ -111,6 +115,8 @@ class DialogueManager {
             callback: () => {
                 this.dialogueTextObj.setText(this.dialogueTextObj.text + this.currText[this.currCharIndex]);
                 this.currCharIndex++;
+
+                this.soundManager.playRandTextClick();
 
                 // stop event if text finished
                 if (this.currCharIndex === this.currText.length) {

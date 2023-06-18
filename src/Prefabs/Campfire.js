@@ -11,7 +11,7 @@ class Campfire extends Phaser.GameObjects.Sprite {
         this.setupAnimations();
 
         this.pos = {x: this.x, y: this.y}; // update reference position for objects
-        this.center_pos = { x: this.x + this.width/2, y: this.y + this.height/2 } //center position  b
+        this.center_pos = { x: this.x + this.width/4, y: this.y + this.height/4 } //center position  b
     }
   
     setupAnimations() {
