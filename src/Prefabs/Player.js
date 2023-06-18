@@ -5,6 +5,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
 
         this.enableMove = true;
+        this.freezeOverride = false;
         this.echoActive = false;
 
         // input references
@@ -401,7 +402,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if (this.enableMove === false){
             this.currMoveSpeed = 0;
             this.movementStates.IDLE.enter();
-            this.scene.soundManager.enableWalkLoopSFX(false);
             return;
         }
         else {

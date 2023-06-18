@@ -9,7 +9,7 @@ class GameManager extends Phaser.Scene {
     this.scene.launch('Menu');
     this.menuScene = this.scene.get("Menu");
 
-    this.currentSceneKey = "";
+    this.currentSceneKey = "Menu";
     this.currentUI = this.scene.get("UI");
 
     this.soundManager = new SoundManager(this);
@@ -73,7 +73,7 @@ class GameManager extends Phaser.Scene {
 
         this.currentScene = this.scene.get(levelSceneKey);
         console.log(this.scene.manager.getScenes());
-        console.log("]] TRANSITION TO LEVEL " + this.currentSceneKey + " -> " + levelSceneKey);
+        console.log("]] TRANSITION MENU TO LEVEL " + this.currentSceneKey + " -> " + levelSceneKey);
       });
     }
   };
@@ -96,35 +96,63 @@ class GameManager extends Phaser.Scene {
         this.scene.launch("Menu");
 
         this.currentScene = this.scene.get("Menu");
-
       });
     }
   };
 
+  transitionBetweenLevels(levelSceneKey) {
+    console.log("transition attempt " + levelSceneKey);
+    const oldLevelKey = this.currentSceneKey;
+
+    if (this.currentSceneKey !== levelSceneKey) {
+      console.log(">> GameManager Scene Switch (" + this.currentSceneKey + " -> " + levelSceneKey + ")");
+      console.log("Active Scenes: ", this.scene.manager.getScenes());
+  
+      this.currentScene = this.scene.get(this.currentSceneKey);
+      this.currentSceneKey = levelSceneKey;
+  
+      this.currentScene.cameras.main.fadeOut(500, 0, 0, 0);
+      this.currentScene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+        this.scene.stop(oldLevelKey);
+  
+        // Start or restart the UI scene
+        this.scene.stop('UI');
+        this.scene.launch('UI');
+
+        // Start or restart the level scene
+        if (this.scene.isActive(levelSceneKey)) {
+          this.scene.restart(levelSceneKey);
+        } else {
+          this.scene.launch(levelSceneKey);
+        }
+  
+        this.currentScene = this.scene.get(levelSceneKey);
+      });
+    }
+  }
+  
+
   create() {
     // Capture the space bar input
     this.input.keyboard.on('keydown-SPACE', () => {
-      //this.transitionFromMenuToLevel('Level1');
-      if (this.currentSceneKey == "Menu")
+      if (this.currentSceneKey === "Menu")
       {
         this.transitionFromMenuToCutscene('Cutscene');
-        this.soundManager.stopMusic();
+        this.soundManager.fadeAndStopMusic();
       }
-
-      
     });
   
     this.input.keyboard.on('keydown-ONE', () => {
-      this.transitionFromMenuToLevel('Level1');
+      this.transitionBetweenLevels('Level1');
     });
   
     this.input.keyboard.on('keydown-TWO', () => {
-      this.transitionFromMenuToLevel('Level2');
+      this.transitionBetweenLevels('Level2'); 
     });
 
     // Debug functionality
     this.input.keyboard.on('keydown-THREE', () => {
-      this.transitionFromLevelToMenu();
+      this.transitionBetweenLevels('Level3');
     });
 
     this.input.keyboard.on('keydown-FOUR', () => {
@@ -136,6 +164,10 @@ class GameManager extends Phaser.Scene {
 
   }
   
+  update(){
+    console.log(this.scene.manager.getScenes());
+
+  }
 }
 
 class UI extends Phaser.Scene {

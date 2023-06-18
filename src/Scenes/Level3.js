@@ -1,11 +1,11 @@
 
-class Level1 extends Phaser.Scene {
+class Level3 extends Phaser.Scene {
     constructor() {
-        super("Level1");
+        super("Level3");
     }
 
     preload() {
-        console.log(">> Level 1 initialization");
+        console.log(">> Level 3 initialization");
         this.load.path = "./assets/";
         //this.scene.launch('UI');
 
@@ -19,7 +19,7 @@ class Level1 extends Phaser.Scene {
         this.load.image("tiles", "tilemap/whispering_pines_tileset.png");    // tile sheet
         this.load.image("persona", "tilemap/persona-tileset.png");    // tile sheet
 
-        this.load.tilemapTiledJSON("level1_map", "tilemap/whispering_pines_01.json");    // Tiled JSON file
+        this.load.tilemapTiledJSON("level3_map", "tilemap/whispering_pines_03.json");    // Tiled JSON file
         this.load.spritesheet('tileAtlas', 'tilemap/persona-tileset.png', {
             frameWidth: 16,
             frameHeight: 16
@@ -51,7 +51,7 @@ class Level1 extends Phaser.Scene {
         // Create a new instance of LevelRoutine with the JSON file
         this.levelRoutine = new LevelRoutine(this);
         this.levelRoutine.uiScene = this.scene.get('UI');
-        this.levelRoutine.loadJSON('level1', 'level1_routine.json');
+        this.levelRoutine.loadJSON('level3', 'level3_routine.json');
 
         this.lights.enable().setAmbientColor(0xaaaaaa);
 
@@ -60,7 +60,7 @@ class Level1 extends Phaser.Scene {
 
         // #region [[ SETUP TILEMAP ]] --------------------------------------------------------------//>>
         // add a tile map
-        this.map = this.add.tilemap("level1_map"); 
+        this.map = this.add.tilemap("level3_map"); 
         const tileset = this.map.addTilesetImage("whispering_pines_tileset", "tiles");
         const persona = this.map.addTilesetImage("persona", "persona");
 
@@ -81,13 +81,14 @@ class Level1 extends Phaser.Scene {
         const unlitLayer = this.map.createLayer("unlit", tileset, 0, 0);
         collision_foregroundLayer.setDepth(globalDepth.ui);
 
+        /*
         const debugGraphics = this.add.graphics().setAlpha(0.75).setDepth(globalDepth.debug);
         collisionLayer.renderDebug(debugGraphics, {
             tileColor: null, // Color of non-colliding tiles
             collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
             faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
         });
-        
+        */
 
         // create Room Handler from "rooms" object layer
         this.roomHandler = new RoomHandler(this, 'rooms');
@@ -102,7 +103,8 @@ class Level1 extends Phaser.Scene {
 
         const p2Spawn = this.map.findObject("player_spawn", obj => obj.name === "p2spawn");
         this.p2 = new Player(this, p2Spawn.x, p2Spawn.y, 'blue', 2, false);
-        //this.p2.enableMove = false;
+        this.p2.enableMove = false;
+        this.p2.freezeOverride = true;
         //this.p2.setVisible(false);
         //this.p2.setAlpha(0.5);
 
@@ -113,7 +115,7 @@ class Level1 extends Phaser.Scene {
         // #region [[ SETUP CAMERA MOVEMENT]] --------------------------------------------------------------//>>
         this.cameraMovement = new CameraMovement(this, this.p1, this.p2);
         this.cameraMovement.setup();     
-
+        this.cameraMovement.dualPlayerMovement = false;
         // Define a key to toggle editor mode
         /*
         this.input.keyboard.on('keydown-SPACE', () => {
@@ -226,6 +228,9 @@ class Level1 extends Phaser.Scene {
         this.soundManager.playMusic("backgroundMusic", {loop:true, volume: 0.2});
         this.soundManager.playSFX("ambience", {loop:true});
 
+
+        this.endGame = false;
+
     }
 
     toggleDebug(){
@@ -292,7 +297,6 @@ class Level1 extends Phaser.Scene {
         }
     }
 
-
     updateAudio() {
 
 
@@ -338,14 +342,22 @@ class Level1 extends Phaser.Scene {
         this.updateAudio();
 
         // END OF GAME
-        if (this.levelRoutine.endOfRoutine)
-        {
-            this.time.delayedCall(1000, () => {
-                this.gameManager.transitionFromLevelToMenu();
-            }, [], this);        
+        if (this.levelRoutine.endOfRoutine && !this.endGame) {
+            this.endGame = true;
+            this.tweens.add({
+                targets: this.p2,
+                alpha: 0,
+                duration: 5000,
+                ease: 'Linear',
+                onComplete: () => {
+                    this.time.delayedCall(1000, () => {
+                        this.gameManager.transitionFromLevelToMenu();
+                    }, [], this);        
+                }
+              });
+
+
         }
     }
-
-
 }
 

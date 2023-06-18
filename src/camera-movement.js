@@ -51,7 +51,7 @@ class CameraMovement {
         this.violetEchoOverlayRect.fillStyle(global_colors.violet.int, 0.35); // Set the fill color and default alpha
         this.violetEchoOverlayRect.fillRect(0, 0, screen.width, screen.height);
         this.violetEchoOverlayRect.setScrollFactor(0);
-        this.violetEchoOverlayRect.setDepth(globalDepth.playerEffects);
+        this.violetEchoOverlayRect.setDepth(globalDepth.ui);
         this.violetEchoOverlayRect.setAlpha(0);
 
         this.blueEchoOverlayRect = this.scene.add.graphics();
@@ -99,6 +99,7 @@ class CameraMovement {
     update() {
 
         this.gizmos.clear();
+        //console.log("camera update", this.scene);
 
         if (this.editorMode) {
             this.updateEditorMode();
@@ -111,7 +112,7 @@ class CameraMovement {
             if (this.dualPlayerMovement === false)
             {
                 //console.log("single player movement");
-                const lerpAmount = 0.1;
+                const lerpAmount = 1;
                 this.mainCameraTarget.x = Phaser.Math.Linear(this.mainCameraTarget.x, this.p1.x, lerpAmount);
                 this.mainCameraTarget.y = Phaser.Math.Linear(this.mainCameraTarget.y, this.p1.y, lerpAmount);
                 this.mainCamera.setAlpha(1);

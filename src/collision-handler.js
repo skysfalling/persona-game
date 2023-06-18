@@ -18,7 +18,10 @@ class CollisionHandler {
     }
     playerOverlapConnection(player, object){
         this.objectOverlap(player.overlapTrigger, object, (none, object) => {
-            object.connectPlayer(player);
+            if (!player.tetheredObject)
+            {
+                object.connectPlayer(player);
+            }
         });
     }
 

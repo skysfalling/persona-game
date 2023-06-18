@@ -39,7 +39,7 @@ let config = {
             gravity: { y: 0 }
         }
     },
-    scene: [GameManager, Cutscene, Menu, Level1, Level2, UI ]
+    scene: [GameManager, Cutscene, Menu, Level1, Level2, Level3, UI ]
 };
 
 const game = new Phaser.Game(config);
@@ -52,10 +52,10 @@ const h = game.config.height;
 let cursors = null;
 
 let globalDepth = {
-    env_background: -2,
-    playerEffects: -1,
-    playArea: 0,
-    env_foreground: 1,
+    env_background: -3,
+    playerEffects: -2,
+    playArea: 1,
+    env_foreground: 0,
     ui: 2,
     debug: 3
 }

@@ -1,7 +1,6 @@
 [
     {
       "delay": 1,
-      "freezePlayer": true,
       "character_id": 1,
       "objective_id": -1,
       "text": [
@@ -11,7 +10,6 @@
     },
     {
       "delay": 0.5,
-      "freezePlayer": true,
       "character_id": 1,
       "objective_id": 0,
       "text": [
@@ -23,7 +21,6 @@
     },
     {
       "delay": 0.5,
-      "freezePlayer": true,
       "character_id": 1,
       "objective_id": 1,
       "text": [
@@ -33,21 +30,18 @@
     },
     {
         "delay": 0,
-        "freezePlayer": true,
         "character_id": 2,
         "objective_id": 1,
         "text": [". . ."]
     },
     {
         "delay": 0,
-        "freezePlayer": true,
         "character_id": 1,
         "objective_id": 1,
         "text": ["I'll always be here for you Blue."]
     },
     {
       "delay": 0.5,
-      "freezePlayer": true,
       "character_id": 1,
       "objective_id": 2,
       "text": [
@@ -57,14 +51,12 @@
     },
     {
         "delay": 0,
-        "freezePlayer": true,
         "character_id": 2,
         "objective_id": 2,
         "text": [". . ."]
     },
     {
       "delay": 0.5,
-      "freezePlayer": true,
       "character_id": 1,
       "objective_id": 3,
       "text": [
@@ -73,14 +65,12 @@
     },
     {
         "delay": 0,
-        "freezePlayer": true,
         "character_id": 2,
         "objective_id": 3,
         "text": [". . ."]
     },
     {
       "delay": 1,
-      "freezePlayer": true,
       "character_id": 1,
       "objective_id": 4,
       "text": [
@@ -90,31 +80,26 @@
     },
     {
         "delay": 0,
-        "freezePlayer": true,
         "character_id": 2,
         "objective_id": 4,
         "text": [". . ."]
     },
     {
         "delay": 2,
-        "freezePlayer": true,
         "character_id": 1,
         "objective_id": 4,
         "text": [
-            "What are you hiding from me Blue?",
-            "Is it about last night?"
+            "What are you hiding from me Blue?"
         ]
     },
     {
         "delay": 0,
-        "freezePlayer": true,
         "character_id": 2,
         "objective_id": 4,
         "text": [". . ."]
     },
     {
         "delay": 1,
-        "freezePlayer": true,
         "character_id": 1,
         "objective_id": 4,
         "text": [
@@ -123,14 +108,12 @@
     },
     {
         "delay": 0,
-        "freezePlayer": true,
         "character_id": 2,
         "objective_id": 4,
         "text": [". . ."]
     },
     {
         "delay": 1,
-        "freezePlayer": true,
         "character_id": 1,
         "objective_id": 4,
         "text": [
@@ -140,7 +123,6 @@
     },
     {
         "delay": 1,
-        "freezePlayer": true,
         "character_id": 1,
         "objective_id": 4,
         "text": [

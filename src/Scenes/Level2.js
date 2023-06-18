@@ -5,24 +5,19 @@ class Level2 extends Phaser.Scene {
     }
 
     preload() {
-        console.log(">> Level 1 initialization");
+        console.log(">> Level 2 initialization");
         this.load.path = "./assets/";
-        this.scene.launch('UI');
+        //this.scene.launch('UI');
 
         this.soundManager = new SoundManager(this);
         this.soundManager.load();
         this.gameManager = this.scene.get('GameManager');
 
-        // Create a new instance of LevelRoutine with the JSON file
-        this.levelRoutine = new LevelRoutine(this, 'level_routine.json');
-        //this.levelRoutine.start();
-        this.levelRoutine.uiScene = this.scene.get('UI');
-
         // load assets
         this.load.image("tiles", "tilemap/whispering_pines_tileset.png");    // tile sheet
         this.load.image("persona", "tilemap/persona-tileset.png");    // tile sheet
 
-        this.load.tilemapTiledJSON("map", "tilemap/whispering_pines_02.json");    // Tiled JSON file
+        this.load.tilemapTiledJSON("level2_map", "tilemap/whispering_pines_02.json");    // Tiled JSON file
         this.load.spritesheet('tileAtlas', 'tilemap/persona-tileset.png', {
             frameWidth: 16,
             frameHeight: 16
@@ -51,6 +46,11 @@ class Level2 extends Phaser.Scene {
 
     create() {
 
+        // Create a new instance of LevelRoutine with the JSON file
+        this.levelRoutine = new LevelRoutine(this);
+        this.levelRoutine.uiScene = this.scene.get('UI');
+        this.levelRoutine.loadJSON('level2', 'level2_routine.json');
+
         this.lights.enable().setAmbientColor(0xaaaaaa);
 
         // get inputs
@@ -58,14 +58,13 @@ class Level2 extends Phaser.Scene {
 
         // #region [[ SETUP TILEMAP ]] --------------------------------------------------------------//>>
         // add a tile map
-        this.map = this.add.tilemap("map"); 
+        this.map = this.add.tilemap("level2_map"); 
         const tileset = this.map.addTilesetImage("whispering_pines_tileset", "tiles");
         const persona = this.map.addTilesetImage("persona", "persona");
 
         // setup tilemap layers
         const env_foregroundLayer = this.map.createLayer("env_foreground", tileset, 0, 0).setPipeline('Light2D');
         env_foregroundLayer.setDepth(globalDepth.env_foreground);
-        console.log(env_foregroundLayer.depth);
 
         const env_backgroundLayer = this.map.createLayer("env_background", tileset, 0, 0).setPipeline('Light2D');
         env_backgroundLayer.setDepth(globalDepth.env_background);
@@ -79,13 +78,14 @@ class Level2 extends Phaser.Scene {
         const unlitLayer = this.map.createLayer("unlit", tileset, 0, 0);
         collision_foregroundLayer.setDepth(globalDepth.ui);
 
+        /*
         const debugGraphics = this.add.graphics().setAlpha(0.75).setDepth(globalDepth.debug);
         collisionLayer.renderDebug(debugGraphics, {
             tileColor: null, // Color of non-colliding tiles
             collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
             faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
         });
-        
+        */
 
         // create Room Handler from "rooms" object layer
         this.roomHandler = new RoomHandler(this, 'rooms');
@@ -292,14 +292,21 @@ class Level2 extends Phaser.Scene {
 
     updateAudio() {
 
-        if (this.p1.currentMovementState.name != "idle")
+
+        // play walk loop if moving
+        if (this.p1.currentMovementState.name != 'idle' || this.p2.currentMovementState.name != 'idle')
         {
-            this.soundManager.enableWalkLoopSFX(true);
+            this.soundManager.playSFX("walkLoop", {
+                loop : true, 
+                volume : 0.1
+            });
         }
-        else 
+        else if (this.p1.currentMovementState.name === 'idle' && this.p2.currentMovementState.name === 'idle')
         {
-            this.soundManager.enableWalkLoopSFX(false);
+            this.soundManager.stopSFX("walkLoop");
         }
+        //console.log("movementStates :: (p1) " + this.p1.currentMovementState.name + " :: (p2) " + this.p2.currentMovementState.name);
+
     }
 
     update (time, delta)
@@ -335,7 +342,5 @@ class Level2 extends Phaser.Scene {
             }, [], this);        
         }
     }
-
-
 }
 

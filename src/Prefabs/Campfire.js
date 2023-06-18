@@ -52,6 +52,7 @@ class Campfire extends Phaser.GameObjects.Sprite {
         else { this.anims.play('campfire_loop', true); }
 
         console.log("connect player campfire");
+        this.scene.soundManager.playSFX('campfire', {loop: true, volume: 1});
     }
 
     disconnectPlayer(player) {
@@ -61,6 +62,8 @@ class Campfire extends Phaser.GameObjects.Sprite {
 
         this.anims.play('campfire_loop', true);
         console.log(this.name + " disconnected " + this.player);
+
+        this.scene.soundManager.stopSFX('campfire');
     }
 }
   

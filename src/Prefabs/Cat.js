@@ -12,7 +12,7 @@ class Cat extends Phaser.GameObjects.Sprite {
         this.exit_id = properties.exit_id;
         this.objective_id = properties.objective_id;
 
-        console.log(":3 CAT -> NEW!", this.properties);
+        //console.log(":3 CAT -> NEW!", this.properties);
 
         this.satisfied = false;
         this.correspondingExit;

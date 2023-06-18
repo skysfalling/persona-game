@@ -1,0 +1,97 @@
+[
+  {
+      "delay": 1,
+      "character_id": 1,
+      "objective_id": -1,
+      "text": [
+          "Blue, isn't it lovely here? It feels like we're the only ones in the world."
+      ]
+  },
+  {
+      "delay": 0.5,
+      "character_id": 1,
+      "objective_id": -1,
+      "text": [
+          "Blue?",
+          "God dammit she ran off again."
+      ]
+  },
+  {
+    "delay": 0.5,
+    "character_id": 1,
+    "objective_id": 0,
+    "text": [
+      "Are they... avoiding me?", 
+      "They're doing this on purpose, aren't they? Just to hurt me, just to get my attention."
+    ]
+  },
+  {
+    "delay": 0.5,
+    "character_id": 1,
+    "objective_id": 1,
+    "text": [
+        "After all we've been through. She's my one and only, and I'm hers. What happened?"
+    ]
+  },
+  {
+    "delay": 0.5,
+    "character_id": 1,
+    "objective_id": 2,
+    "text": [
+        "Blue ! Blue ! There you are, come help me!"
+    ]
+  },
+  {
+      "delay": 0.5,
+      "character_id": 1,
+      "objective_id": 2,
+      "text": [
+          "You left me alone, Blue! I almost got lost looking for you!",
+          "Is it me? Did I say something that upset you? Is that why you're pulling away?",
+          "Just yesterday we were fine, I felt like we were in heaven! But now, every silent step you take, it's like a dagger in my heart!",
+          "Don't you know how much your silence hurts me? How can I understand what you're feeling if you won't let me in?",
+          "You are my everything love, why can't you see that?"
+      ]
+  },
+  {
+    "delay": 2,
+    "character_id": 2,
+    "objective_id": 2,
+    "text": [
+        "..."
+    ]
+  },
+  {
+    "delay": 1,
+    "character_id": 2,
+    "objective_id": 2,
+    "text": [
+        "i didnt lie"
+    ]
+},
+  {
+      "delay": 0.5,
+      "character_id": 1,
+      "objective_id": 2,
+      "text": [
+          "THEN WHAT IS WRONG WITH YOU ??",
+          "SPEAK UP BLUE!"
+      ]
+  },
+  {
+      "delay": 0,
+      "character_id": 2,
+      "objective_id": 2,
+      "text": [
+          "..."
+      ]
+  },
+  {
+      "delay": 0,
+      "character_id": 1,
+      "objective_id": 2,
+      "text": [
+          "BLUE!"
+      ]
+  }
+]

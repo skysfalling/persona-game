@@ -1,0 +1,133 @@
+[
+    {
+      "delay": 1,
+      "character_id": 1,
+      "objective_id": -1,
+      "text": [
+        "Blue's gone... because of me. Why can't I just keep my mouth shut?",
+        "I shouldn't have yelled ... I pushed them away. I need to find them."
+      ]
+    },
+    {
+      "delay": 0.5,
+      "character_id": 1,
+      "objective_id": 0,
+      "text": [
+        "We've always been together, even when we're apart. But now... it's different.",
+        "I can't feel her."
+      ]
+    },
+    {
+      "delay": 0.5,
+      "character_id": 1,
+      "objective_id": 1,
+      "text": [
+        "I took Blue's silence for granted...",
+        "Maybe it's their way of dealing with things. Why couldn't I understand that?",
+        "Maybe if I could just... apologize. Would they listen?"
+        ]
+    },
+    {
+      "delay": 1,
+      "character_id": 1,
+      "objective_id": 2,
+      "text": ["Blue... you're here."]
+    },
+    {
+      "delay": 0.5,
+      "character_id": 1,
+      "objective_id": 2,
+      "text": [
+        "I... I was so scared. I couldn't find you. I... I thought I had lost you."
+      ]
+    },
+    {
+      "delay": 0.5,
+      "character_id": 2,
+      "objective_id": 2,
+      "text": [
+        "I know... I messed up. I was wrong, so wrong.",
+        "I didn't understand... your silence. Your space. It was your way, not mine."
+      ]
+    },
+    {
+      "delay": 0.5,
+      "character_id": 1,
+      "objective_id": 2,
+      "text": [
+        "I just... I need you to know that I'm sorry.",
+        "I want to understand you, Blue. Not change you."
+      ]
+    },
+    {
+      "delay": 2,
+      "character_id": 2,
+      "objective_id": 2,
+      "text": [
+        "You never stopped to think about what I must feel, or even register that I'm different from you.",
+        "I like spending time around you Violet, you really know to make each summer an adventure.",
+        "But you're too caught up in yourself and how you feel to listen to me.",
+        "Then you get caught up in your head and then blame me for not reciprocating.",
+        "I am not you.",
+        "So don't expect me to be"
+      ]
+    },
+    {
+      "delay": 0.5,
+      "character_id": 1,
+      "objective_id": 2,
+      "text": [
+            "It's been hard not seeing you for so long.", 
+            "I've missed you so much.", 
+            "I'll listen, I swear I will.", 
+            "I promise"
+        ]
+    },
+    {
+      "delay": 0,
+      "character_id": 2,
+      "objective_id": 2,
+      "text": [
+        "I've missed you too Violet.", 
+        "But things can't go back to the way they were.", 
+        "I'ts over Violet", 
+        "I'm gone."
+        ]
+    },
+    {
+      "delay": 0.5,
+      "character_id": 1,
+      "objective_id": 2,
+      "text": ["But... you're here... You're here with me..."]
+    },
+    {
+      "delay": 0,
+      "character_id": 2,
+      "objective_id": 2,
+      "text": ["..."]
+    },
+    {
+      "delay": 1,
+      "character_id": 1,
+      "objective_id": 2,
+      "text": [
+        "Blue... I... I... I didn't know... I didn't...",
+        "I'm sorry, I didn't mean it."
+      ]
+    },
+    {
+      "delay": 0,
+      "character_id": 2,
+      "objective_id": 2,
+      "text": ["..."]
+    },
+    {
+        "delay": 0,
+        "character_id": 1,
+        "objective_id": 2,
+        "text": [
+          "I DIDNT MEAN IT"
+        ]
+      }
+  ]
+  
