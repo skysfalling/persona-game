@@ -17,6 +17,7 @@ class GameManager extends Phaser.Scene {
 
     this.soundManager = new SoundManager(this);
     this.soundManager.load();
+    
   }
 
   transitionToScene(targetSceneKey) {
@@ -63,16 +64,18 @@ class GameManager extends Phaser.Scene {
           else 
           {
             this.soundManager.stopMusic("backgroundMusic");
-            this.soundManager.stopSFX("backgroundMusic");
+            this.soundManager.stopSFX("ambience");
 
+            if (this,this.currentSceneKey == "Menu")
+            {
+              this.soundManager.playSFX("ambience", {loop: true});
+            }
           }
-
           console.log(this.prefix + " gameProgression: " + this.gameProgression);
       });
     }
   }
   
-
   create() {
     // Capture the space bar input
     this.input.keyboard.on('keydown-SPACE', () => {
@@ -116,7 +119,7 @@ class GameManager extends Phaser.Scene {
       this.transitionToScene('Level3');
     });
 
-    this.soundManager.playMusic("ambience", {loop:true});
+    this.soundManager.playSFX("ambience", {loop:true});
   }
 }
 
