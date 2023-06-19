@@ -43,7 +43,7 @@
     },
     {
       "delay": 0.5,
-      "character_id": 2,
+      "character_id": 1,
       "objective_id": 2,
       "text": [
         "I know... I messed up. I was wrong, so wrong.",
@@ -60,7 +60,15 @@
       ]
     },
     {
-      "delay": 2,
+      "delay": 1,
+      "character_id": 2,
+      "objective_id": 2,
+      "text": [
+        "..."
+      ]
+    },
+    {
+      "delay": 3,
       "character_id": 2,
       "objective_id": 2,
       "text": [

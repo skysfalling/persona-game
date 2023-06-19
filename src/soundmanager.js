@@ -118,13 +118,13 @@ class SoundManager {
     playRandCatSfx() {
         const randomIndex = Phaser.Math.RND.between(0, this.catSfxList.length - 1);
         const randomKey = this.catSfxList[randomIndex];
-        this.playSFX(randomKey, {volume : 2});
+        this.playSFX(randomKey, {volume : 4});
     }
 
     playRandTextClick() {
       const randomIndex = Phaser.Math.RND.between(0, this.textClickList.length - 1);
       const randomKey = this.textClickList[randomIndex];
-      this.playSFX(randomKey, {volume : 0.2});
+      this.playSFX(randomKey, {volume : 0.4});
     }
 
     // #endregion

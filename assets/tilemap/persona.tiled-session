@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map1.json",
+    "activeFile": "whispering_pines_03.json",
     "expandedProjectPaths": [
         "."
     ],
@@ -137,15 +137,15 @@
         },
         "whispering_pines_01.json": {
             "expandedObjectLayers": [
-                5,
                 6,
+                5,
                 12
             ],
             "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 761.3333333333333,
-                "y": 366.33333333333326
+                "x": 800,
+                "y": 799.6666666666665
             }
         },
         "whispering_pines_01.json#persona": {
@@ -177,15 +177,15 @@
         },
         "whispering_pines_02.json": {
             "expandedObjectLayers": [
-                5,
                 6,
+                5,
                 12
             ],
             "scale": 3,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1054,
-                "y": 843.8333333333333
+                "x": 800,
+                "y": 799.8333333333333
             }
         },
         "whispering_pines_02.json#whispering_pines_tileset": {
@@ -197,11 +197,11 @@
                 6,
                 12
             ],
-            "scale": 1,
-            "selectedLayer": 1,
+            "scale": 3,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 940,
-                "y": 717.5
+                "x": 1114.6666666666665,
+                "y": 498.16666666666663
             }
         },
         "whispering_pines_03.json#whispering_pines_tileset": {
@@ -219,24 +219,25 @@
     "map.tileWidth": 16,
     "map.width": 100,
     "openFiles": [
-        "map1.json",
-        "map1.tmx"
+        "whispering_pines_01.json",
+        "whispering_pines_02.json",
+        "whispering_pines_03.json"
     ],
     "project": "persona.tiled-project",
     "property.type": "color",
     "recentFiles": [
+        "whispering_pines_01.json",
+        "whispering_pines_02.json",
+        "whispering_pines_03.json",
         "map1.tmx",
         "map1.json",
         "map2.json",
-        "whispering_pines_01.json",
         "whispering_pines_01.tmx",
         "heart.tsx",
         "map2.tmx",
         "cat_idle.tsx",
         "persona.tsx",
-        "monochrome_packed.tsx",
-        "tilemap01.json",
-        "tilemap01.tmx"
+        "monochrome_packed.tsx"
     ],
     "tileset.embedInMap": true,
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
