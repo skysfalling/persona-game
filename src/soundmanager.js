@@ -76,7 +76,7 @@ class SoundManager {
     // #region SFX
 
     // Play sound effect
-    playSFX(key, config) {
+    playSFX(key, config = {volume: 1}) {
       let sound = this.sfx[key];
 
       // create sound effect
@@ -95,7 +95,7 @@ class SoundManager {
     }
 
     // Stop playing a specific sound effect
-    stopSFX(key) {
+    stopSFX(key) {      
       if (this.sfx[key]) {
         const sound = this.sfx[key];
         sound.stop();
@@ -146,7 +146,7 @@ class SoundManager {
     }
     //#endregion
 
-    fadeAndStopMusic(key, duration = 100) {
+    fadeAndStopMusic(key, duration = 1000) {
       const music = this.music[key];
     
       if (music) {
@@ -159,6 +159,25 @@ class SoundManager {
           if (music.volume <= 0) {
             music.stop();
             clearInterval(fadeOutInterval);
+          }
+        }, 1); // Interval of 1ms for smoother fade-out
+      }
+    }
+
+    fadeAndStopSFX(key, duration = 10) {
+      const sfx = this.sfx[key];
+    
+      if (sfx) {
+        const fadeDuration = duration;
+        const fadeStep = sfx.volume / fadeDuration;
+    
+        const fadeOutInterval = setInterval(() => {
+          sfx.volume -= fadeStep;
+    
+          if (sfx.volume <= 0) {
+            sfx.stop();
+            clearInterval(fadeOutInterval);
+            console.log("fadeOutInterval")
           }
         }, 1); // Interval of 1ms for smoother fade-out
       }

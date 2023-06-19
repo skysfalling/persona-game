@@ -12,6 +12,9 @@ class Level3 extends Phaser.Scene {
         this.soundManager = new SoundManager(this);
         this.soundManager.load();
         this.gameManager = this.scene.get('GameManager');
+        if (this.gameManager.gameProgression === 2){
+            this.gameManager.gameProgression = 3;
+        }
 
 
 
@@ -207,6 +210,7 @@ class Level3 extends Phaser.Scene {
         //#region [[ HTML REFERENCES ]]
         this.physics.world.drawDebug = false;
 
+        /*
         // toggle gizmos
         const enableGizmosButton = document.querySelector("#enable-gamegizmos");
         enableGizmosButton.innerHTML = "Game Gizmos: " + this.gizmos.enabled;
@@ -223,12 +227,9 @@ class Level3 extends Phaser.Scene {
             this.p1.toggleDebug();
             this.p2.toggleDebug();
         }); 
+        */
         //#endregion
     
-        this.soundManager.playMusic("backgroundMusic", {loop:true, volume: 0.2});
-        this.soundManager.playSFX("ambience", {loop:true});
-
-
         this.endGame = false;
 
     }
@@ -351,7 +352,7 @@ class Level3 extends Phaser.Scene {
                 ease: 'Linear',
                 onComplete: () => {
                     this.time.delayedCall(1000, () => {
-                        this.gameManager.transitionFromLevelToMenu();
+                        this.gameManager.transitionToScene("EndCutscene");
                     }, [], this);        
                 }
               });

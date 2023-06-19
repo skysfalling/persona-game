@@ -44,7 +44,7 @@
   {
       "delay": 0.5,
       "character_id": 1,
-      "objective_id": 2,
+      "objective_id": 3,
       "text": [
           "You left me alone, Blue! I almost got lost looking for you!",
           "Is it me? Did I say something that upset you? Is that why you're pulling away?",
@@ -56,7 +56,7 @@
   {
     "delay": 2,
     "character_id": 2,
-    "objective_id": 2,
+    "objective_id": 3,
     "text": [
         "..."
     ]
@@ -64,7 +64,7 @@
   {
     "delay": 1,
     "character_id": 2,
-    "objective_id": 2,
+    "objective_id": 3,
     "text": [
         "i didnt lie"
     ]
@@ -72,7 +72,7 @@
   {
       "delay": 0.5,
       "character_id": 1,
-      "objective_id": 2,
+      "objective_id": 3,
       "text": [
           "THEN WHAT IS WRONG WITH YOU ??",
           "SPEAK UP BLUE!"
@@ -81,7 +81,7 @@
   {
       "delay": 0,
       "character_id": 2,
-      "objective_id": 2,
+      "objective_id": 3,
       "text": [
           "..."
       ]
@@ -89,7 +89,7 @@
   {
       "delay": 0,
       "character_id": 1,
-      "objective_id": 2,
+      "objective_id": 3,
       "text": [
           "BLUE!"
       ]

@@ -141,11 +141,11 @@
                 6,
                 12
             ],
-            "scale": 3,
+            "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 513.6666666666666,
-                "y": 523.8333333333333
+                "x": 761.3333333333333,
+                "y": 366.33333333333326
             }
         },
         "whispering_pines_01.json#persona": {
@@ -181,11 +181,11 @@
                 6,
                 12
             ],
-            "scale": 1,
-            "selectedLayer": 7,
+            "scale": 3,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 565,
-                "y": 1057.5
+                "x": 1054,
+                "y": 843.8333333333333
             }
         },
         "whispering_pines_02.json#whispering_pines_tileset": {

@@ -1,6 +1,9 @@
 class GameManager extends Phaser.Scene {
   constructor() {
     super('GameManager');
+
+    this.prefix = ">> GameManager "
+    this.gameProgression = 0;
   }
 
   preload(){
@@ -16,117 +19,55 @@ class GameManager extends Phaser.Scene {
     this.soundManager.load();
   }
 
-  transitionFromMenuToCutscene(cutsceneSceneKey) {
-    const menuScene = this.scene.get("Menu");
-    console.log(this.scene.manager.getScenes());
-    console.log("menuScene " , menuScene);
-
-    if (this.currentSceneKey !== cutsceneSceneKey) {
-      this.currentSceneKey = cutsceneSceneKey;
-  
-      menuScene.cameras.main.fadeOut(500, 0, 0, 0);
-      menuScene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-        this.scene.stop('Menu');
-  
-        // Start / restart cutscene
-        if (this.scene.isActive(cutsceneSceneKey)) {
-          this.scene.restart(cutsceneSceneKey);
-        } 
-        else {
-          this.scene.launch(cutsceneSceneKey);
-        }
-  
-        this.currentScene = this.scene.get(cutsceneSceneKey);
-        console.log(this.scene.manager.getScenes());
-        console.log("]] TRANSITION TO CUTSCENE " + this.currentSceneKey + " -> " + cutsceneSceneKey);
-      });
-    }
-  }
-  
-
-  transitionFromMenuToLevel(levelSceneKey) {
-    const menuScene = this.scene.get("Menu");
-    console.log(this.scene.manager.getScenes());
-
-    if (this.currentSceneKey !== levelSceneKey) {
-      this.currentSceneKey = levelSceneKey;
-
-      menuScene.cameras.main.fadeOut(500, 0, 0, 0);
-      menuScene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-        this.scene.stop('Menu');
-
-        // start / restart level
-        if (this.scene.isActive(levelSceneKey)) {
-          this.scene.restart(levelSceneKey);
-        } 
-        else {
-          this.scene.launch(levelSceneKey);
-        }
-
-        // start / restart ui
-        if (this.scene.isActive("UI")) {
-          this.scene.restart("UI");
-        } 
-        else {
-          this.scene.launch("UI");
-        }
-
-        this.currentScene = this.scene.get(levelSceneKey);
-        console.log(this.scene.manager.getScenes());
-        console.log("]] TRANSITION MENU TO LEVEL " + this.currentSceneKey + " -> " + levelSceneKey);
-      });
-    }
-  };
-
-
-  transitionFromLevelToMenu() {
-    const oldLevelKey = this.currentSceneKey;
-    if (this.currentSceneKey !== "Menu") {
-      console.log(">> GameManager Scene Switch ( " + this.currentSceneKey + " -> Menu ");
-      console.log("Active Scenes : ", this.scene.manager.getScenes());
-
-      this.currentSceneKey = "Menu";
-
-      this.currentScene.cameras.main.fadeOut(500, 0, 0, 0);
-      this.currentUI.cameras.main.fadeOut(500, 0, 0, 0);
-      this.currentScene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-        this.scene.stop(oldLevelKey);
-        this.scene.stop('UI');
-
-        this.scene.launch("Menu");
-
-        this.currentScene = this.scene.get("Menu");
-      });
-    }
-  };
-
-  transitionBetweenLevels(levelSceneKey) {
-    console.log("transition attempt " + levelSceneKey);
+  transitionToScene(targetSceneKey) {
+    console.log("transition attempt " + targetSceneKey);
     const oldLevelKey = this.currentSceneKey;
 
-    if (this.currentSceneKey !== levelSceneKey) {
-      console.log(">> GameManager Scene Switch (" + this.currentSceneKey + " -> " + levelSceneKey + ")");
+    if (this.currentSceneKey !== targetSceneKey) {
+      console.log(this.prefix + " Scene Switch (" + this.currentSceneKey + " -> " + targetSceneKey + ")");
       console.log("Active Scenes: ", this.scene.manager.getScenes());
   
       this.currentScene = this.scene.get(this.currentSceneKey);
-      this.currentSceneKey = levelSceneKey;
-  
-      this.currentScene.cameras.main.fadeOut(500, 0, 0, 0);
-      this.currentScene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-        this.scene.stop(oldLevelKey);
-  
-        // Start or restart the UI scene
-        this.scene.stop('UI');
-        this.scene.launch('UI');
+      if (this.currentScene.soundManager)
+      {
+        this.currentScene.soundManager.stopAllSFX();
+      }
+      
+      this.currentSceneKey = targetSceneKey;
 
-        // Start or restart the level scene
-        if (this.scene.isActive(levelSceneKey)) {
-          this.scene.restart(levelSceneKey);
-        } else {
-          this.scene.launch(levelSceneKey);
-        }
-  
-        this.currentScene = this.scene.get(levelSceneKey);
+      this.currentScene.cameras.main.fadeOut(500, 0, 0, 0);
+      this.currentScene.cameras.main.once(
+        Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+          this.scene.stop(oldLevelKey);
+    
+          // Restart the UI scene
+          this.scene.stop('UI');
+          this.scene.launch('UI');
+
+          // Start or restart the level scene
+          if (this.scene.isActive(targetSceneKey)) {
+            this.scene.restart(targetSceneKey);
+          } else {
+            this.scene.launch(targetSceneKey);
+          }
+    
+          this.currentScene = this.scene.get(targetSceneKey);
+        
+
+          // LEVEL SOUND SETTINGS
+          if (this.currentSceneKey === "Level1" || this.currentSceneKey === "Level2" || this.currentSceneKey === "Level3")
+          {
+            this.soundManager.playMusic("backgroundMusic");
+            this.soundManager.playSFX("ambience", {loop: true});
+          }
+          else 
+          {
+            this.soundManager.stopMusic("backgroundMusic");
+            this.soundManager.stopSFX("backgroundMusic");
+
+          }
+
+          console.log(this.prefix + " gameProgression: " + this.gameProgression);
       });
     }
   }
@@ -137,36 +78,45 @@ class GameManager extends Phaser.Scene {
     this.input.keyboard.on('keydown-SPACE', () => {
       if (this.currentSceneKey === "Menu")
       {
-        this.transitionFromMenuToCutscene('Cutscene');
-        this.soundManager.fadeAndStopMusic();
+        this.gameProgression = 1;
+        this.transitionToScene('IntroCutscene');
       }
     });
   
     this.input.keyboard.on('keydown-ONE', () => {
-      this.transitionBetweenLevels('Level1');
+      this.transitionToScene('IntroCutscene');
     });
   
     this.input.keyboard.on('keydown-TWO', () => {
-      this.transitionBetweenLevels('Level2'); 
+      this.transitionToScene('ReflectionCutscene');
     });
 
     // Debug functionality
     this.input.keyboard.on('keydown-THREE', () => {
-      this.transitionBetweenLevels('Level3');
+      this.transitionToScene('RunCutscene');
     });
 
     this.input.keyboard.on('keydown-FOUR', () => {
-      this.transitionFromLevelToMenu();
+      this.transitionToScene('EndCutscene');
+    });
+
+    this.input.keyboard.on('keydown-FIVE', () => {
+      this.transitionToScene('Menu');
+    });
+
+    this.input.keyboard.on('keydown-SIX', () => {
+      this.transitionToScene('Level1');
+    });
+
+    this.input.keyboard.on('keydown-SEVEN', () => {
+      this.transitionToScene('Level2');
+    });
+
+    this.input.keyboard.on('keydown-EIGHT', () => {
+      this.transitionToScene('Level3');
     });
 
     this.soundManager.playMusic("ambience", {loop:true});
-
-
-  }
-  
-  update(){
-    console.log(this.scene.manager.getScenes());
-
   }
 }
 
@@ -190,9 +140,9 @@ class UI extends Phaser.Scene {
   }
 }
 
-class Cutscene extends Phaser.Scene {
+class IntroCutscene extends Phaser.Scene {
   constructor() {
-    super('Cutscene');
+    super('IntroCutscene');
   }
 
   preload() {
@@ -201,6 +151,8 @@ class Cutscene extends Phaser.Scene {
   }
 
   create() {
+    this.gameManager = this.scene.get('GameManager');
+    this.gameManager.gameProgression = 1;
 
     // Load and play the video using the id
     this.video = this.add.video(0, 0, 'video').setScale(0.3).setOrigin(0).setAlpha(1);
@@ -209,10 +161,87 @@ class Cutscene extends Phaser.Scene {
 
     // Event triggered when the video completes
     this.video.on('complete', () => {
-      // Transition to another scene
-      this.scene.start('Level1');
-      // Stop and destroy this scene
-      this.scene.stop('Cutscene');
+      this.gameManager.transitionToScene("Level1");
+    });
+  }
+}
+
+class ReflectionCutscene extends Phaser.Scene {
+  constructor() {
+    super('ReflectionCutscene');
+  }
+
+  preload() {
+
+    // Load the video file
+    this.load.video('reflection-video', 'assets/cutscene/reflection-cutscene.mp4');
+  }
+
+  create() {
+    this.gameManager = this.scene.get('GameManager');
+    this.gameManager.gameProgression = 2;
+
+    // Load and play the video using the id
+    this.video = this.add.video(0, 0, 'reflection-video').setScale(0.3).setOrigin(0).setAlpha(1);
+    this.video.resolution = 10;
+    this.video.play();
+
+    // Event triggered when the video completes
+    this.video.on('complete', () => {
+      this.gameManager.transitionToScene("Level2");
+    });
+  }
+}
+
+class RunCutscene extends Phaser.Scene {
+  constructor() {
+    super('RunCutscene');
+  }
+
+  preload() {
+
+    // Load the video file
+    this.load.video('run-video', 'assets/cutscene/run-cutscene.mp4');
+  }
+
+  create() {
+    this.gameManager = this.scene.get('GameManager');
+    this.gameManager.gameProgression = 3;
+
+    // Load and play the video using the id
+    this.video = this.add.video(0, 0, 'run-video').setScale(0.3).setOrigin(0).setAlpha(1);
+    this.video.resolution = 10;
+    this.video.play();
+
+    // Event triggered when the video completes
+    this.video.on('complete', () => {
+      this.gameManager.transitionToScene("Level3");
+    });
+  }
+}
+
+class EndCutscene extends Phaser.Scene {
+  constructor() {
+    super('EndCutscene');
+  }
+
+  preload() {
+    // Load the video file
+    this.load.video('end-video', 'assets/cutscene/end-cutscene.mp4');
+  }
+
+  create() {
+    this.gameManager = this.scene.get('GameManager');
+    this.gameManager.gameProgression = 4;
+
+    // Load and play the video using the id
+    this.video = this.add.video(0, 0, 'end-video').setScale(0.3).setOrigin(0).setAlpha(1);
+    this.video.resolution = 10;
+    this.video.play();
+
+    // Event triggered when the video completes
+    this.video.on('complete', () => {
+      this.gameManager.transitionToScene("Menu");
     });
   }
 }
@@ -223,48 +252,138 @@ class Menu extends Phaser.Scene {
   }
 
   preload() {
-
+    this.load.bitmapFont('doomed', 'assets/fonts/doomed.png', 'assets/fonts/doomed.xml');
+    this.load.bitmapFont('awasete', 'assets/fonts/awasete.png', 'assets/fonts/awasete.xml');
   }
 
   create() {
+    this.gameManager = this.scene.get('GameManager');
 
-    this.add.text(
-      screen.center.x,
-      screen.center.y - 25,
-      'Persona',
-      { fontSize: '24px', fill: '#fff' }
-    ).setOrigin(0.5);
+    const screenWidth = this.cameras.main.width;
+    const screenHeight = this.cameras.main.height;
 
-    this.add.text(
-      screen.center.x,
-      screen.center.y + 50,
-      'Press Space to Start',
-      { fontSize: '12px', fill: '#fff' }
-    ).setOrigin(0.5);
+    // Calculate the x-position for each button
+    const buttonSpacing = 50;
+    const buttonWidth = 100;
+    const buttonCount = 3;
+    const totalButtonWidth = buttonWidth * buttonCount + buttonSpacing * (buttonCount - 1);
 
-    this.add.text(
-      screen.center.x,
-      screen.botMid.y - 10,
-      'skysfalling. 2023. v0.2 ',
-      { fontSize: '10px', fill: '#fff', resolution: 1 }
-    ).setOrigin(0.5);
+    // Create the buttons
+    this.button1 = this.createButton(screen.center.x - 25, screen.center.y, '1', 10);
+    this.button2 = this.createButton(screen.center.x, screen.center.y, '2', 10);
+    this.button3 = this.createButton(screen.center.x + 25, screen.center.y, '3', 10);
 
-    // Add the GIF sprite
-    //this.gif = this.add.sprite(this.cameras.main.centerX, this.cameras.main.centerY + 50, 'gif');
+    // Set the depth and interactive behavior for each button
+    this.button1.setDepth(1);
+    this.button2.setDepth(1);
+    this.button3.setDepth(1);
 
+    this.button1.setInteractive({ useHandCursor: true });
+    this.button2.setInteractive({ useHandCursor: true });
+    this.button3.setInteractive({ useHandCursor: true });
 
 
-    /*
-    // Start the animation
-    this.anims.create({
-      key: 'gif',
-      frames: this.anims.generateFrameNumbers('gif', { start: 0, end: -1 }),
-      frameRate: 10, // Set the frame rate to 10 frames per second
-      repeat: -1 // Repeat indefinitely
+    // Handle button click events
+    this.button1.on('pointerdown', () => {
+      this.gameManager.transitionToScene("IntroCutscene");
     });
-    */
 
-    //this.gif.play('gif');
+    this.button2.on('pointerdown', () => {
+      this.gameManager.transitionToScene("ReflectionCutscene");
+    });
+
+    this.button3.on('pointerdown', () => {
+      this.gameManager.transitionToScene("RunCutscene");
+    });
+
+    /// (( CREATE TITLE ))
+    this.titleText = this.add.bitmapText(
+      screenWidth / 2,
+      screenHeight / 2 - 25,
+      'doomed',
+      'PERSONA',
+      40
+    );
+    this.titleText.setScrollFactor(0);
+    this.titleText.setDepth(2);
+    this.titleText.setOrigin(0.5, 1);
+    this.titleText.setTint(0xcccccc);
+
+    /// (( CREATE START TEXT ))
+    this.startText = this.add.bitmapText(
+      screenWidth / 2,
+      screenHeight / 2 + 100,
+      'awasete',
+      '-- press space to begin --',
+      11
+    );
+    this.startText.setScrollFactor(0);
+    this.startText.setDepth(2);
+    this.startText.setOrigin(0.5, 1);
+    this.startText.setTint(0xcccccc);
+
+    this.devTagText = this.add.bitmapText(
+      5,
+      screenHeight - 5,
+      'awasete',
+      'skysfalling',
+      8
+    );
+    this.devTagText.setScrollFactor(0);
+    this.devTagText.setDepth(2);
+    this.devTagText.setOrigin(0, 1);
+    this.devTagText.setTint(0xcccccc);
+
+    this.versionText = this.add.bitmapText(
+      screen.width - 5,
+      screenHeight - 5,
+      'awasete',
+      'v0.4',
+      8
+    );
+    this.versionText.setScrollFactor(0);
+    this.versionText.setDepth(2);
+    this.versionText.setOrigin(1, 1);
+    this.versionText.setTint(0xcccccc);
+  }
+
+  update() {
+    // Hide or show buttons based on gameProgression
+    switch (this.gameManager.gameProgression) {
+      case 0:
+        this.button1.setVisible(false);
+        this.button2.setVisible(false);
+        this.button3.setVisible(false);
+        break;
+      case 1:
+        this.button1.setVisible(true);
+        this.button2.setVisible(false);
+        this.button3.setVisible(false);
+        break;
+      case 2:
+        this.button1.setVisible(true);
+        this.button2.setVisible(true);
+        this.button3.setVisible(false);
+        break;
+      case 3:
+        this.button1.setVisible(true);
+        this.button2.setVisible(true);
+        this.button3.setVisible(true);
+        break;
+      default:
+        this.button1.setVisible(true);
+        this.button2.setVisible(true);
+        this.button3.setVisible(true);
+    }
+  }
+
+  createButton(x, y, text, fontSize = 20) {
+    const button = this.add.bitmapText(x, y, 'awasete', text, fontSize);
+    button.setOrigin(0.5);
+    button.setTint(0xcccccc);
+    return button;
   }
 }
+
+
 

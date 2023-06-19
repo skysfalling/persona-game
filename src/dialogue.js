@@ -38,7 +38,7 @@ class DialogueManager {
         this.skipPromptText.setDepth(globalDepth.ui + 1);
         this.skipPromptText.setScale(0.5);
         this.skipPromptText.setOrigin(0.5, 1);
-        this.skipPromptText.setTint(0x555555);
+        this.skipPromptText.setTint(0xcccccc);
 
         // -- create profile image --------------------------------------------------------
         this.currentProfile = "violet";

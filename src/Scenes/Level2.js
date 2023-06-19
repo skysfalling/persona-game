@@ -12,6 +12,9 @@ class Level2 extends Phaser.Scene {
         this.soundManager = new SoundManager(this);
         this.soundManager.load();
         this.gameManager = this.scene.get('GameManager');
+        if (this.gameManager.gameProgression === 1){
+            this.gameManager.gameProgression = 2;
+        }
 
         // load assets
         this.load.image("tiles", "tilemap/whispering_pines_tileset.png");    // tile sheet
@@ -203,6 +206,7 @@ class Level2 extends Phaser.Scene {
         //#region [[ HTML REFERENCES ]]
         this.physics.world.drawDebug = false;
 
+        /*
         // toggle gizmos
         const enableGizmosButton = document.querySelector("#enable-gamegizmos");
         enableGizmosButton.innerHTML = "Game Gizmos: " + this.gizmos.enabled;
@@ -219,10 +223,8 @@ class Level2 extends Phaser.Scene {
             this.p1.toggleDebug();
             this.p2.toggleDebug();
         }); 
+        */
         //#endregion
-    
-        this.soundManager.playMusic("backgroundMusic", {loop:true, volume: 0.2});
-        this.soundManager.playSFX("ambience", {loop:true});
 
     }
 
@@ -338,7 +340,7 @@ class Level2 extends Phaser.Scene {
         if (this.levelRoutine.endOfRoutine)
         {
             this.time.delayedCall(1000, () => {
-                this.gameManager.transitionFromLevelToMenu();
+                this.gameManager.transitionToScene("RunCutscene");
             }, [], this);        
         }
     }

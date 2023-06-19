@@ -39,7 +39,7 @@ let config = {
             gravity: { y: 0 }
         }
     },
-    scene: [GameManager, Cutscene, Menu, Level1, Level2, Level3, UI ]
+    scene: [GameManager, IntroCutscene, ReflectionCutscene, RunCutscene, EndCutscene, Menu, Level1, Level2, Level3, UI ]
 };
 
 const game = new Phaser.Game(config);
