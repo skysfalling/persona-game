@@ -341,7 +341,7 @@ class Menu extends Phaser.Scene {
       screen.width - 5,
       screenHeight - 5,
       'awasete',
-      'v0.42',
+      'v0.41',
       8
     );
     this.versionText.setScrollFactor(0);
