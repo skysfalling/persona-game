@@ -43,6 +43,7 @@ let config = {
 };
 
 const game = new Phaser.Game(config);
+const game_version = 0.45;
 
 // globals
 const centerX = game.config.width / 2;

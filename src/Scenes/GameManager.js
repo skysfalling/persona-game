@@ -58,7 +58,7 @@ class GameManager extends Phaser.Scene {
           // LEVEL SOUND SETTINGS
           if (this.currentSceneKey === "Level1" || this.currentSceneKey === "Level2" || this.currentSceneKey === "Level3")
           {
-            this.soundManager.playMusic("backgroundMusic", 0.5);
+            this.soundManager.playMusic("backgroundMusic", {volume: 0.5, loop: true});
             this.soundManager.playSFX("ambience", {loop: true});
           }
           else 
@@ -341,7 +341,7 @@ class Menu extends Phaser.Scene {
       screen.width - 5,
       screenHeight - 5,
       'awasete',
-      'v0.44',
+      'v' + game_version,
       8
     );
     this.versionText.setScrollFactor(0);

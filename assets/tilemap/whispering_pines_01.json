@@ -807,7 +807,7 @@
                     {
                      "exit_id":0,
                      "id_type":0,
-                     "objective_id":1
+                     "objective_id":-1
                     },
                  "propertytypes":
                     {
@@ -819,8 +819,31 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":560,
+                 "x":592,
                  "y":512
+                }, 
+                {
+                 "height":16,
+                 "id":115,
+                 "name":"cat",
+                 "properties":
+                    {
+                     "exit_id":0,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":608,
+                 "y":528
                 }, 
                 {
                  "height":16,
@@ -830,7 +853,7 @@
                     {
                      "exit_id":0,
                      "id_type":0,
-                     "objective_id":1
+                     "objective_id":-1
                     },
                  "propertytypes":
                     {
@@ -853,7 +876,7 @@
                     {
                      "exit_id":0,
                      "id_type":0,
-                     "objective_id":1
+                     "objective_id":-1
                     },
                  "propertytypes":
                     {
@@ -1073,7 +1096,7 @@
                  "visible":true,
                  "width":16,
                  "x":896,
-                 "y":432
+                 "y":368
                 }, 
                 {
                  "height":16,
@@ -1614,6 +1637,17 @@
                  "width":16,
                  "x":544,
                  "y":464
+                }, 
+                {
+                 "height":16,
+                 "id":113,
+                 "name":"heart",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":880,
+                 "y":448
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1646,7 +1680,7 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":113,
+ "nextobjectid":116,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",
