@@ -10,15 +10,17 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    overflow: hidden;
     background-color: black;
     height: 100vh;
     margin: 0;
+    margin-top: 100px;
+    margin-bottom: 100px;
   }
   
   p {
     font-size: 10px;
     color: rgba(255, 255, 255, 0.3);
+    margin-top: 5px;
   }
   
   a {
@@ -27,6 +29,10 @@ body {
   }
 
   a:hover {
-    color: red;
+    color: #645EFF;
     text-decoration: underline;
+  }
+
+  #phaser-game{
+    border: 1px solid #222222
   }

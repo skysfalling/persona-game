@@ -265,6 +265,7 @@ class Menu extends Phaser.Scene {
     const screenWidth = this.cameras.main.width;
     const screenHeight = this.cameras.main.height;
 
+    // #region (( CREATE BUTTONS))
     // Calculate the x-position for each button
     const buttonSpacing = 50;
     const buttonWidth = 100;
@@ -298,6 +299,7 @@ class Menu extends Phaser.Scene {
     this.button3.on('pointerdown', () => {
       this.gameManager.transitionToScene("RunCutscene");
     });
+    //#endregion
 
     /// (( CREATE TITLE ))
     this.titleText = this.add.bitmapText(

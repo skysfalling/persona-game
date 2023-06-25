@@ -134,7 +134,7 @@ class CameraMovement {
             else 
             {
                 const distance = Phaser.Math.Distance.Between(this.p1.x, this.p1.y, this.p2.x, this.p2.y, {x: 0, y: 0});
-                const thresholdDistance = 200;
+                const thresholdDistance = 150;
                 const lerpAmount = 0.05; 
         
                 // >> MAIN CAMERA

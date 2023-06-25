@@ -46,6 +46,7 @@ class Campfire extends Phaser.GameObjects.Sprite {
         this.connectedPlayer = player;
         this.connectedPlayer.enableMove = false;
         this.connectedPlayer.newTetheredObject(this);
+        this.connectedPlayer.freezeOverride = true;
 
         if (this.connectedPlayer.playerID == 1) { this.anims.play('campfire_violet_loop', true); }
         else if (this.connectedPlayer.playerID == 2) { this.anims.play('campfire_blue_loop', true); }
@@ -58,7 +59,9 @@ class Campfire extends Phaser.GameObjects.Sprite {
     disconnectPlayer(player) {
         player.enableMove = true;
         this.connectedPlayer.tetheredObject = null;
+        this.connectedPlayer.freezeOverride = false;
         this.connectedPlayer = null;
+        
 
         this.anims.play('campfire_loop', true);
         console.log(this.name + " disconnected " + this.player);
