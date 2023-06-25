@@ -4,3 +4,29 @@
     font-family: Silverfinster;
     src: url('assets/fonts/Silverfinster-x3L2K.ttf') format('truetype');
 }
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: black;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  p {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.3);
+  }
+  
+  a {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  a:hover {
+    color: red;
+    text-decoration: underline;
+  }
