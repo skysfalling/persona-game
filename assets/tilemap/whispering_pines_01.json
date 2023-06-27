@@ -13,16 +13,16 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 9, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 9, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 14, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -666,12 +666,14 @@
                  "height":16,
                  "id":63,
                  "name":"cat_exit",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":0
-                        }],
+                 "properties":
+                    {
+                     "exit_id":0
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -683,12 +685,14 @@
                  "height":16,
                  "id":69,
                  "name":"cat_exit",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -700,12 +704,14 @@
                  "height":16,
                  "id":71,
                  "name":"cat_exit",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":2
-                        }],
+                 "properties":
+                    {
+                     "exit_id":2
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -717,12 +723,14 @@
                  "height":16,
                  "id":116,
                  "name":"cat_exit",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":25
-                        }],
+                 "properties":
+                    {
+                     "exit_id":25
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -734,12 +742,14 @@
                  "height":16,
                  "id":76,
                  "name":"cat_exit",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":3
-                        }],
+                 "properties":
+                    {
+                     "exit_id":3
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -751,12 +761,14 @@
                  "height":16,
                  "id":78,
                  "name":"cat_exit",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":4
-                        }],
+                 "properties":
+                    {
+                     "exit_id":4
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -768,12 +780,14 @@
                  "height":16,
                  "id":88,
                  "name":"cat_exit",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":5
-                        }],
+                 "properties":
+                    {
+                     "exit_id":5
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -785,22 +799,18 @@
                  "height":16,
                  "id":64,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":0
-                        }],
+                 "properties":
+                    {
+                     "exit_id":0,
+                     "id_type":0,
+                     "objective_id":0
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -812,22 +822,18 @@
                  "height":16,
                  "id":89,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":0,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -839,22 +845,18 @@
                  "height":16,
                  "id":115,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":0,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -866,22 +868,18 @@
                  "height":16,
                  "id":109,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":0,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -893,22 +891,18 @@
                  "height":16,
                  "id":136,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":0,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -920,22 +914,18 @@
                  "height":16,
                  "id":110,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":0,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -947,22 +937,18 @@
                  "height":16,
                  "id":111,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":0,
+                     "id_type":0,
+                     "objective_id":1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -974,22 +960,18 @@
                  "height":16,
                  "id":68,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":1,
+                     "id_type":0,
+                     "objective_id":1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1001,22 +983,18 @@
                  "height":16,
                  "id":70,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":2,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1028,22 +1006,18 @@
                  "height":16,
                  "id":93,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":2,
+                     "id_type":3,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1055,22 +1029,18 @@
                  "height":16,
                  "id":96,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":2,
+                     "id_type":2,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1082,22 +1052,18 @@
                  "height":16,
                  "id":97,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":2,
+                     "id_type":1,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1109,22 +1075,18 @@
                  "height":16,
                  "id":82,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":2,
+                     "id_type":1,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1136,22 +1098,18 @@
                  "height":16,
                  "id":117,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":2,
+                     "id_type":1,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1163,22 +1121,18 @@
                  "height":16,
                  "id":118,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":2,
+                     "id_type":1,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1190,22 +1144,18 @@
                  "height":16,
                  "id":119,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":2,
+                     "id_type":1,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1217,22 +1167,18 @@
                  "height":16,
                  "id":129,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":2,
+                     "id_type":1,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1244,22 +1190,18 @@
                  "height":16,
                  "id":133,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":25
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":25,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1271,22 +1213,18 @@
                  "height":16,
                  "id":122,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":25
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":25,
+                     "id_type":2,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1298,22 +1236,18 @@
                  "height":16,
                  "id":123,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":25
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":25,
+                     "id_type":1,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1325,22 +1259,18 @@
                  "height":16,
                  "id":134,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":25
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":25,
+                     "id_type":2,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1352,22 +1282,18 @@
                  "height":16,
                  "id":135,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":25
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":25,
+                     "id_type":2,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1379,22 +1305,18 @@
                  "height":16,
                  "id":124,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":25
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":25,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1406,22 +1328,18 @@
                  "height":16,
                  "id":137,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":25
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":25,
+                     "id_type":3,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1433,22 +1351,18 @@
                  "height":16,
                  "id":125,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":25
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":25,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1460,22 +1374,18 @@
                  "height":16,
                  "id":130,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":25
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":25,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1487,22 +1397,18 @@
                  "height":16,
                  "id":131,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":25
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":25,
+                     "id_type":0,
+                     "objective_id":1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1514,22 +1420,18 @@
                  "height":16,
                  "id":126,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":25
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":25,
+                     "id_type":3,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1541,22 +1443,18 @@
                  "height":16,
                  "id":90,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":2,
+                     "id_type":2,
+                     "objective_id":1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1568,22 +1466,18 @@
                  "height":16,
                  "id":72,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":2
-                        }],
+                 "properties":
+                    {
+                     "exit_id":2,
+                     "id_type":0,
+                     "objective_id":2
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1595,22 +1489,18 @@
                  "height":16,
                  "id":83,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":2
-                        }],
+                 "properties":
+                    {
+                     "exit_id":2,
+                     "id_type":0,
+                     "objective_id":2
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1622,22 +1512,18 @@
                  "height":16,
                  "id":92,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":2
-                        }],
+                 "properties":
+                    {
+                     "exit_id":2,
+                     "id_type":1,
+                     "objective_id":2
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1649,22 +1535,18 @@
                  "height":16,
                  "id":75,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":3
-                        }],
+                 "properties":
+                    {
+                     "exit_id":3,
+                     "id_type":1,
+                     "objective_id":3
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1676,22 +1558,18 @@
                  "height":16,
                  "id":112,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":3
-                        }],
+                 "properties":
+                    {
+                     "exit_id":3,
+                     "id_type":0,
+                     "objective_id":3
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1703,22 +1581,18 @@
                  "height":16,
                  "id":77,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":3
-                        }],
+                 "properties":
+                    {
+                     "exit_id":3,
+                     "id_type":2,
+                     "objective_id":3
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1730,22 +1604,18 @@
                  "height":16,
                  "id":94,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":3,
+                     "id_type":3,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1757,22 +1627,18 @@
                  "height":16,
                  "id":127,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":25
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":25,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1784,22 +1650,18 @@
                  "height":16,
                  "id":98,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":3,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1811,22 +1673,18 @@
                  "height":16,
                  "id":79,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":4
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":4,
+                     "id_type":1,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1838,22 +1696,18 @@
                  "height":16,
                  "id":101,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":4
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":4,
+                     "id_type":2,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1865,22 +1719,18 @@
                  "height":16,
                  "id":99,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":4
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":4,
+                     "id_type":3,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1892,22 +1742,18 @@
                  "height":16,
                  "id":80,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":4
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":4,
+                     "id_type":2,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1919,22 +1765,18 @@
                  "height":16,
                  "id":100,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":4
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":4,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1946,22 +1788,18 @@
                  "height":16,
                  "id":102,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":4
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":4,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1973,22 +1811,18 @@
                  "height":16,
                  "id":103,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":4
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":4,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2000,22 +1834,18 @@
                  "height":16,
                  "id":104,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":4
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":4,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2027,22 +1857,18 @@
                  "height":16,
                  "id":105,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":4
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":4,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2054,22 +1880,18 @@
                  "height":16,
                  "id":106,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":4
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":4,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2081,22 +1903,18 @@
                  "height":16,
                  "id":107,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":4
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":4,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2108,22 +1926,18 @@
                  "height":16,
                  "id":108,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":4
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":4,
+                     "id_type":0,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2135,22 +1949,18 @@
                  "height":16,
                  "id":81,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":5
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":4
-                        }],
+                 "properties":
+                    {
+                     "exit_id":5,
+                     "id_type":2,
+                     "objective_id":4
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2162,22 +1972,18 @@
                  "height":16,
                  "id":86,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":5
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":4
-                        }],
+                 "properties":
+                    {
+                     "exit_id":5,
+                     "id_type":1,
+                     "objective_id":4
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2189,22 +1995,18 @@
                  "height":16,
                  "id":87,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":5
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":4
-                        }],
+                 "properties":
+                    {
+                     "exit_id":5,
+                     "id_type":0,
+                     "objective_id":4
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2216,22 +2018,18 @@
                  "height":16,
                  "id":95,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":5
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":0
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":4
-                        }],
+                 "properties":
+                    {
+                     "exit_id":5,
+                     "id_type":0,
+                     "objective_id":4
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2265,22 +2063,18 @@
                  "height":16,
                  "id":128,
                  "name":"cat",
-                 "properties":[
-                        {
-                         "name":"exit_id",
-                         "type":"int",
-                         "value":25
-                        }, 
-                        {
-                         "name":"id_type",
-                         "type":"int",
-                         "value":3
-                        }, 
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "exit_id":25,
+                     "id_type":3,
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "exit_id":"int",
+                     "id_type":"int",
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2292,12 +2086,14 @@
                  "height":16,
                  "id":132,
                  "name":"campfire",
-                 "properties":[
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2309,29 +2105,20 @@
                  "height":16,
                  "id":138,
                  "name":"campfire",
-                 "properties":[
-                        {
-                         "name":"objective_id",
-                         "type":"int",
-                         "value":-1
-                        }],
+                 "properties":
+                    {
+                     "objective_id":-1
+                    },
+                 "propertytypes":
+                    {
+                     "objective_id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":688,
                  "y":272
-                }, 
-                {
-                 "height":16,
-                 "id":139,
-                 "name":"heart",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":1200,
-                 "y":432
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2364,7 +2151,7 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":141,
+ "nextobjectid":139,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",
@@ -2386,6 +2173,6 @@
         }],
  "tilewidth":16,
  "type":"map",
- "version":"1.10",
+ "version":1.1,
  "width":100
 }
