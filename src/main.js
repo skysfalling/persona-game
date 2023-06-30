@@ -11,7 +11,7 @@ Implemented Phaser Components :
 - Timers
 - Animations
 - Camera Movement
-  + Midpoint Follow && Vertical Splitscreen
+- Midpoint Follow && Vertical Splitscreen
 - Point Lights
 - Bitmap Text Objects
 
@@ -43,7 +43,7 @@ let config = {
 };
 
 const game = new Phaser.Game(config);
-const game_version = 0.5;
+const game_version = 1.0;
 
 // globals
 const centerX = game.config.width / 2;
