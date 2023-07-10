@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "whispering_pines_01.json",
+    "activeFile": "whispering_pines_02.json",
     "expandedProjectPaths": [
         "."
     ],
-    "exportAsImage.includeBackgroundColor": true,
+    "exportAsImage.includeBackgroundColor": false,
     "fileStates": {
         "": {
             "scaleInDock": 1,
@@ -138,15 +138,15 @@
         },
         "whispering_pines_01.json": {
             "expandedObjectLayers": [
+                5,
                 6,
-                12,
-                5
+                12
             ],
-            "scale": 2.6092,
-            "selectedLayer": 1,
+            "scale": 1.5,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 501.11145178598804,
-                "y": 524.8735244519393
+                "x": 561.6666666666667,
+                "y": 288.99999999999994
             }
         },
         "whispering_pines_01.json#persona": {
@@ -178,15 +178,15 @@
         },
         "whispering_pines_02.json": {
             "expandedObjectLayers": [
+                5,
                 6,
-                12,
-                5
+                12
             ],
-            "scale": 1.4412,
+            "scale": 0.33,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 610.9492089925062,
-                "y": 361.1573688592839
+                "x": 756.0606060606062,
+                "y": 842.4242424242423
             }
         },
         "whispering_pines_02.json#whispering_pines_tileset": {
@@ -194,15 +194,15 @@
         },
         "whispering_pines_03.json": {
             "expandedObjectLayers": [
+                5,
                 6,
-                12,
-                5
+                12
             ],
-            "scale": 1.5,
+            "scale": 0.5,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 800,
-                "y": 799.6666666666666
+                "x": 1085,
+                "y": 841
             }
         },
         "whispering_pines_03.json#whispering_pines_tileset": {
@@ -227,9 +227,9 @@
     "project": "persona.tiled-project",
     "property.type": "color",
     "recentFiles": [
+        "whispering_pines_01.json",
         "whispering_pines_03.json",
         "whispering_pines_02.json",
-        "whispering_pines_01.json",
         "map1.tmx",
         "map1.json",
         "map2.json",

@@ -61,7 +61,7 @@ class Level1 extends Phaser.Scene {
         // #region [[ SETUP TILEMAP ]] --------------------------------------------------------------//>>
         // add a tile map
         this.map = this.add.tilemap("level1_map"); 
-        const tileset = this.map.addTilesetImage("whispering_pines_tileset", "tiles");
+        const tileset = this.map.addTilesetImage("whispering_pines_tileset", "tiles");      
         const persona = this.map.addTilesetImage("persona", "persona");
 
         // setup tilemap layers

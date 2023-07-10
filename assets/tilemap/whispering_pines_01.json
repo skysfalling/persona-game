@@ -941,7 +941,7 @@
                     {
                      "exit_id":0,
                      "id_type":0,
-                     "objective_id":1
+                     "objective_id":-1
                     },
                  "propertytypes":
                     {
@@ -964,7 +964,7 @@
                     {
                      "exit_id":1,
                      "id_type":0,
-                     "objective_id":1
+                     "objective_id":-1
                     },
                  "propertytypes":
                     {
@@ -1413,8 +1413,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":976,
-                 "y":352
+                 "x":896,
+                 "y":448
                 }, 
                 {
                  "height":16,
@@ -1447,7 +1447,7 @@
                     {
                      "exit_id":2,
                      "id_type":2,
-                     "objective_id":1
+                     "objective_id":-1
                     },
                  "propertytypes":
                     {
@@ -1470,7 +1470,7 @@
                     {
                      "exit_id":2,
                      "id_type":0,
-                     "objective_id":2
+                     "objective_id":-1
                     },
                  "propertytypes":
                     {
@@ -1505,7 +1505,7 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":800,
+                 "x":816,
                  "y":320
                 }, 
                 {
@@ -1539,7 +1539,7 @@
                     {
                      "exit_id":3,
                      "id_type":1,
-                     "objective_id":3
+                     "objective_id":-1
                     },
                  "propertytypes":
                     {
@@ -1562,7 +1562,7 @@
                     {
                      "exit_id":3,
                      "id_type":0,
-                     "objective_id":3
+                     "objective_id":-1
                     },
                  "propertytypes":
                     {
@@ -2133,7 +2133,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
