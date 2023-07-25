@@ -82,5 +82,31 @@ a:hover {
   flex-direction: inherit;
 }
 
+.button-container {
+  display: grid;
+  grid-template-columns: repeat(8, 50px);
+  grid-template-rows: repeat(2, 50px);
+  gap: 5px; /* Adjust this value for spacing between buttons */
+}
 
+.gba-button {
+  width: 50px;
+  height: 50px;
+  background-color: #E6E6E6;
+  border: 2px solid #777;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
 
+.hidden {
+  font-size: 0;
+  visibility: hidden;
+}
+
+.gba-button:not(.hidden) {
+  font-size: 24px; /* Set the font size for visible buttons */
+}
