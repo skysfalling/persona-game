@@ -3,10 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "whispering_pines_01.json",
+    "activeFile": "whispering_pines_02.json",
     "expandedProjectPaths": [
         "."
     ],
+    "exportAsImage.includeBackgroundColor": false,
     "fileStates": {
         "": {
             "scaleInDock": 1,
@@ -138,14 +139,14 @@
         "whispering_pines_01.json": {
             "expandedObjectLayers": [
                 12,
-                6,
-                5
+                5,
+                6
             ],
             "scale": 1.5,
-            "selectedLayer": 1,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 633,
-                "y": 365
+                "x": 799.6666666666666,
+                "y": 799.3333333333333
             }
         },
         "whispering_pines_01.json#persona": {
@@ -178,30 +179,30 @@
         "whispering_pines_02.json": {
             "expandedObjectLayers": [
                 12,
-                6,
-                5
+                5,
+                6
             ],
             "scale": 1.5,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 470.99999999999994,
-                "y": 881.3333333333333
+                "x": 1255,
+                "y": 876
             }
         },
         "whispering_pines_02.json#whispering_pines_tileset": {
-            "scaleInDock": 2
+            "scaleInDock": 1.5
         },
         "whispering_pines_03.json": {
             "expandedObjectLayers": [
                 12,
-                6,
-                5
+                5,
+                6
             ],
-            "scale": 1.5,
+            "scale": 0.75,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 779.6666666666666,
-                "y": 674
+                "x": 602,
+                "y": 724
             }
         },
         "whispering_pines_03.json#whispering_pines_tileset": {
@@ -226,9 +227,9 @@
     "project": "persona.tiled-project",
     "property.type": "color",
     "recentFiles": [
+        "whispering_pines_01.json",
         "whispering_pines_03.json",
         "whispering_pines_02.json",
-        "whispering_pines_01.json",
         "map1.tmx",
         "map1.json",
         "map2.json",

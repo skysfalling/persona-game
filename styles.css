@@ -1,38 +1,112 @@
-
-
 @font-face {
-    font-family: Silverfinster;
-    src: url('assets/fonts/Silverfinster-x3L2K.ttf') format('truetype');
+    font-family: Awasete;
+    src: url('assets/fonts/awasete_powder.ttf') format('truetype');
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: black;
-    height: 100vh;
-    margin: 0;
-    margin-top: 100px;
-    margin-bottom: 100px;
-  }
-  
-  p {
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.3);
-    margin-top: 5px;
-  }
-  
-  a {
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.3);
-  }
+  font-family: 'Awasete', Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: black;
+  height: 100vh;
+  margin-bottom: 100px;
+  overflow: hidden;
+}
 
-  a:hover {
-    color: #645EFF;
-    text-decoration: underline;
-  }
+h3 {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 5px;
+  letter-spacing: 2px;
+}
 
-  #phaser-game{
-    border: 1px solid #222222
-  }
+p {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 5px;
+}
+
+a {
+  font-size: 12px;
+  margin: 5px;
+}
+
+a:hover {
+  color: #cccccc;
+  text-decoration: underline;
+}
+
+.image-container, .gif-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+}
+
+.image-container img, .gif-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.sidebar {
+  position: relative;
+  width: 200px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#game-parent{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 650px;
+}
+
+#phaser-game{
+  border: 1px solid #222222
+}
+
+#game-description {
+  display: inherit;
+  justify-content: inherit;
+  align-items: inherit;
+  flex-direction: inherit;
+}
+
+.button-container {
+  display: grid;
+  grid-template-columns: repeat(8, 50px);
+  grid-template-rows: repeat(2, 50px);
+  gap: 5px; /* Adjust this value for spacing between buttons */
+}
+
+.gba-button {
+  width: 50px;
+  height: 50px;
+  background-color: #E6E6E6;
+  border: 2px solid #777;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.hidden {
+  font-size: 0;
+  visibility: hidden;
+}
+
+.gba-button:not(.hidden) {
+  font-size: 24px; /* Set the font size for visible buttons */
+}

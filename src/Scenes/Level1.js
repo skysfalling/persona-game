@@ -61,7 +61,7 @@ class Level1 extends Phaser.Scene {
         // #region [[ SETUP TILEMAP ]] --------------------------------------------------------------//>>
         // add a tile map
         this.map = this.add.tilemap("level1_map"); 
-        const tileset = this.map.addTilesetImage("whispering_pines_tileset", "tiles");
+        const tileset = this.map.addTilesetImage("whispering_pines_tileset", "tiles");      
         const persona = this.map.addTilesetImage("persona", "persona");
 
         // setup tilemap layers
@@ -241,28 +241,31 @@ class Level1 extends Phaser.Scene {
     // UPDATE OBJECTIVE COUNT
     updateObjectiveCount() {
         const objectiveCount = {};
+        let catsRemaining = 0
+
         this.cats.children.iterate(cat => {
           const objectiveId = cat.objective_id;
-      
+
+          // if main objective, store in array
           if (objectiveId >= 0) {
             if (objectiveCount.hasOwnProperty(objectiveId)) {
               objectiveCount[objectiveId]++;
-            } else {
+            }
+            else {
               objectiveCount[objectiveId] = 1;
             }
           }
+
+          catsRemaining++;
         });
       
         this.objectiveCount = objectiveCount;
+        this.catsRemaining = catsRemaining;
 
-        //console.log("Objective Count:", this.objectiveCount);
-
-        /*
-        const objectiveCountElement = document.getElementById("objectiveCount");
-        if (objectiveCountElement) {
-          objectiveCountElement.textContent = "Objective Count : " + JSON.stringify(this.objectiveCount);
+        const catsRemainingElement = document.getElementById("cats-remaining");
+        if (catsRemainingElement) {
+          catsRemainingElement.textContent = "cats-remaining : " + this.catsRemaining;
         }
-        */
     };
 
     getObjectiveCount(objective_id) {

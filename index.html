@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="icon" href="web-imagery/icons/sitting-cat-blue.png" type="image/x-icon">
-
     <title>~. persona .~</title>    
     <link rel="stylesheet" type="text/css" href="styles.css">
 
@@ -33,15 +31,114 @@
 </head>
 
 <body>
-    <div id="phaser-game"></div>
 
-    <p style="color:white">-| //~* [[ Arrow Keys to Move ]]  ::  [[ Z & X for tether-bubble ]] :: [[ 1 , 2 , 3 , 4 - Cutscenes ]] :: [[ 5 - Menu ]] :: [[ 6, 7, 8 - Levels ]] *~\\ |-</p>
-    <p style="color:#B568E8"> WARNING :: Flashing lights and depictions of self-harm, violence, and emotional abuse.</p>
-    <p> <b>~ -- // (( HEADPHONES REQUIRED )) \\ -- ~</b> </p>
-    <p> thank you to Athena Patronas and Tatiana Lucero for their art contributions and support 
-    <p> dedicated to Odin and Eve <3 </p>
-    <a href="https://linktr.ee/skysfall1ng" target="_blank"> {|| more by skysfalling ||}</a>
-    <a href="https://forms.gle/Efmt94FhTu1oK6zRA" target="_blank">(( vibe check? ))</a>
+    <div id="game-parent">
+        <div class="sidebar">
+
+            <p>~*\\ -------- //*~</p>
+
+            <div class="image-container">
+                <img src="./web-imagery/icons/persona_sitting_cats.png" alt="Image"
+                style="width: 80%"
+                >
+            </div>
+
+            <p id="cats-remaining" style="color:  #bbbbbb">cats-remaining : X</p>
+
+            <p>-----------</p>
+            <p>
+                MOVE :: Arrow Keys <br>
+                INTERACT :: Z & X <br>
+                MENU :: 5
+            </p>
+
+            <p>-----------</p>
+
+            <p>
+                Skip Dialogue :: SPACE <br>
+                Skip To Cutscene :: 1-4<br>
+                Skip To Level :: 6-8 
+            </p>
+
+            <p>~*\\ -------- //*~</p>
+            <a 
+            style="color: #ffffff"
+            href="https://distrokid.com/hyperfollow/skysfalling/persona" target="_blank"> !. listen to the album .!</a>
+            <a 
+            style="color: #aaaaaa"
+            href="https://linktr.ee/skysfall1ng" target="_blank"> {|| more by skysfalling ||}</a>
+            <a 
+            style="color: #B568E8"
+            href="https://www.redbubble.com/people/skysfalling/shop?artistUserName=skysfalling&asc=u&collections=3585943&iaCode=all-departments&sortOrder=relevant" target="_blank"> !! buy merch !! </a>
+            <a 
+            style="color: #645EFF"
+            href="https://forms.gle/Efmt94FhTu1oK6zRA" target="_blank">(( vibe check? ))</a>
+
+            <a 
+            style="color: #2413A2"
+            href="https://www.youtube.com/watch?v=9Lr3MEkXMxc&t=1s" target="_blank">watch Persona 1966 -></a>
+
+            <p>~*// -------- \\*~</p>
+
+        </div>
+        <div id="phaser-game"></div>
+        <div class="sidebar">
+            <p>~*\\ -------- //*~</p>
+
+            <h3 style="color:#B568E8"> :: WARNING :: </h3>
+            <p style="color:#B568E8"> 
+                flashing lights <br>
+                self-harm <br> 
+                violence <br>
+                emotional abuse
+            </p>
+            
+            <p>-----------</p>
+
+            <h3> ~ Thank You ~</h3>
+            <p> 
+            Athena Patronas <br>
+            Tatiana Lucero </p>
+
+            <p>-----------</p>
+            <p> dedicated to <br>
+                Odin and Eve <3 </p>
+
+            <p>-----------</p>
+
+            <p>sky casey . 2023</p>
+
+            <p>~*// -------- \\*~</p>
+
+
+        </div>
+
+    </div>
+    <h3>~ -- // (( HEADPHONES REQUIRED )) \\ -- ~</h3>
+
+
+
+    <div class="button-container">
+        <!-- First Row -->
+        <div class="gba-button hidden">1</div>
+        <div class="gba-button hidden">2</div>
+        <div class="gba-button hidden">3</div>
+        <div class="gba-button hidden">4</div>
+        <div class="gba-button hidden">5</div>
+        <div class="gba-button hidden">6</div>
+        <div class="gba-button">↑</div>
+        <div class="gba-button hidden">8</div>
+      
+        <!-- Second Row -->
+        <div class="gba-button">Z</div>
+        <div class="gba-button">X</div>
+        <div class="gba-button hidden">11</div>
+        <div class="gba-button hidden">12</div>
+        <div class="gba-button hidden">13</div>
+        <div class="gba-button">←</div>
+        <div class="gba-button">↓</div>
+        <div class="gba-button">→</div>
+      </div>
 
 </body>
 </html>
