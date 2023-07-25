@@ -138,15 +138,15 @@
         },
         "whispering_pines_01.json": {
             "expandedObjectLayers": [
+                12,
                 5,
-                6,
-                12
+                6
             ],
             "scale": 1.5,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 561.6666666666667,
-                "y": 288.99999999999994
+                "x": 799.6666666666666,
+                "y": 799.3333333333333
             }
         },
         "whispering_pines_01.json#persona": {
@@ -178,15 +178,15 @@
         },
         "whispering_pines_02.json": {
             "expandedObjectLayers": [
+                12,
                 5,
-                6,
-                12
+                6
             ],
-            "scale": 0.33,
+            "scale": 1.5,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 756.0606060606062,
-                "y": 842.4242424242423
+                "x": 1255,
+                "y": 876
             }
         },
         "whispering_pines_02.json#whispering_pines_tileset": {
@@ -194,15 +194,15 @@
         },
         "whispering_pines_03.json": {
             "expandedObjectLayers": [
+                12,
                 5,
-                6,
-                12
+                6
             ],
-            "scale": 0.5,
+            "scale": 0.75,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 1085,
-                "y": 841
+                "x": 602,
+                "y": 724
             }
         },
         "whispering_pines_03.json#whispering_pines_tileset": {
