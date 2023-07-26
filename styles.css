@@ -83,7 +83,7 @@ a:hover {
 }
 
 .button-container-parent {
-  border: 1px solid #444444;
+  border: 0px solid #444444;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -103,7 +103,6 @@ a:hover {
 }
 
 .gba-button {
-
   width: 75px;
   height: 75px;
 
@@ -118,6 +117,12 @@ a:hover {
   align-items: center;
   cursor: pointer;
   text-align: center; /* Add this line to center the font */
+}
+
+
+#space.gba-button {
+  width: 200px;
+  height: 75px;
 }
 
 /* Hover effect */

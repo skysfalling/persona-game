@@ -196,9 +196,17 @@ class Dialogue {
         // -- [[ CHARACTER PROFILES ]] --------------------------------------------------------
         this.randomSwitchProfileFrame(this.dialogueManager.profile_image, this.minProfileFrame, this.maxProfileFrame);
 
+        const spaceButton = document.getElementById('space');
+        spaceButton.addEventListener('click', () => {
+            this.nextLine();
+        });
+
         this.scene.input.keyboard.on('keydown-SPACE', () => {
             this.nextLine();
         });
+
+        
+
     }
   
     nextLine() {

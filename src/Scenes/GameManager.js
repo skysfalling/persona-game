@@ -86,6 +86,15 @@ class GameManager extends Phaser.Scene {
       }
     });
   
+    const spaceButton = document.getElementById('space');
+    spaceButton.addEventListener('click', () => {
+      if (this.currentSceneKey === "Menu")
+      {
+        this.gameProgression = 1;
+        this.transitionToScene('IntroCutscene');
+      }
+    });
+
     this.input.keyboard.on('keydown-ONE', () => {
       this.transitionToScene('IntroCutscene');
     });
