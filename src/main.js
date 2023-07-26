@@ -28,6 +28,7 @@ let config = {
     render: {
         pixelArt: true
     },
+    antialiasGL: false,
     backgroundColor: '#000000',
     width: 320, // Set the desired width of the scaled window
     height: 320, // Set the desired height of the scaled window
