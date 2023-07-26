@@ -78,16 +78,7 @@ class GameManager extends Phaser.Scene {
   
   create() {
     // Capture the space bar input
-    this.input.keyboard.on('keydown-SPACE', () => {
-      if (this.currentSceneKey === "Menu")
-      {
-        this.gameProgression = 1;
-        this.transitionToScene('IntroCutscene');
-      }
-    });
-  
-    const spaceButton = document.getElementById('space');
-    spaceButton.addEventListener('touchstart', () => {
+    this.input.on('pointerdown', () => {
       if (this.currentSceneKey === "Menu")
       {
         this.gameProgression = 1;
@@ -169,11 +160,35 @@ class IntroCutscene extends Phaser.Scene {
     // Load and play the video using the id
     this.video = this.add.video(0, 0, 'video').setScale(0.3).setOrigin(0).setAlpha(1);
     this.video.resolution = 10;
+
+    // Show a message to click to play the video if it's locked (due to audio autoplay restrictions)
+    this.video.on('locked', () => {
+      const message = this.add.text(screen.center.x, screen.center.y, 'Click to play video', {
+        font: '16px Courier',
+        fill: '#ffffff',
+      }).setShadow(1, 1).setOrigin(0.5);
+
+      this.video.on('unlocked', () => {
+        message.destroy();
+      });
+    });
+
     this.video.play();
+
+    // Add a click event to pause/resume the video when clicked
+    this.video.once('play', () => {
+      this.input.on('pointerdown', () => {
+        if (this.video.isPlaying()) {
+          //this.video.pause();
+        } else {
+          this.video.resume();
+        }
+      });
+    });
 
     // Event triggered when the video completes
     this.video.on('complete', () => {
-      this.gameManager.transitionToScene("Level1");
+      this.gameManager.transitionToScene('Level1');
     });
   }
 }
@@ -184,7 +199,6 @@ class ReflectionCutscene extends Phaser.Scene {
   }
 
   preload() {
-
     // Load the video file
     this.load.video('reflection-video', 'assets/cutscene/reflection-cutscene.mp4');
   }
@@ -193,17 +207,42 @@ class ReflectionCutscene extends Phaser.Scene {
     this.gameManager = this.scene.get('GameManager');
     this.gameManager.gameProgression = 2;
 
-    // Load and play the video using the id
-    this.video = this.add.video(0, 0, 'reflection-video').setScale(0.3).setOrigin(0).setAlpha(1);
-    this.video.resolution = 10;
-    this.video.play();
+    // Load the video using the id
+    const reflectionVideo = this.add.video(0, 0, 'reflection-video').setScale(0.3).setOrigin(0).setAlpha(1);
+    reflectionVideo.resolution = 10;
+
+    // Show "Click to play video" message if video is locked (due to audio autoplay restrictions)
+    reflectionVideo.on('locked', () => {
+      const message = this.add.text(screen.center.x, screen.center.y, 'Click to play video', {
+        font: '16px Courier',
+        fill: '#ffffff',
+      }).setShadow(1, 1).setOrigin(0.5);
+
+      reflectionVideo.on('unlocked', () => {
+        message.destroy();
+      });
+    });
+
+    reflectionVideo.play();
+
+    // Add a click event to pause/resume the video when clicked
+    reflectionVideo.once('play', () => {
+      this.input.on('pointerdown', () => {
+        if (reflectionVideo.isPlaying()) {
+          //reflectionVideo.pause();
+        } else {
+          reflectionVideo.resume();
+        }
+      });
+    });
 
     // Event triggered when the video completes
-    this.video.on('complete', () => {
-      this.gameManager.transitionToScene("Level2");
+    reflectionVideo.on('complete', () => {
+      this.gameManager.transitionToScene('Level2');
     });
   }
 }
+
 
 class RunCutscene extends Phaser.Scene {
   constructor() {
@@ -211,7 +250,6 @@ class RunCutscene extends Phaser.Scene {
   }
 
   preload() {
-
     // Load the video file
     this.load.video('run-video', 'assets/cutscene/run-cutscene.mp4');
   }
@@ -220,17 +258,42 @@ class RunCutscene extends Phaser.Scene {
     this.gameManager = this.scene.get('GameManager');
     this.gameManager.gameProgression = 3;
 
-    // Load and play the video using the id
-    this.video = this.add.video(0, 0, 'run-video').setScale(0.3).setOrigin(0).setAlpha(1);
-    this.video.resolution = 10;
-    this.video.play();
+    // Load the video using the id
+    const runVideo = this.add.video(0, 0, 'run-video').setScale(0.3).setOrigin(0).setAlpha(1);
+    runVideo.resolution = 10;
+
+    // Show "Click to play video" message if video is locked (due to audio autoplay restrictions)
+    runVideo.on('locked', () => {
+      const message = this.add.text(screen.center.x, screen.center.y, 'Click to play video', {
+        font: '16px Courier',
+        fill: '#ffffff',
+      }).setShadow(1, 1).setOrigin(0.5);
+
+      runVideo.on('unlocked', () => {
+        message.destroy();
+      });
+    });
+
+    runVideo.play();
+
+    // Add a click event to pause/resume the video when clicked
+    runVideo.once('play', () => {
+      this.input.on('pointerdown', () => {
+        if (runVideo.isPlaying()) {
+          //runVideo.pause();
+        } else {
+          runVideo.resume();
+        }
+      });
+    });
 
     // Event triggered when the video completes
-    this.video.on('complete', () => {
-      this.gameManager.transitionToScene("Level3");
+    runVideo.on('complete', () => {
+      this.gameManager.transitionToScene('Level3');
     });
   }
 }
+
 
 class EndCutscene extends Phaser.Scene {
   constructor() {
@@ -246,17 +309,42 @@ class EndCutscene extends Phaser.Scene {
     this.gameManager = this.scene.get('GameManager');
     this.gameManager.gameProgression = 4;
 
-    // Load and play the video using the id
-    this.video = this.add.video(0, 0, 'end-video').setScale(0.3).setOrigin(0).setAlpha(1);
-    this.video.resolution = 10;
-    this.video.play();
+    // Load the video using the id
+    const endVideo = this.add.video(0, 0, 'end-video').setScale(0.3).setOrigin(0).setAlpha(1);
+    endVideo.resolution = 10;
+
+    // Show "Click to play video" message if video is locked (due to audio autoplay restrictions)
+    endVideo.on('locked', () => {
+      const message = this.add.text(screen.center.x, screen.center.y, 'Click to play video', {
+        font: '16px Courier',
+        fill: '#ffffff',
+      }).setShadow(1, 1).setOrigin(0.5);
+
+      endVideo.on('unlocked', () => {
+        message.destroy();
+      });
+    });
+
+    endVideo.play();
+
+    // Add a click event to pause/resume the video when clicked
+    endVideo.once('play', () => {
+      this.input.on('pointerdown', () => {
+        if (endVideo.isPlaying()) {
+          //endVideo.pause();
+        } else {
+          endVideo.resume();
+        }
+      });
+    });
 
     // Event triggered when the video completes
-    this.video.on('complete', () => {
-      this.gameManager.transitionToScene("Menu");
+    endVideo.on('complete', () => {
+      this.gameManager.transitionToScene('Menu');
     });
   }
 }
+
 
 class Menu extends Phaser.Scene {
   constructor() {
@@ -328,7 +416,7 @@ class Menu extends Phaser.Scene {
       screenWidth / 2,
       screenHeight / 2 + 100,
       'awasete',
-      '-- press space to begin --',
+      '-- click here to begin --',
       11
     );
     this.startText.setScrollFactor(0);

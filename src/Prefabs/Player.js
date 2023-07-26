@@ -1,6 +1,5 @@
 class Player extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, name, id, invertedMove) 
-    {
+    constructor(scene, x, y, name, id, invertedMove) {
         super(scene, x, y, "game_characters", name, invertedMove);
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -27,63 +26,147 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         const arrowDownButton = document.getElementById('arrow-down');
         const zButton = document.getElementById('z');
         const xButton = document.getElementById('x');
-        function registerButtonDown(cursor) {
+
+        // Helper function to register button down
+        const registerButtonDown = (cursor) => {
             cursor.isDown = true;
-          }
-          
-        function registerButtonUp(cursor) {
-        cursor.isDown = false;
-        }
-        
-        arrowUpButton.addEventListener('touchstart', () => {
-        registerButtonDown(this.cursors.up);
-        });
-        arrowUpButton.addEventListener('touchend', () => {
-        registerButtonUp(this.cursors.up);
-        });
-        
-        arrowLeftButton.addEventListener('touchstart', () => {
-        registerButtonDown(this.cursors.left);
-        });
-        arrowLeftButton.addEventListener('touchend', () => {
-        registerButtonUp(this.cursors.left);
-        });
-        
-        arrowRightButton.addEventListener('touchstart', () => {
-        registerButtonDown(this.cursors.right);
-        });
-        arrowRightButton.addEventListener('touchend', () => {
-        registerButtonUp(this.cursors.right);
-        });
-        
-        arrowDownButton.addEventListener('touchstart', () => {
-        registerButtonDown(this.cursors.down);
-        });
-        arrowDownButton.addEventListener('touchend', () => {
-        registerButtonUp(this.cursors.down);
+        };
+
+        // Helper function to register button up
+        const registerButtonUp = (cursor) => {
+            cursor.isDown = false;
+        };
+
+        // Handle cursor up and down events for both mouse and touch interactions
+        // Arrow Up
+        arrowUpButton.addEventListener('mousedown', () => {
+            registerButtonDown(this.cursors.up);
         });
 
+        arrowUpButton.addEventListener('touchstart', (event) => {
+            event.preventDefault(); // Prevent default touch behavior
+            registerButtonDown(this.cursors.up);
+        });
+
+        arrowUpButton.addEventListener('mouseup', () => {
+            registerButtonUp(this.cursors.up);
+        });
+
+        arrowUpButton.addEventListener('touchend', () => {
+            registerButtonUp(this.cursors.up);
+        });
+
+        // Arrow Left
+        arrowLeftButton.addEventListener('mousedown', () => {
+            registerButtonDown(this.cursors.left);
+        });
+
+        arrowLeftButton.addEventListener('touchstart', (event) => {
+            event.preventDefault(); // Prevent default touch behavior
+            registerButtonDown(this.cursors.left);
+        });
+
+        arrowLeftButton.addEventListener('mouseup', () => {
+            registerButtonUp(this.cursors.left);
+        });
+
+        arrowLeftButton.addEventListener('touchend', () => {
+            registerButtonUp(this.cursors.left);
+        });
+
+        // Arrow Right
+        arrowRightButton.addEventListener('mousedown', () => {
+            registerButtonDown(this.cursors.right);
+        });
+
+        arrowRightButton.addEventListener('touchstart', (event) => {
+            event.preventDefault(); // Prevent default touch behavior
+            registerButtonDown(this.cursors.right);
+        });
+
+        arrowRightButton.addEventListener('mouseup', () => {
+            registerButtonUp(this.cursors.right);
+        });
+
+        arrowRightButton.addEventListener('touchend', () => {
+            registerButtonUp(this.cursors.right);
+        });
+
+        // Arrow Down
+        arrowDownButton.addEventListener('mousedown', () => {
+            registerButtonDown(this.cursors.down);
+        });
+
+        arrowDownButton.addEventListener('touchstart', (event) => {
+            event.preventDefault(); // Prevent default touch behavior
+            registerButtonDown(this.cursors.down);
+        });
+
+        arrowDownButton.addEventListener('mouseup', () => {
+            registerButtonUp(this.cursors.down);
+        });
+
+        arrowDownButton.addEventListener('touchend', () => {
+            registerButtonUp(this.cursors.down);
+        });
+
+        // Z Button
+        zButton.addEventListener('mousedown', () => {
+            registerButtonDown(this.cursors.z);
+        });
+
+        zButton.addEventListener('touchstart', (event) => {
+            event.preventDefault(); // Prevent default touch behavior
+            registerButtonDown(this.cursors.z);
+        });
+
+        zButton.addEventListener('mouseup', () => {
+            registerButtonUp(this.cursors.z);
+        });
+
+        zButton.addEventListener('touchend', () => {
+            registerButtonUp(this.cursors.z);
+        });
+
+        // X Button
+        xButton.addEventListener('mousedown', () => {
+            registerButtonDown(this.cursors.x);
+        });
+
+        xButton.addEventListener('touchstart', (event) => {
+            event.preventDefault(); // Prevent default touch behavior
+            registerButtonDown(this.cursors.x);
+        });
+
+        xButton.addEventListener('mouseup', () => {
+            registerButtonUp(this.cursors.x);
+        });
+
+        xButton.addEventListener('touchend', () => {
+            registerButtonUp(this.cursors.x);
+        });
         // #endregion
+
 
         // -- positions ----------------------------------------------------------------//>>
         this.x = x;
         this.y = y;
         this.setOrigin(0);
-        this.body.setSize(this.width*0.5, this.height*0.5);
+        this.body.setSize(this.width * 0.5, this.height * 0.5);
         this.setDepth(globalDepth.playArea);
 
         // -- description -------------------------------------------------------------------//>>
         this.name = name;
         this.playerID = id;
         this.color = 0xffffff;
-        
+
         if (this.playerID === 1) {
             this.name = "violet";
             this.color = global_colors.violet.int;
             this.color_string = global_colors.violet.hex;
             this.prefix = ">> [[ 1 ]] ";
         }
-        
+
         if (this.playerID === 2) {
             this.name = "blue";
             this.color = global_colors.blue.int;
@@ -182,7 +265,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             repeat: -1
         });
         //#endregion
-        
+
         //#region UP ANIMATIONS
         this.scene.anims.create({
             key: 'up-idle1',
@@ -220,28 +303,25 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.body.setVelocity(0);
 
                     // set move animation
-                    if (this.currentFacing == "up" || this.currentFacing == "down")
-                    {
-                        if (this.playerID == 1)
-                        {
+                    if (this.currentFacing == "up" || this.currentFacing == "down") {
+                        if (this.playerID == 1) {
                             this.anims.play(this.currentFacing + '-idle1');
                         }
-                        else{
+                        else {
                             this.anims.play(this.currentFacing + '-idle2');
                         }
                     }
                     else {
                         // set move animation
-                        if (this.playerID == 1)
-                        {
+                        if (this.playerID == 1) {
                             this.anims.play('horz-idle1');
                         }
-                        else{
+                        else {
                             this.anims.play('horz-idle2');
                         }
                     }
 
-                    if (this.currentMovementState == this.movementStates.IDLE) {return;}
+                    if (this.currentMovementState == this.movementStates.IDLE) { return; }
                     this.currentMovementState = this.movementStates.IDLE;
                 }
             },
@@ -254,18 +334,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.currentFacing = "left";
 
                     // dont reset animations if in same state
-                    if (this.currentMovementState == this.movementStates.LEFT) {return;} 
+                    if (this.currentMovementState == this.movementStates.LEFT) { return; }
 
                     // update state
                     this.currentMovementState = this.movementStates.LEFT;
                     this.setFlipX(false);
 
                     // set move animation
-                    if (this.playerID == 1)
-                    {
+                    if (this.playerID == 1) {
                         this.anims.play('horz-move1');
                     }
-                    else{
+                    else {
                         this.anims.play('horz-move2');
                     }
                 },
@@ -279,18 +358,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.currentFacing = "right";
 
                     // dont reset animations if in same state
-                    if (this.currentMovementState == this.movementStates.RIGHT) {return;} 
+                    if (this.currentMovementState == this.movementStates.RIGHT) { return; }
 
                     // update state
                     this.currentMovementState = this.movementStates.RIGHT;
                     this.setFlipX(true);
 
                     // set move animation
-                    if (this.playerID == 1)
-                    {
+                    if (this.playerID == 1) {
                         this.anims.play('horz-move1');
                     }
-                    else{
+                    else {
                         this.anims.play('horz-move2');
                     }
                 },
@@ -303,18 +381,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.currentFacing = "up";
 
                     // dont reset animations if in same state
-                    if (this.currentMovementState == this.movementStates.UP) {return;} 
+                    if (this.currentMovementState == this.movementStates.UP) { return; }
 
                     // update state
                     this.currentMovementState = this.movementStates.UP;
                     this.setFlipX(false);
 
                     // set move animation
-                    if (this.playerID == 1)
-                    {
+                    if (this.playerID == 1) {
                         this.anims.play('up-move1');
                     }
-                    else{
+                    else {
                         this.anims.play('up-move2');
                     }
                 },
@@ -327,19 +404,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.currentFacing = "down";
 
                     // dont reset animations if in same state
-                    if (this.currentMovementState == this.movementStates.DOWN) {return;} 
+                    if (this.currentMovementState == this.movementStates.DOWN) { return; }
 
                     // update state
                     this.currentMovementState = this.movementStates.DOWN;
                     this.setFlipX(false);
 
                     // set move animation
-                    if (this.playerID == 1)
-                    {
+                    if (this.playerID == 1) {
                         this.anims.play('down-move1');
                     }
-                    else
-                    {
+                    else {
                         this.anims.play('down-move2');
                     }
                 },
@@ -352,8 +427,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         // #endregion
 
         // #region [[ ABILITY STATE ]] ==================================== /// 
-        if (this.playerID === 1) { this.ability_cursor = this.cursors.z;}
-        else if (this.playerID === 2) { this.ability_cursor = this.cursors.x;}
+        if (this.playerID === 1) { this.ability_cursor = this.cursors.z; }
+        else if (this.playerID === 2) { this.ability_cursor = this.cursors.x; }
 
         this.currAbilityState;
         this.abilityStates = {
@@ -386,7 +461,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 update: () => {
                     this.tetherBubble.currSize = this.tetherBubble.maxSize;
 
-                    if (!this.ability_cursor.isDown ) {
+                    if (!this.ability_cursor.isDown) {
                         this.abilityStates.NONE.enter();
                     }
                 }
@@ -394,26 +469,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
         this.abilityStates.NONE.enter();
         //#endregion
-
-        zButton.addEventListener('touchstart', () => {
-            this.cursors.z.isDown = true;
-            });
-        zButton.addEventListener('touchend', () => {
-            this.cursors.z.isDown = false;
-        });
-
-        xButton.addEventListener('touchstart', () => {
-            this.cursors.x.isDown = true;
-            });
-        xButton.addEventListener('touchend', () => {
-            this.cursors.x.isDown = false;
-        });
     }
 
     update() {
 
-        this.pos = {x: this.x, y: this.y}; // update reference position for objects
-        this.center_pos = { x: this.x + this.width/2, y: this.y + this.height/2 } //center position
+        this.pos = { x: this.x, y: this.y }; // update reference position for objects
+        this.center_pos = { x: this.x + this.width / 2, y: this.y + this.height / 2 } //center position
         this.handleMovement();
         this.setFacingDirection();
 
@@ -423,26 +484,26 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         // [[ UPDATE POSITIONS ]------------------------------------------------]
         this.overlapTrigger.setPosition(this.center_pos.x, this.center_pos.y);
         this.light.setPosition(this.center_pos.x, this.center_pos.y);
-        
+
         // [[ UPDATE GIZMOS ]------------------------------------------------]
         this.gizmos_debug.clear();
         this.gizmos_debug.updateText(this.stateText, this.x + this.ui_offset, this.y + this.ui_offset, this.x + " " + this.y, '#ffffff', 10);
         // ==== )))
         this.gizmo_effects.clear();
-        this.gizmo_effects.drawCircleNoLine(this.overlapTrigger.x, this.overlapTrigger.y, this.overlapTrigger.body.width/2, this.color);
-        this.gizmo_effects.drawCircleFill(this.overlapTrigger.x, this.overlapTrigger.y, this.overlapTrigger.body.width/2, this.color, 0.1);
+        this.gizmo_effects.drawCircleNoLine(this.overlapTrigger.x, this.overlapTrigger.y, this.overlapTrigger.body.width / 2, this.color);
+        this.gizmo_effects.drawCircleFill(this.overlapTrigger.x, this.overlapTrigger.y, this.overlapTrigger.body.width / 2, this.color, 0.1);
 
         // [[ UPDATE TETHER BUBBLE ]]------------------------------------------------]        
         const lerpFactor = 0.1; // Adjust the lerp factor as needed
         const targetWidth = this.currAbilityState === this.abilityStates.TETHER_BUBBLE ? this.tetherBubble.currSize : 0;
         const currentWidth = this.overlapTrigger.body.width;
         const lerpedWidth = Phaser.Math.Linear(currentWidth, targetWidth, lerpFactor);
-        
+
         // update trigger width
         this.overlapTrigger.displayWidth = lerpedWidth;
         this.overlapTrigger.displayHeight = lerpedWidth;
 
-        if (this.tetheredObject){
+        if (this.tetheredObject) {
             // draw tether to object
             this.gizmos_debug.drawCircle(this.tetheredObject.x, this.tetheredObject.y, 10, 0xffffff, 0, 1);
 
@@ -451,8 +512,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         let newroom = this.scene.roomHandler.getCurrentRoom(this);
-        if (newroom && newroom != this.currRoom)
-        {
+        if (newroom && newroom != this.currRoom) {
             this.currRoom = newroom;
             console.log(this.name + " " + this.currRoom.name);
         }
@@ -460,7 +520,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     handleMovement() {
         // disable movement until idle again
-        if (this.enableMove === false){
+        if (this.enableMove === false) {
             this.currMoveSpeed = 0;
             this.movementStates.IDLE.enter();
             return;
@@ -482,8 +542,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 }
                 else {
                     this.movementStates.RIGHT.enter();
-                }        
-            } 
+                }
+            }
             else if (this.cursors.up.isDown) {
                 if (this.inverted) {
                     this.movementStates.DOWN.enter();
@@ -491,7 +551,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 else {
                     this.movementStates.UP.enter();
                 }
-            } 
+            }
             else if (this.cursors.down.isDown) {
                 if (this.inverted) {
                     this.movementStates.UP.enter();
@@ -500,15 +560,14 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                     this.movementStates.DOWN.enter();
                 }
             }
-            else
-            {
+            else {
                 this.movementStates.IDLE.enter();
             }
         }
     }
 
-    newTetheredObject(object){
-        if(this.tetheredObject) {this.tetheredObject.disconnectPlayer(this);}
+    newTetheredObject(object) {
+        if (this.tetheredObject) { this.tetheredObject.disconnectPlayer(this); }
 
         console.log(this.prefix + " - tethered object : " + object.name);
         this.tetheredObject = object;
@@ -519,7 +578,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     getDirectionOfObj(object) {
         const dx = object.x - this.x;
         const dy = object.y - this.y;
-      
+
         if (Math.abs(dx) > Math.abs(dy)) {
             if (dx < 0) {
                 return "left";
@@ -536,24 +595,20 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     setFacingDirection() {
-      
-        if (this.currentMovementState == this.movementStates.LEFT) 
-        {
+
+        if (this.currentMovementState == this.movementStates.LEFT) {
             this.facingDirection.x = -1;
             this.facingDirection.y = 0;
-        } 
-        else if (this.currentMovementState == this.movementStates.RIGHT)
-        {
+        }
+        else if (this.currentMovementState == this.movementStates.RIGHT) {
             this.facingDirection.x = 1;
             this.facingDirection.y = 0;
         }
-        else if (this.currentMovementState == this.movementStates.DOWN) 
-        {
+        else if (this.currentMovementState == this.movementStates.DOWN) {
             this.facingDirection.x = 0;
             this.facingDirection.y = -1;
-        } 
-        else if (this.currentMovementState == this.movementStates.UP)
-        {
+        }
+        else if (this.currentMovementState == this.movementStates.UP) {
             this.facingDirection.x = 0;
             this.facingDirection.y = 1;
         }
@@ -563,9 +618,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     toggleDebug() {
         this.gizmos_debug.enabled = !this.gizmos_debug.enabled;
 
-        if (this.gizmos_debug.enabled)
-        {
-            this.stateText = this.gizmos_debug.createText(this.x, this.y, this.x + " " + this.y , '#ffffff', 5);
+        if (this.gizmos_debug.enabled) {
+            this.stateText = this.gizmos_debug.createText(this.x, this.y, this.x + " " + this.y, '#ffffff', 5);
         }
     }
 }

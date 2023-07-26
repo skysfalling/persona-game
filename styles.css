@@ -1,6 +1,6 @@
 @font-face {
-    font-family: Awasete;
-    src: url('assets/fonts/awasete_powder.ttf') format('truetype');
+  font-family: Awasete;
+  src: url('assets/fonts/awasete_powder.ttf') format('truetype');
 }
 
 /* Default styles for larger screens */
@@ -14,6 +14,10 @@ body {
   height: 100vh;
   margin-bottom: 100px;
   overflow: hidden;
+
+  --scaling-factor: 0.8;
+  /* Adjust the default scaling factor as per your preference */
+
 }
 
 h3 {
@@ -39,7 +43,8 @@ a:hover {
   text-decoration: underline;
 }
 
-.image-container, .gif-container {
+.image-container,
+.gif-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,7 +54,8 @@ a:hover {
   margin: 10px;
 }
 
-.image-container img, .gif-container img {
+.image-container img,
+.gif-container img {
   max-width: 100%;
   height: auto;
 }
@@ -65,14 +71,14 @@ a:hover {
   text-align: center;
 }
 
-#game-parent{
+#game-parent {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 650px;
 }
 
-#phaser-game{
+#phaser-game {
   border: 1px solid #222222
 }
 
@@ -81,13 +87,13 @@ a:hover {
   justify-content: inherit;
   align-items: inherit;
   flex-direction: inherit;
-  width: 100%;
+  width: 500px;
 }
 
 #game-header {
   display: inherit;
-  justify-content: inherit;
-  align-items: inherit;
+  justify-content: center;
+  align-items: center;
   display: none;
 }
 
@@ -99,7 +105,7 @@ a:hover {
   padding: 10px;
   width: 600;
 
-  display: none;  
+  display: none;
 }
 
 .button-container {
@@ -122,15 +128,15 @@ a:hover {
 
   font-size: 36px;
   font-weight: bold;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  text-align: center; /* Add this line to center the font */
+  text-align: center;
+  /* Add this line to center the font */
 
   display: none;
-
 }
 
 #space.gba-button {
@@ -153,47 +159,77 @@ a:hover {
   visibility: hidden;
 }
 
-/* Mobile-specific styles */
-@media (max-width: 1000px) {
+
+/* ================================================================= */
+
+/* Set default scaling factor */
+body {
+  --scaling-factor: 1;
+}
+
+/* Landscape version -------------------------- */
+@media (orientation: landscape) and (max-width: 800px) {
   body {
-    margin-bottom: 0; /* Remove the bottom margin on mobile */
-    transform: scale(0.9); /* Adjust the scaling factor as per your preference */
-    overflow: hidden; /* Hide the overflowing content after scaling */
-  }
-
-  .sidebar {
-    display: none; /* Completely remove the sidebar on mobile */
-  }
-
-  .button-container-parent {
-    display: flex; /* Display the button container on mobile */
-  }
-  
-  .gba-button {
-    display: block; /* Display the buttons on mobile */
-  }
-
-  #game-header {
-    display: flex; 
+    --scaling-factor: 0.4;
   }
 }
 
-@media (max-width: 600px) {
+@media (orientation: landscape) and (max-width: 400px) {
   body {
-    margin-bottom: 0; /* Remove the bottom margin on mobile */
-    transform: scale(0.5); /* Adjust the scaling factor as per your preference */
-    overflow: hidden; /* Hide the overflowing content after scaling */
+    --scaling-factor: 0.3;
+  }
+}
+
+/* Apply scaling factor to all mobile-specific styles for devices with vertical aspect ratio <= 1 */
+@media (orientation: landscape) and (max-width: 1080px) {
+  body {
+    transform: scale(var(--scaling-factor));
+  }
+}
+
+/* Portrait version ------------------------ */
+@media (orientation: portrait) and (max-width: 1080px) {
+  body {
+    --scaling-factor: 1;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 900px) {
+  body {
+    --scaling-factor: 0.8;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 600px) {
+  body {
+    --scaling-factor: 0.6;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 400px) {
+  body {
+    --scaling-factor: 0.4;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 1080px) {
+  body {
+    transform: scale(var(--scaling-factor));
   }
 
   .sidebar {
-    display: none; /* Completely remove the sidebar on smaller screens */
+    display: none;
   }
 
   .button-container-parent {
-    display: flex; /* Display the button container on smaller screens */
+    display: flex;
   }
 
   .gba-button {
-    display: block; /* Display the buttons on smaller screens */
+    display: block;
+  }
+
+  #game-header {
+    display: block;
   }
 }

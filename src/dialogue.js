@@ -12,9 +12,9 @@ class DialogueManager {
         this.screenMargin = 50;
         this.portraitWidth = 50;
 
-        this.origin = {x: screen.center.x, y: screen.height - this.screenMargin};
-        this.left_point = {x: 0 + this.screenMargin, y: screen.height - this.screenMargin};
-        this.right_point = {x: screen.width - this.screenMargin, y: screen.height - this.screenMargin};
+        this.origin = { x: screen.center.x, y: screen.height - this.screenMargin };
+        this.left_point = { x: 0 + this.screenMargin, y: screen.height - this.screenMargin };
+        this.right_point = { x: screen.width - this.screenMargin, y: screen.height - this.screenMargin };
 
         // -- [[ DIALOG ]] --------------------------------------------------------
         // Define a key to toggle editor mode
@@ -24,7 +24,7 @@ class DialogueManager {
         this.characterWrapLimit = 40; // Adjust the character wrap limit as needed
 
         // -- create dialog text object --------------------------------------------------------
-        this.dialogueTextObj = scene.add.bitmapText(this.origin.x - this.screenMargin, this.origin.y - this.screenMargin*0.6, 'awasete', "default dialog text", this.fontSize);
+        this.dialogueTextObj = scene.add.bitmapText(this.origin.x - this.screenMargin, this.origin.y - this.screenMargin * 0.6, 'awasete', "default dialog text", this.fontSize);
         this.dialogueTextObj.setScrollFactor(0);
         this.dialogueTextObj.setDepth(globalDepth.ui + 1);
         this.dialogueTextObj.setScale(0.5);
@@ -68,18 +68,17 @@ class DialogueManager {
         const words = text.split(' ');
         let line = '';
         let newLines = '';
-        
+
         for (let i = 0; i < words.length; i++) {
-            if (line.length + words[i].length <= wrapLimit) 
-            {
+            if (line.length + words[i].length <= wrapLimit) {
                 line += words[i] + ' ';
-            } 
+            }
             else {
                 newLines += line.trim() + '\n';
                 line = words[i] + ' ';
             }
         }
-        
+
         return newLines + line.trim();
     }
 
@@ -89,7 +88,7 @@ class DialogueManager {
         this.profile_image.setVisible(true); // Show the profile image
         this.backgroundRect.setVisible(true); // Show the dialogue box
     }
-    
+
     hide() {
         this.dialogueTextObj.setVisible(false); // Hide the dialogue text object
         this.skipPromptText.setVisible(false);
@@ -128,7 +127,7 @@ class DialogueManager {
             loop: true
         });
     }
-      
+
     skipText() {
         if (this.isTyping) {
             this.dialogueTextObj.setText(this.currText); // Set the full text instantly if skipped
@@ -143,8 +142,7 @@ class DialogueManager {
 }
 
 class Dialogue {
-    constructor(scene, characterID = 0, textList = "I have nothing to say [[ NO TEXT GIVINE ]]") 
-    {
+    constructor(scene, characterID = 0, textList = "I have nothing to say [[ NO TEXT GIVINE ]]") {
         this.scene = scene;
 
         // create dialogue manager if needed
@@ -189,7 +187,7 @@ class Dialogue {
 
     }
 
-    start(){
+    start() {
         this.dialogueManager.show();
         this.nextLine();
 
@@ -201,14 +199,15 @@ class Dialogue {
             this.nextLine();
         });
 
-        this.scene.input.keyboard.on('keydown-SPACE', () => {
+        spaceButton.addEventListener('mousedown', () => {
             this.nextLine();
         });
 
-        
-
+        this.scene.input.keyboard.on('keydown-SPACE', () => {
+            this.nextLine();
+        });
     }
-  
+
     nextLine() {
         // if no more lines, return
         if (this.currentLineIndex >= this.textList.length) {
@@ -226,7 +225,7 @@ class Dialogue {
         }
 
         // if manager is typing, stop
-        if (this.dialogueManager.isTyping){
+        if (this.dialogueManager.isTyping) {
             this.dialogueManager.skipText();
             console.log("DIALOGUE :: skip line");
             return;
@@ -241,25 +240,25 @@ class Dialogue {
     }
 
     // -- [[ CHARACTER PROFILE ]] ----------------------------------------------------
-    randomSwitchProfileFrame(image, minFrame, maxFrame) {        
+    randomSwitchProfileFrame(image, minFrame, maxFrame) {
         // start random animation loop
         this.profileSwtichEvent = this.scene.time.addEvent({
-          delay: Phaser.Math.Between(100, 300), // random frame duration
-          callback: () => {
-            // choose the first frame 80% of the time
-            const randomValue = Math.random();
-            const selectedFrame = randomValue <= 0.9 ? minFrame : Phaser.Math.Between(minFrame, maxFrame);
-            image.setFrame(this.profileFrames[selectedFrame]);
-          },
-          callbackScope: this,
-          loop: true
+            delay: Phaser.Math.Between(100, 300), // random frame duration
+            callback: () => {
+                // choose the first frame 80% of the time
+                const randomValue = Math.random();
+                const selectedFrame = randomValue <= 0.9 ? minFrame : Phaser.Math.Between(minFrame, maxFrame);
+                image.setFrame(this.profileFrames[selectedFrame]);
+            },
+            callbackScope: this,
+            loop: true
         });
     }
 
-    onComplete(callback) {        
+    onComplete(callback) {
         // Set the onComplete callback function
         if (typeof callback === 'function') {
-          this.onCompleteCallback = callback;
+            this.onCompleteCallback = callback;
         }
     }
 
@@ -270,6 +269,5 @@ class Dialogue {
         this.scene.input.keyboard.off('keydown-SPACE');
     }
 }
-  
-  
-  
+
+
