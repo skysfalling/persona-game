@@ -87,7 +87,7 @@ class GameManager extends Phaser.Scene {
     });
   
     const spaceButton = document.getElementById('space');
-    spaceButton.addEventListener('click', () => {
+    spaceButton.addEventListener('touchstart', () => {
       if (this.currentSceneKey === "Menu")
       {
         this.gameProgression = 1;

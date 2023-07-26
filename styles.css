@@ -3,6 +3,7 @@
     src: url('assets/fonts/awasete_powder.ttf') format('truetype');
 }
 
+/* Default styles for larger screens */
 body {
   font-family: 'Awasete', Arial, sans-serif;
   display: flex;
@@ -80,6 +81,14 @@ a:hover {
   justify-content: inherit;
   align-items: inherit;
   flex-direction: inherit;
+  width: 100%;
+}
+
+#game-header {
+  display: inherit;
+  justify-content: inherit;
+  align-items: inherit;
+  display: none;
 }
 
 .button-container-parent {
@@ -89,6 +98,8 @@ a:hover {
   justify-content: space-between;
   padding: 10px;
   width: 600;
+
+  display: none;  
 }
 
 .button-container {
@@ -117,8 +128,10 @@ a:hover {
   align-items: center;
   cursor: pointer;
   text-align: center; /* Add this line to center the font */
-}
 
+  display: none;
+
+}
 
 #space.gba-button {
   width: 200px;
@@ -138,4 +151,49 @@ a:hover {
 .hidden {
   font-size: 0;
   visibility: hidden;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 1000px) {
+  body {
+    margin-bottom: 0; /* Remove the bottom margin on mobile */
+    transform: scale(0.9); /* Adjust the scaling factor as per your preference */
+    overflow: hidden; /* Hide the overflowing content after scaling */
+  }
+
+  .sidebar {
+    display: none; /* Completely remove the sidebar on mobile */
+  }
+
+  .button-container-parent {
+    display: flex; /* Display the button container on mobile */
+  }
+  
+  .gba-button {
+    display: block; /* Display the buttons on mobile */
+  }
+
+  #game-header {
+    display: flex; 
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    margin-bottom: 0; /* Remove the bottom margin on mobile */
+    transform: scale(0.5); /* Adjust the scaling factor as per your preference */
+    overflow: hidden; /* Hide the overflowing content after scaling */
+  }
+
+  .sidebar {
+    display: none; /* Completely remove the sidebar on smaller screens */
+  }
+
+  .button-container-parent {
+    display: flex; /* Display the button container on smaller screens */
+  }
+
+  .gba-button {
+    display: block; /* Display the buttons on smaller screens */
+  }
 }

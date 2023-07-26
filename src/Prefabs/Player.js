@@ -27,33 +27,40 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         const arrowDownButton = document.getElementById('arrow-down');
         const zButton = document.getElementById('z');
         const xButton = document.getElementById('x');
-
-        arrowUpButton.addEventListener('mousedown', () => {
-        this.cursors.up.isDown = true;
+        function registerButtonDown(cursor) {
+            cursor.isDown = true;
+          }
+          
+        function registerButtonUp(cursor) {
+        cursor.isDown = false;
+        }
+        
+        arrowUpButton.addEventListener('touchstart', () => {
+        registerButtonDown(this.cursors.up);
         });
-        arrowUpButton.addEventListener('mouseup', () => {
-        this.cursors.up.isDown = false;
+        arrowUpButton.addEventListener('touchend', () => {
+        registerButtonUp(this.cursors.up);
         });
-
-        arrowLeftButton.addEventListener('mousedown', () => {
-        this.cursors.left.isDown = true;
+        
+        arrowLeftButton.addEventListener('touchstart', () => {
+        registerButtonDown(this.cursors.left);
         });
-        arrowLeftButton.addEventListener('mouseup', () => {
-        this.cursors.left.isDown = false;
+        arrowLeftButton.addEventListener('touchend', () => {
+        registerButtonUp(this.cursors.left);
         });
-
-        arrowRightButton.addEventListener('mousedown', () => {
-        this.cursors.right.isDown = true;
+        
+        arrowRightButton.addEventListener('touchstart', () => {
+        registerButtonDown(this.cursors.right);
         });
-        arrowRightButton.addEventListener('mouseup', () => {
-        this.cursors.right.isDown = false;
+        arrowRightButton.addEventListener('touchend', () => {
+        registerButtonUp(this.cursors.right);
         });
-
-        arrowDownButton.addEventListener('mousedown', () => {
-        this.cursors.down.isDown = true;
+        
+        arrowDownButton.addEventListener('touchstart', () => {
+        registerButtonDown(this.cursors.down);
         });
-        arrowDownButton.addEventListener('mouseup', () => {
-        this.cursors.down.isDown = false;
+        arrowDownButton.addEventListener('touchend', () => {
+        registerButtonUp(this.cursors.down);
         });
 
         // #endregion
@@ -388,18 +395,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.abilityStates.NONE.enter();
         //#endregion
 
-        zButton.addEventListener('mousedown', () => {
+        zButton.addEventListener('touchstart', () => {
             this.cursors.z.isDown = true;
             });
-        zButton.addEventListener('mouseup', () => {
+        zButton.addEventListener('touchend', () => {
             this.cursors.z.isDown = false;
         });
 
-        
-        xButton.addEventListener('mousedown', () => {
+        xButton.addEventListener('touchstart', () => {
             this.cursors.x.isDown = true;
             });
-        xButton.addEventListener('mouseup', () => {
+        xButton.addEventListener('touchend', () => {
             this.cursors.x.isDown = false;
         });
     }

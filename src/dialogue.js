@@ -197,7 +197,7 @@ class Dialogue {
         this.randomSwitchProfileFrame(this.dialogueManager.profile_image, this.minProfileFrame, this.maxProfileFrame);
 
         const spaceButton = document.getElementById('space');
-        spaceButton.addEventListener('click', () => {
+        spaceButton.addEventListener('touchstart', () => {
             this.nextLine();
         });
 
