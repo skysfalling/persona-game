@@ -19,6 +19,45 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             x: Phaser.Input.Keyboard.KeyCodes.X
         });
 
+        // #region HTML BUTTONS
+        // Add click and release event listeners to the buttons
+        const arrowUpButton = document.getElementById('arrow-up');
+        const arrowLeftButton = document.getElementById('arrow-left');
+        const arrowRightButton = document.getElementById('arrow-right');
+        const arrowDownButton = document.getElementById('arrow-down');
+        const zButton = document.getElementById('z');
+        const xButton = document.getElementById('x');
+
+        arrowUpButton.addEventListener('mousedown', () => {
+        this.cursors.up.isDown = true;
+        });
+        arrowUpButton.addEventListener('mouseup', () => {
+        this.cursors.up.isDown = false;
+        });
+
+        arrowLeftButton.addEventListener('mousedown', () => {
+        this.cursors.left.isDown = true;
+        });
+        arrowLeftButton.addEventListener('mouseup', () => {
+        this.cursors.left.isDown = false;
+        });
+
+        arrowRightButton.addEventListener('mousedown', () => {
+        this.cursors.right.isDown = true;
+        });
+        arrowRightButton.addEventListener('mouseup', () => {
+        this.cursors.right.isDown = false;
+        });
+
+        arrowDownButton.addEventListener('mousedown', () => {
+        this.cursors.down.isDown = true;
+        });
+        arrowDownButton.addEventListener('mouseup', () => {
+        this.cursors.down.isDown = false;
+        });
+
+        // #endregion
+
         // -- positions ----------------------------------------------------------------//>>
         this.x = x;
         this.y = y;
@@ -320,7 +359,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 update: () => {
                     this.tetherBubble.currSize = 0;
 
-                    if (Phaser.Input.Keyboard.JustDown(this.ability_cursor)) {
+                    if (this.ability_cursor.isDown) {
                         this.abilityStates.TETHER_BUBBLE.enter();
                     }
                 }
@@ -340,7 +379,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 update: () => {
                     this.tetherBubble.currSize = this.tetherBubble.maxSize;
 
-                    if (Phaser.Input.Keyboard.JustUp(this.ability_cursor) ) {
+                    if (!this.ability_cursor.isDown ) {
                         this.abilityStates.NONE.enter();
                     }
                 }
@@ -348,6 +387,21 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
         this.abilityStates.NONE.enter();
         //#endregion
+
+        zButton.addEventListener('mousedown', () => {
+            this.cursors.z.isDown = true;
+            });
+        zButton.addEventListener('mouseup', () => {
+            this.cursors.z.isDown = false;
+        });
+
+        
+        xButton.addEventListener('mousedown', () => {
+            this.cursors.x.isDown = true;
+            });
+        xButton.addEventListener('mouseup', () => {
+            this.cursors.x.isDown = false;
+        });
     }
 
     update() {
